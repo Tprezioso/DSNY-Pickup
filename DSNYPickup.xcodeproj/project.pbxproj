@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5590824325A3CB7900F2CF62 /* DSNYPickupApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5590824225A3CB7900F2CF62 /* DSNYPickupApp.swift */; };
-		5590824525A3CB7900F2CF62 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5590824425A3CB7900F2CF62 /* ContentView.swift */; };
+		5590824525A3CB7900F2CF62 /* GarbagePickupDays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5590824425A3CB7900F2CF62 /* GarbagePickupDays.swift */; };
 		5590824725A3CB7A00F2CF62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5590824625A3CB7A00F2CF62 /* Assets.xcassets */; };
 		5590824A25A3CB7A00F2CF62 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5590824925A3CB7A00F2CF62 /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -16,7 +16,7 @@
 /* Begin PBXFileReference section */
 		5590823F25A3CB7900F2CF62 /* DSNYPickup.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DSNYPickup.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5590824225A3CB7900F2CF62 /* DSNYPickupApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSNYPickupApp.swift; sourceTree = "<group>"; };
-		5590824425A3CB7900F2CF62 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		5590824425A3CB7900F2CF62 /* GarbagePickupDays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GarbagePickupDays.swift; sourceTree = "<group>"; };
 		5590824625A3CB7A00F2CF62 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5590824925A3CB7A00F2CF62 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		5590824B25A3CB7A00F2CF62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -53,7 +53,7 @@
 			isa = PBXGroup;
 			children = (
 				5590824225A3CB7900F2CF62 /* DSNYPickupApp.swift */,
-				5590824425A3CB7900F2CF62 /* ContentView.swift */,
+				5590824425A3CB7900F2CF62 /* GarbagePickupDays.swift */,
 				5590824625A3CB7A00F2CF62 /* Assets.xcassets */,
 				5590824B25A3CB7A00F2CF62 /* Info.plist */,
 				5590824825A3CB7A00F2CF62 /* Preview Content */,
@@ -138,7 +138,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5590824525A3CB7900F2CF62 /* ContentView.swift in Sources */,
+				5590824525A3CB7900F2CF62 /* GarbagePickupDays.swift in Sources */,
 				5590824325A3CB7900F2CF62 /* DSNYPickupApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
