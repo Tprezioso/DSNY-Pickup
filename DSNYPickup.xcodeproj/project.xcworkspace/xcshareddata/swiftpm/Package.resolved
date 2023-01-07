@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "soda-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/socrata/soda-swift",
+      "state" : {
+        "branch" : "main",
+        "revision" : "f578510edf6c922ca4b4dfe87d29fd526b581129"
+      }
+    }
+  ],
+  "version" : 2
+}
