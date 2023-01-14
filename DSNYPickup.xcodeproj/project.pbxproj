@@ -16,6 +16,9 @@
 		55B2513F2969B8AF0045364E /* APIToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B2513E2969B8AF0045364E /* APIToken.swift */; };
 		55F6791629722F94003331C5 /* Garbage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F6791529722F94003331C5 /* Garbage.swift */; };
 		55F67918297327CB003331C5 /* CalendarHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F67917297327CB003331C5 /* CalendarHeaderView.swift */; };
+		55F6791D29734F54003331C5 /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 55F6791C29734F54003331C5 /* Collections */; };
+		55F6791F29734F54003331C5 /* DequeModule in Frameworks */ = {isa = PBXBuildFile; productRef = 55F6791E29734F54003331C5 /* DequeModule */; };
+		55F6792129734F54003331C5 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 55F6792029734F54003331C5 /* OrderedCollections */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,7 +39,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55F6791D29734F54003331C5 /* Collections in Frameworks */,
 				55B2513B2969B7BD0045364E /* SODAKit in Frameworks */,
+				55F6792129734F54003331C5 /* OrderedCollections in Frameworks */,
+				55F6791F29734F54003331C5 /* DequeModule in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,6 +107,9 @@
 			name = DSNYPickup;
 			packageProductDependencies = (
 				55B2513A2969B7BD0045364E /* SODAKit */,
+				55F6791C29734F54003331C5 /* Collections */,
+				55F6791E29734F54003331C5 /* DequeModule */,
+				55F6792029734F54003331C5 /* OrderedCollections */,
 			);
 			productName = DSNYPickup;
 			productReference = 5590823F25A3CB7900F2CF62 /* DSNYPickup.app */;
@@ -131,6 +140,7 @@
 			mainGroup = 5590823625A3CB7900F2CF62;
 			packageReferences = (
 				55B251392969B7BD0045364E /* XCRemoteSwiftPackageReference "soda-swift" */,
+				55F6791B29734F54003331C5 /* XCRemoteSwiftPackageReference "swift-collections" */,
 			);
 			productRefGroup = 5590824025A3CB7900F2CF62 /* Products */;
 			projectDirPath = "";
@@ -360,6 +370,14 @@
 				kind = branch;
 			};
 		};
+		55F6791B29734F54003331C5 /* XCRemoteSwiftPackageReference "swift-collections" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-collections.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -367,6 +385,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 55B251392969B7BD0045364E /* XCRemoteSwiftPackageReference "soda-swift" */;
 			productName = SODAKit;
+		};
+		55F6791C29734F54003331C5 /* Collections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 55F6791B29734F54003331C5 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = Collections;
+		};
+		55F6791E29734F54003331C5 /* DequeModule */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 55F6791B29734F54003331C5 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = DequeModule;
+		};
+		55F6792029734F54003331C5 /* OrderedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 55F6791B29734F54003331C5 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = OrderedCollections;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

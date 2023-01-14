@@ -6,10 +6,13 @@
 //
 
 import SwiftUI
+import Collections
 
 struct GarbagePickupDays: View {    
     @State var textString = ""
     let columns = Array(repeating: GridItem(.flexible()), count: 6)
+    let testArray: [String] = ["Thursday", "Tuesday", "Friday"]
+    @State var days: OrderedDictionary = ["Monday": false, "Tuesday" : false, "Wednesday" : false, "Thursday": false, "Friday": false, "Saturday": false]
     
     var body: some View {
         VStack {
@@ -26,23 +29,35 @@ struct GarbagePickupDays: View {
 
             Grid {
                 GridRow { CalendarHeaderView() }
+                
+                // Garbage
                 GridRow {
-                    ForEach(0..<6) { _ in
-                        ColorSquare(color: .pink)
+                    ForEach(days.values, id: \.self) { day in
+                        if day == true {
+                            ColorSquare(color: .pink)
+                        } else {
+                            Text("")
+                        }
                     }
                 }
+                
+                // Large Items
                 GridRow {
                     ForEach(0..<1) { _ in
                         
                         ColorSquare(color: .yellow)
                     }
                 }
+                
+                // Recycling
                 GridRow {
                     ForEach(0..<5) { _ in
                         
                         ColorSquare(color: .mint)
                     }
                 }
+                
+                // Composting
                 GridRow {
                     ForEach(0..<4) { _ in
                         
@@ -54,7 +69,14 @@ struct GarbagePickupDays: View {
             Spacer()
             
         }.onAppear {
-            
+                for pick in testArray {
+                    for day in days.keys.sorted() {
+                    if pick == day {
+                        days[day] = true
+                    } 
+                }
+            }
+            let _ = print(days)
         }
     }
 }
@@ -72,4 +94,27 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         GarbagePickupDays()
     }
+}
+
+enum EnumDays: Int, CustomStringConvertible
+{
+    var description: String {
+        switch self {
+        case .MONDAY:
+            return "Monday"
+        case .TUESDAY:
+            return "Tuesday"
+        case .WEDNESDAY:
+            return "Wednesday"
+        case .THURSDAY:
+            return "Thursday"
+        case .FRIDAY:
+            return "Friday"
+        case .SATURDAY:
+            return "Saturday"
+        case .SUNDAY:
+            return "Sunday"
+        }
+    }
+    case MONDAY,TUESDAY,WEDNESDAY,THURSDAY,FRIDAY,SATURDAY,SUNDAY
 }
