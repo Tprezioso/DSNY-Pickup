@@ -7,20 +7,21 @@
 
 import SwiftUI
 
-struct GarbagePickupDays: View {
-    let tempURL = "https://data.cityofnewyork.us/resource/rv63-53db.json?$where=within_circle(multipolygon,%2040.73623017912892,%20-73.80868539963596,%201000)"
-
-    let collectionURL = "https://a827-donatenyc.nyc.gov/DSNYGeoCoder/api/DSNYCollection/CollectionSchedule?address=6525%20160th%20Street%2C%20Fresh%20Meadows%2C%20NY%2C%20USA"
+struct GarbagePickupDays: View {    
+    @State var textString = ""
     
     var body: some View {
         VStack {
-            Text("SearchView")
+            TextField("Address", text: $textString, prompt: Text("When is collecting at..."))
                 .padding()
             Text("InfoView")
+                .onTapGesture {
+                    Task { @MainActor in
+                        try await NetworkManager.shared.getGarbageDetails(atAddress: textString)
+                    }
+                }
         }.onAppear {
-            Task { @MainActor in
-                try await NetworkManager.shared.getGarbageDetails(atUrl: tempURL)
-            }
+            
         }
     }
 }
