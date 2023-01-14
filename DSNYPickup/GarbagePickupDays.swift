@@ -8,13 +8,17 @@
 import SwiftUI
 
 struct GarbagePickupDays: View {
+    let tempURL = "https://data.cityofnewyork.us/resource/rv63-53db.json?$where=within_circle(multipolygon,%2040.60682780600007,%20-74.00173702999996,%201000)"
+
     var body: some View {
         VStack {
             Text("SearchView")
                 .padding()
             Text("InfoView")
         }.onAppear {
-            NetworkManager.shared.getData()
+            Task { @MainActor in
+                try await NetworkManager.shared.getGarbageDetails(atUrl: tempURL)
+            }
         }
     }
 }
