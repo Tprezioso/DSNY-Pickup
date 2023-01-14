@@ -6,23 +6,21 @@
 //
 
 import SwiftUI
-import Collections
 
-struct GarbagePickupDays: View {    
-    @State var textString = ""
+struct GarbageCollectionView: View {    
     let columns = Array(repeating: GridItem(.flexible()), count: 6)
-    let testArray: [String] = ["Thursday", "Tuesday", "Friday"]
-    @State var days: OrderedDictionary = ["Monday": false, "Tuesday" : false, "Wednesday" : false, "Thursday": false, "Friday": false, "Saturday": false]
+    @StateObject var viewModel = GarbageCollectionStateModel()
     
     var body: some View {
         VStack {
             HStack {
-                TextField("Address", text: $textString, prompt: Text("When is collecting at..."))
+                TextField("Address", text: $viewModel.textString, prompt: Text("When is collecting at..."))
                     .textFieldStyle(.roundedBorder)
                     .submitLabel(.search)
                     .onSubmit {
                         Task { @MainActor in
-                            try await NetworkManager.shared.getGarbageDetails(atAddress: textString)
+                            viewModel.garbageData = try await NetworkManager.shared.getGarbageDetails(atAddress: viewModel.textString)
+                            viewModel.sortData()
                         }
                     }
             }.padding()
@@ -32,9 +30,14 @@ struct GarbagePickupDays: View {
                 
                 // Garbage
                 GridRow {
-                    ForEach(days.values, id: \.self) { day in
+                    ForEach(viewModel.garbage.values, id: \.self) { day in
                         if day == true {
-                            ColorSquare(color: .pink)
+                            Image(systemName: "trash")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 50, height: 50)
+                                .foregroundColor(.pink)
+//                            ColorSquare(color: .pink)
                         } else {
                             Text("")
                         }
@@ -43,25 +46,34 @@ struct GarbagePickupDays: View {
                 
                 // Large Items
                 GridRow {
-                    ForEach(0..<1) { _ in
-                        
-                        ColorSquare(color: .yellow)
+                    ForEach(viewModel.largeItems.values, id: \.self) { day in
+                        if day == true {
+                            ColorSquare(color: .yellow)
+                        } else {
+                            Text("")
+                        }
                     }
                 }
                 
                 // Recycling
                 GridRow {
-                    ForEach(0..<5) { _ in
-                        
-                        ColorSquare(color: .mint)
+                    ForEach(viewModel.recycling.values, id: \.self) { day in
+                        if day == true {
+                            ColorSquare(color: .mint)
+                        } else {
+                            Text("")
+                        }
                     }
                 }
                 
                 // Composting
                 GridRow {
-                    ForEach(0..<4) { _ in
-                        
-                        ColorSquare(color: .indigo)
+                    ForEach(viewModel.composting.values, id: \.self) { day in
+                        if day == true {
+                            ColorSquare(color: .indigo)
+                        } else {
+                            Text("")
+                        }
                     }
                 }
             }
@@ -69,14 +81,7 @@ struct GarbagePickupDays: View {
             Spacer()
             
         }.onAppear {
-                for pick in testArray {
-                    for day in days.keys.sorted() {
-                    if pick == day {
-                        days[day] = true
-                    } 
-                }
-            }
-            let _ = print(days)
+                
         }
     }
 }
@@ -92,7 +97,7 @@ struct ColorSquare: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        GarbagePickupDays()
+        GarbageCollectionView()
     }
 }
 

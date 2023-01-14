@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5590824325A3CB7900F2CF62 /* DSNYPickupApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5590824225A3CB7900F2CF62 /* DSNYPickupApp.swift */; };
-		5590824525A3CB7900F2CF62 /* GarbagePickupDays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5590824425A3CB7900F2CF62 /* GarbagePickupDays.swift */; };
+		5590824525A3CB7900F2CF62 /* GarbageCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5590824425A3CB7900F2CF62 /* GarbageCollectionView.swift */; };
 		5590824725A3CB7A00F2CF62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5590824625A3CB7A00F2CF62 /* Assets.xcassets */; };
 		5590824A25A3CB7A00F2CF62 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5590824925A3CB7A00F2CF62 /* Preview Assets.xcassets */; };
 		55B2513B2969B7BD0045364E /* SODAKit in Frameworks */ = {isa = PBXBuildFile; productRef = 55B2513A2969B7BD0045364E /* SODAKit */; };
@@ -19,12 +19,13 @@
 		55F6791D29734F54003331C5 /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 55F6791C29734F54003331C5 /* Collections */; };
 		55F6791F29734F54003331C5 /* DequeModule in Frameworks */ = {isa = PBXBuildFile; productRef = 55F6791E29734F54003331C5 /* DequeModule */; };
 		55F6792129734F54003331C5 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 55F6792029734F54003331C5 /* OrderedCollections */; };
+		55F679232973600D003331C5 /* GarbageCollectionStateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F679222973600D003331C5 /* GarbageCollectionStateModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		5590823F25A3CB7900F2CF62 /* DSNYPickup.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DSNYPickup.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5590824225A3CB7900F2CF62 /* DSNYPickupApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSNYPickupApp.swift; sourceTree = "<group>"; };
-		5590824425A3CB7900F2CF62 /* GarbagePickupDays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GarbagePickupDays.swift; sourceTree = "<group>"; };
+		5590824425A3CB7900F2CF62 /* GarbageCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GarbageCollectionView.swift; sourceTree = "<group>"; };
 		5590824625A3CB7A00F2CF62 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5590824925A3CB7A00F2CF62 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		5590824B25A3CB7A00F2CF62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -32,6 +33,7 @@
 		55B2513E2969B8AF0045364E /* APIToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIToken.swift; sourceTree = "<group>"; };
 		55F6791529722F94003331C5 /* Garbage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Garbage.swift; sourceTree = "<group>"; };
 		55F67917297327CB003331C5 /* CalendarHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarHeaderView.swift; sourceTree = "<group>"; };
+		55F679222973600D003331C5 /* GarbageCollectionStateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GarbageCollectionStateModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,7 +71,8 @@
 			isa = PBXGroup;
 			children = (
 				5590824225A3CB7900F2CF62 /* DSNYPickupApp.swift */,
-				5590824425A3CB7900F2CF62 /* GarbagePickupDays.swift */,
+				5590824425A3CB7900F2CF62 /* GarbageCollectionView.swift */,
+				55F679222973600D003331C5 /* GarbageCollectionStateModel.swift */,
 				55F67917297327CB003331C5 /* CalendarHeaderView.swift */,
 				55B2513C2969B7D40045364E /* NetworkManager.swift */,
 				55F6791529722F94003331C5 /* Garbage.swift */,
@@ -172,7 +175,8 @@
 				55F67918297327CB003331C5 /* CalendarHeaderView.swift in Sources */,
 				55B2513F2969B8AF0045364E /* APIToken.swift in Sources */,
 				55B2513D2969B7D40045364E /* NetworkManager.swift in Sources */,
-				5590824525A3CB7900F2CF62 /* GarbagePickupDays.swift in Sources */,
+				55F679232973600D003331C5 /* GarbageCollectionStateModel.swift in Sources */,
+				5590824525A3CB7900F2CF62 /* GarbageCollectionView.swift in Sources */,
 				5590824325A3CB7900F2CF62 /* DSNYPickupApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
