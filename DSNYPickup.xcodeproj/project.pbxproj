@@ -15,6 +15,7 @@
 		55B2513D2969B7D40045364E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B2513C2969B7D40045364E /* NetworkManager.swift */; };
 		55B2513F2969B8AF0045364E /* APIToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B2513E2969B8AF0045364E /* APIToken.swift */; };
 		55F6791629722F94003331C5 /* Garbage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F6791529722F94003331C5 /* Garbage.swift */; };
+		55F67918297327CB003331C5 /* CalendarHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F67917297327CB003331C5 /* CalendarHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		55B2513C2969B7D40045364E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		55B2513E2969B8AF0045364E /* APIToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIToken.swift; sourceTree = "<group>"; };
 		55F6791529722F94003331C5 /* Garbage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Garbage.swift; sourceTree = "<group>"; };
+		55F67917297327CB003331C5 /* CalendarHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 			children = (
 				5590824225A3CB7900F2CF62 /* DSNYPickupApp.swift */,
 				5590824425A3CB7900F2CF62 /* GarbagePickupDays.swift */,
+				55F67917297327CB003331C5 /* CalendarHeaderView.swift */,
 				55B2513C2969B7D40045364E /* NetworkManager.swift */,
 				55F6791529722F94003331C5 /* Garbage.swift */,
 				55B2513E2969B8AF0045364E /* APIToken.swift */,
@@ -156,6 +159,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				55F6791629722F94003331C5 /* Garbage.swift in Sources */,
+				55F67918297327CB003331C5 /* CalendarHeaderView.swift in Sources */,
 				55B2513F2969B8AF0045364E /* APIToken.swift in Sources */,
 				55B2513D2969B7D40045364E /* NetworkManager.swift in Sources */,
 				5590824525A3CB7900F2CF62 /* GarbagePickupDays.swift in Sources */,
