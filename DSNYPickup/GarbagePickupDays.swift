@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct GarbagePickupDays: View {
-    let tempURL = "https://data.cityofnewyork.us/resource/rv63-53db.json?$where=within_circle(multipolygon,%2040.60682780600007,%20-74.00173702999996,%201000)"
+    let tempURL = "https://data.cityofnewyork.us/resource/rv63-53db.json?$where=within_circle(multipolygon,%2040.73623017912892,%20-73.80868539963596,%201000)"
 
+    let collectionURL = "https://a827-donatenyc.nyc.gov/DSNYGeoCoder/api/DSNYCollection/CollectionSchedule?address=6525%20160th%20Street%2C%20Fresh%20Meadows%2C%20NY%2C%20USA"
+    
     var body: some View {
         VStack {
             Text("SearchView")
