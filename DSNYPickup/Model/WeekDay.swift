@@ -10,8 +10,4 @@ import OrderedCollections
 
 struct WeekDay {
     static var week: OrderedDictionary = ["Monday": false, "Tuesday" : false, "Wednesday" : false, "Thursday": false, "Friday": false, "Saturday": false]
-    
-//    init(week: OrderedDictionary<String, Any>) {
-//        WeekDay.week = week
-//    }
-}
+    }

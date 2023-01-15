@@ -21,6 +21,7 @@
 		55F6792129734F54003331C5 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 55F6792029734F54003331C5 /* OrderedCollections */; };
 		55F679232973600D003331C5 /* GarbageCollectionStateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F679222973600D003331C5 /* GarbageCollectionStateModel.swift */; };
 		55F6792529737328003331C5 /* WeekDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F6792429737328003331C5 /* WeekDay.swift */; };
+		55F6792729738A68003331C5 /* GarbageCollectionGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F6792629738A68003331C5 /* GarbageCollectionGridView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		55F67917297327CB003331C5 /* CalendarHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarHeaderView.swift; sourceTree = "<group>"; };
 		55F679222973600D003331C5 /* GarbageCollectionStateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GarbageCollectionStateModel.swift; sourceTree = "<group>"; };
 		55F6792429737328003331C5 /* WeekDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDay.swift; sourceTree = "<group>"; };
+		55F6792629738A68003331C5 /* GarbageCollectionGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GarbageCollectionGridView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,12 +75,10 @@
 			isa = PBXGroup;
 			children = (
 				5590824225A3CB7900F2CF62 /* DSNYPickupApp.swift */,
-				5590824425A3CB7900F2CF62 /* GarbageCollectionView.swift */,
-				55F679222973600D003331C5 /* GarbageCollectionStateModel.swift */,
-				55F67917297327CB003331C5 /* CalendarHeaderView.swift */,
-				55B2513C2969B7D40045364E /* NetworkManager.swift */,
-				55F6791529722F94003331C5 /* Garbage.swift */,
-				55F6792429737328003331C5 /* WeekDay.swift */,
+				55F6792B2973A193003331C5 /* Screens */,
+				55F679282973A15C003331C5 /* Views */,
+				55F6792A2973A17D003331C5 /* Manager */,
+				55F679292973A174003331C5 /* Model */,
 				55B2513E2969B8AF0045364E /* APIToken.swift */,
 				5590824625A3CB7A00F2CF62 /* Assets.xcassets */,
 				5590824B25A3CB7A00F2CF62 /* Info.plist */,
@@ -93,6 +93,41 @@
 				5590824925A3CB7A00F2CF62 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		55F679282973A15C003331C5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				55F6792629738A68003331C5 /* GarbageCollectionGridView.swift */,
+				55F67917297327CB003331C5 /* CalendarHeaderView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		55F679292973A174003331C5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				55F6791529722F94003331C5 /* Garbage.swift */,
+				55F6792429737328003331C5 /* WeekDay.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		55F6792A2973A17D003331C5 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				55B2513C2969B7D40045364E /* NetworkManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		55F6792B2973A193003331C5 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				5590824425A3CB7900F2CF62 /* GarbageCollectionView.swift */,
+				55F679222973600D003331C5 /* GarbageCollectionStateModel.swift */,
+			);
+			path = Screens;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -177,6 +212,7 @@
 				55F6791629722F94003331C5 /* Garbage.swift in Sources */,
 				55F67918297327CB003331C5 /* CalendarHeaderView.swift in Sources */,
 				55F6792529737328003331C5 /* WeekDay.swift in Sources */,
+				55F6792729738A68003331C5 /* GarbageCollectionGridView.swift in Sources */,
 				55B2513F2969B8AF0045364E /* APIToken.swift in Sources */,
 				55B2513D2969B7D40045364E /* NetworkManager.swift in Sources */,
 				55F679232973600D003331C5 /* GarbageCollectionStateModel.swift in Sources */,
