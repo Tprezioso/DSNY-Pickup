@@ -14,6 +14,7 @@ class GarbageCollectionStateModel: ObservableObject {
     @Published var recycling: OrderedDictionary = WeekDay.week
     @Published var composting: OrderedDictionary = WeekDay.week
     @Published var isLoading = false
+    @Published var alertItem: AlertItem?
     
     @Published var textString = ""
     
@@ -28,6 +29,18 @@ class GarbageCollectionStateModel: ObservableObject {
                 isLoading = false
             } catch {
                 print("❌ Error getting garbage data")
+                switch error {
+                case NetworkError.invalidData:
+                    self.alertItem = AlertContext.invalidData
+                    
+                case NetworkError.invalidURL:
+                    self.alertItem = AlertContext.invalidURL
+                    
+                case NetworkError.invalidResponse:
+                    self.alertItem = AlertContext.invalidResponse
+                default:
+                    self.alertItem = AlertContext.unableToComplete
+                }
                 isLoading = false
             }
         }
