@@ -16,11 +16,15 @@ class NetworkManager {
     
     func getGarbageDetails(atAddress addressString: String) async throws -> Garbage {
         
-        guard let searchableAddress = collectionURL.appending(addressString).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { throw NetworkError.invalidURL }
+        guard let searchableAddress = collectionURL.appending(addressString).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
+            print(" ❌ Invalid URL")
+            throw NetworkError.invalidURL
+        }
         guard let url = URL(string: searchableAddress) else { throw NetworkError.invalidURL }
         
         let (data, response) = try await URLSession.shared.data(from: url)        
         guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+            print(" ❌ Invalid Response")
             throw NetworkError.invalidResponse
         }
         
@@ -29,7 +33,8 @@ class NetworkManager {
             print(garbage)
             return garbage
         } catch {
-            throw NetworkError.invalidRepoData
+            print(" ❌ Invalid Data")
+            throw NetworkError.invalidData
         }
     }
 }
@@ -37,5 +42,5 @@ class NetworkManager {
 enum NetworkError: Error {
     case invalidURL
     case invalidResponse
-    case invalidRepoData
+    case invalidData
 }

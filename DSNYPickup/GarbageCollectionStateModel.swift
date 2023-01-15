@@ -9,16 +9,17 @@ import SwiftUI
 import Collections
 
 class GarbageCollectionStateModel: ObservableObject {
-    @Published var garbage: OrderedDictionary = ["Monday": false, "Tuesday" : false, "Wednesday" : false, "Thursday": false, "Friday": false, "Saturday": false]
-    @Published var largeItems: OrderedDictionary = ["Monday": false, "Tuesday" : false, "Wednesday" : false, "Thursday": false, "Friday": false, "Saturday": false]
-    @Published var recycling: OrderedDictionary = ["Monday": false, "Tuesday" : false, "Wednesday" : false, "Thursday": false, "Friday": false, "Saturday": false]
-    @Published var composting: OrderedDictionary = ["Monday": false, "Tuesday" : false, "Wednesday" : false, "Thursday": false, "Friday": false, "Saturday": false]
+    @Published var garbage: OrderedDictionary = WeekDay.week
+    @Published var largeItems: OrderedDictionary = WeekDay.week
+    @Published var recycling: OrderedDictionary = WeekDay.week
+    @Published var composting: OrderedDictionary = WeekDay.week
     
     @Published var textString = ""
     
     @Published var garbageData: Garbage?
 
     func sortData() {
+        resetArrayData()
         garbage = organizeCollection(from: garbageData?.regularCollectionSchedule, dictionary: &garbage)
         largeItems = organizeCollection(from: garbageData?.bulkPickupCollectionSchedule, dictionary: &largeItems)
         recycling = organizeCollection(from: garbageData?.recyclingCollectionSchedule, dictionary: &recycling)
@@ -38,5 +39,20 @@ class GarbageCollectionStateModel: ObservableObject {
             
         }
         return dictionary
+    }
+    
+    func resetArrayData() {
+        garbage.forEach({ (key, value) -> Void in
+            garbage[key] = false
+        })
+        largeItems.forEach({ (key, value) -> Void in
+            largeItems[key] = false
+        })
+        recycling.forEach({ (key, value) -> Void in
+            recycling[key] = false
+        })
+        composting.forEach({ (key, value) -> Void in
+            composting[key] = false
+        })
     }
 }
