@@ -7,7 +7,6 @@
 
 import Foundation
 import UIKit
-import SODAKit
 
 class NetworkManager {
     static let shared = NetworkManager()

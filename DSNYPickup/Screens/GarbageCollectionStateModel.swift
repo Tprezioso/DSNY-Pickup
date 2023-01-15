@@ -13,11 +13,26 @@ class GarbageCollectionStateModel: ObservableObject {
     @Published var largeItems: OrderedDictionary = WeekDay.week
     @Published var recycling: OrderedDictionary = WeekDay.week
     @Published var composting: OrderedDictionary = WeekDay.week
+    @Published var isLoading = false
     
     @Published var textString = ""
     
     @Published var garbageData: Garbage?
 
+    func getGarbageCollectionData() {
+        Task { @MainActor in
+            isLoading = true
+            do {
+                garbageData = try await NetworkManager.shared.getGarbageDetails(atAddress: textString)
+                sortData()
+                isLoading = false
+            } catch {
+                print("❌ Error getting garbage data")
+                isLoading = false
+            }
+        }
+    }
+    
     func sortData() {
         resetArrayData()
         garbage = organizeCollection(from: garbageData?.regularCollectionSchedule, dictionary: &garbage)

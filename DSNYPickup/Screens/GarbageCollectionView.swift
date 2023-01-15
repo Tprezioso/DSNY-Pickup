@@ -12,30 +12,35 @@ struct GarbageCollectionView: View {
     @StateObject var viewModel = GarbageCollectionStateModel()
     
     var body: some View {
-        ScrollView {
-            VStack {
-                HStack {
-                    TextField("Address", text: $viewModel.textString, prompt: Text("When is collecting at..."))
-                        .textFieldStyle(.roundedBorder)
-                        .submitLabel(.search)
-                        .onSubmit {
-                            Task { @MainActor in
-                                viewModel.garbageData = try await NetworkManager.shared.getGarbageDetails(atAddress: viewModel.textString)
-                                viewModel.sortData()
-                            }
+        
+        ZStack {
+                NavigationStack {
+                    ScrollView {
+                        VStack {
+                            HStack {
+                                TextField("Address", text: $viewModel.textString, prompt: Text("When is collecting at..."))
+                                    .textFieldStyle(.roundedBorder)
+                                    .submitLabel(.search)
+                                    .onSubmit {
+                                        viewModel.getGarbageCollectionData()
+                                    }
+                            }.padding()
+                            
+                            GarbageCollectionGridView(
+                                garbage: viewModel.garbage,
+                                largeItems: viewModel.largeItems,
+                                recycling: viewModel.recycling,
+                                composting: viewModel.composting
+                            )
+                            Spacer()
+                            
+                        }.onAppear {
+                            
                         }
-                }.padding()
-                
-                GarbageCollectionGridView(
-                    garbage: viewModel.garbage,
-                    largeItems: viewModel.largeItems,
-                    recycling: viewModel.recycling,
-                    composting: viewModel.composting
-                )
-                Spacer()
-                
-            }.onAppear {
-                
+                    }.navigationTitle("Collection Schedule")
+                }
+            if viewModel.isLoading {
+                ProgressView()
             }
         }
     }

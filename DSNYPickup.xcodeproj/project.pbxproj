@@ -11,7 +11,6 @@
 		5590824525A3CB7900F2CF62 /* GarbageCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5590824425A3CB7900F2CF62 /* GarbageCollectionView.swift */; };
 		5590824725A3CB7A00F2CF62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5590824625A3CB7A00F2CF62 /* Assets.xcassets */; };
 		5590824A25A3CB7A00F2CF62 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5590824925A3CB7A00F2CF62 /* Preview Assets.xcassets */; };
-		55B2513B2969B7BD0045364E /* SODAKit in Frameworks */ = {isa = PBXBuildFile; productRef = 55B2513A2969B7BD0045364E /* SODAKit */; };
 		55B2513D2969B7D40045364E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B2513C2969B7D40045364E /* NetworkManager.swift */; };
 		55B2513F2969B8AF0045364E /* APIToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B2513E2969B8AF0045364E /* APIToken.swift */; };
 		55F6791629722F94003331C5 /* Garbage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F6791529722F94003331C5 /* Garbage.swift */; };
@@ -46,7 +45,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				55F6791D29734F54003331C5 /* Collections in Frameworks */,
-				55B2513B2969B7BD0045364E /* SODAKit in Frameworks */,
 				55F6792129734F54003331C5 /* OrderedCollections in Frameworks */,
 				55F6791F29734F54003331C5 /* DequeModule in Frameworks */,
 			);
@@ -147,7 +145,6 @@
 			);
 			name = DSNYPickup;
 			packageProductDependencies = (
-				55B2513A2969B7BD0045364E /* SODAKit */,
 				55F6791C29734F54003331C5 /* Collections */,
 				55F6791E29734F54003331C5 /* DequeModule */,
 				55F6792029734F54003331C5 /* OrderedCollections */,
@@ -180,7 +177,6 @@
 			);
 			mainGroup = 5590823625A3CB7900F2CF62;
 			packageReferences = (
-				55B251392969B7BD0045364E /* XCRemoteSwiftPackageReference "soda-swift" */,
 				55F6791B29734F54003331C5 /* XCRemoteSwiftPackageReference "swift-collections" */,
 			);
 			productRefGroup = 5590824025A3CB7900F2CF62 /* Products */;
@@ -347,6 +343,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"DSNYPickup/Preview Content\"";
+				DEVELOPMENT_TEAM = 6JBM5ZNF6C;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = DSNYPickup/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
@@ -368,6 +365,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"DSNYPickup/Preview Content\"";
+				DEVELOPMENT_TEAM = 6JBM5ZNF6C;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = DSNYPickup/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
@@ -406,14 +404,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		55B251392969B7BD0045364E /* XCRemoteSwiftPackageReference "soda-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/socrata/soda-swift";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 		55F6791B29734F54003331C5 /* XCRemoteSwiftPackageReference "swift-collections" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-collections.git";
@@ -425,11 +415,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		55B2513A2969B7BD0045364E /* SODAKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 55B251392969B7BD0045364E /* XCRemoteSwiftPackageReference "soda-swift" */;
-			productName = SODAKit;
-		};
 		55F6791C29734F54003331C5 /* Collections */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 55F6791B29734F54003331C5 /* XCRemoteSwiftPackageReference "swift-collections" */;
