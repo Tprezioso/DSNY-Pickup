@@ -23,6 +23,7 @@ struct GarbageCollectionView: View {
                             VStack(alignment: .leading) {
                                             HStack {
                                                 Image(systemName: "magnifyingglass")
+                                                    .foregroundColor(.secondary)
                                                 TextField("Search...", text: $viewModel.textString, prompt: Text("When is collecting at..."))
                                             }
                                             .textFieldStyle(RoundedBorderTextFieldStyle())
