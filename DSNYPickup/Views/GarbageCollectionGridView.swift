@@ -15,7 +15,7 @@ struct GarbageCollectionGridView: View {
     var composting: OrderedDictionary<String, Bool>
 
     var body: some View {
-            Grid {
+        Grid {
             GridRow { CalendarHeaderView() }
             
             // Garbage
@@ -30,13 +30,21 @@ struct GarbageCollectionGridView: View {
                             
                             Text("Garbage")
                                 .font(.caption)
+                                .scaledToFit()
+                                .minimumScaleFactor(0.4)
                         }.foregroundColor(.green)
+                            .padding(4)
+                            .overlay {
+                                RoundedRectangle(cornerRadius: 10.0)
+                                    .stroke(.green)
+                            }
                     } else {
                         Text("")
+                            .frame(width: 40, height: 60)
                     }
                 }
             }
-            
+            Divider()
             // Large Items
             GridRow {
                 ForEach(largeItems.values, id: \.self) { day in
@@ -49,13 +57,23 @@ struct GarbageCollectionGridView: View {
                             
                             Text("Large Items")
                                 .font(.caption)
+                                .scaledToFit()
+                                .minimumScaleFactor(0.6)
                         }.foregroundColor(.green)
+                            .padding(4)
+                            .overlay {
+                                RoundedRectangle(cornerRadius: 10.0)
+                                    .stroke(.green)
+                            }
+                        
                         
                     } else {
                         Text("")
+                            .frame(width: 40, height: 60)
                     }
                 }
             }
+            Divider()
             
             // Recycling
             GridRow {
@@ -69,12 +87,22 @@ struct GarbageCollectionGridView: View {
                             
                             Text("Recycling")
                                 .font(.caption)
+                                .scaledToFit()
+                                .minimumScaleFactor(0.4)
                         }.foregroundColor(.cyan)
+                            .padding(4)
+                            .overlay {
+                                RoundedRectangle(cornerRadius: 10.0)
+                                    .stroke(.cyan)
+                            }
+                        
                     } else {
                         Text("")
+                            .frame(width: 40, height: 60)
                     }
                 }
             }
+            Divider()
             
             // Composting
             GridRow {
@@ -88,14 +116,22 @@ struct GarbageCollectionGridView: View {
                             
                             Text("Compost")
                                 .font(.caption)
+                                .scaledToFit()
                                 .minimumScaleFactor(0.4)
                         }
                         .foregroundColor(.orange)
+                        .padding(4)
+                        .overlay {
+                            RoundedRectangle(cornerRadius: 10.0)
+                                .stroke(.orange)
+                        }
                     } else {
                         Text("")
+                            .frame(width: 40, height: 60)
                     }
                 }
             }
-        }
+            Divider()            
+        }.padding(.horizontal, 10)
     }
 }

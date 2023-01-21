@@ -8,61 +8,41 @@
 import SwiftUI
 
 struct GarbageCollectionView: View {
-    let columns = Array(repeating: GridItem(.flexible()), count: 6)
     @StateObject var viewModel = GarbageCollectionStateModel()
+    
     init() {
         UILabel.appearance(whenContainedInInstancesOf: [UINavigationBar.self]).adjustsFontSizeToFitWidth = true
     }
     
     var body: some View {
-        
         ZStack {
-                NavigationStack {
-                    ScrollView {
-                        VStack {
-                            VStack(alignment: .leading) {
-                                            HStack {
-                                                Image(systemName: "magnifyingglass")
-                                                    .foregroundColor(.secondary)
-                                                TextField("Search...", text: $viewModel.textString, prompt: Text("When is collecting at..."))
-                                            }
-                                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                                            .submitLabel(.search)
-                                            .onSubmit {
-                                                viewModel.getGarbageCollectionData()
-                                            }
-                                        }.padding()
-
-                            GarbageCollectionGridView(
-                                    garbage: viewModel.garbage,
-                                    largeItems: viewModel.largeItems,
-                                    recycling: viewModel.recycling,
-                                    composting: viewModel.composting
-                                )
-                            Spacer()
-                        }.onAppear {
-                            viewModel.getGarbageCollectionData()
-                        }
-                    }.navigationTitle("DSNY Garbage Collection")
+            ScrollView {
+                VStack {
+                    AddressSearchView(viewModel: viewModel)
+                    
+                    GarbageCollectionGridView(
+                        garbage: viewModel.garbage,
+                        largeItems: viewModel.largeItems,
+                        recycling: viewModel.recycling,
+                        composting: viewModel.composting
+                    )
+                    Spacer()
+                }.onAppear {
+                    viewModel.getGarbageCollectionData()
                 }
+            }.navigationTitle("DSNY Garbage Collection")
+                .toolbarColorScheme(.dark, for: .navigationBar)
+                .toolbarBackground(Color.accentColor, for: .navigationBar)
+                .toolbarBackground(.visible, for: .navigationBar)
             if viewModel.isLoading {
                 ProgressView()
             }
-        } .alert(item: $viewModel.alertItem) { alertItem in
+        }.alert(item: $viewModel.alertItem) { alertItem in
             Alert.init(title: alertItem.title, message: alertItem.message, dismissButton: alertItem.dismissButton)
         }
         .onTapGesture {
             dismissKeyboardOnTap()
         }
-    }
-}
-
-struct ColorSquare: View {
-    let color: Color
-    
-    var body: some View {
-        color
-        .frame(width: 50, height: 50)
     }
 }
 
@@ -72,8 +52,7 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
-enum EnumDays: Int, CustomStringConvertible
-{
+enum EnumDays: Int, CustomStringConvertible {
     var description: String {
         switch self {
         case .MONDAY:
@@ -100,4 +79,40 @@ extension View {
     UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder),
                                     to: nil, from: nil, for: nil)
   }
+}
+
+struct RoundedRectangleButtonStyle: ButtonStyle {
+  func makeBody(configuration: Configuration) -> some View {
+      configuration.label
+        .scaleEffect(configuration.isPressed ? 0.95 : 1)
+  }
+}
+
+struct AddressSearchView: View {
+    @StateObject var viewModel: GarbageCollectionStateModel
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            HStack {
+                Image(systemName: "magnifyingglass")
+                    .foregroundColor(.secondary)
+                TextField("Search...", text: $viewModel.searchString, prompt: Text("When is collecting at..."))
+                Button {
+                    print("Save")
+                } label: {
+                    Image(systemName: "plus.circle.fill")
+                        .resizable()
+                        .foregroundColor(.accentColor)
+                        .frame(width: 30, height: 30)
+                }
+                
+            }
+            .font(.title2)
+            .textFieldStyle(.roundedBorder)
+            .submitLabel(.search)
+            .onSubmit {
+                viewModel.getGarbageCollectionData()
+            }
+        }.padding()
+    }
 }

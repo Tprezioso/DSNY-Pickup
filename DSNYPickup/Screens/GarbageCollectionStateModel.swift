@@ -16,7 +16,7 @@ class GarbageCollectionStateModel: ObservableObject {
     @Published var isLoading = false
     @Published var alertItem: AlertItem?
     
-    @Published var textString = ""
+    @Published var searchString = "12 Jamaica ave"
     
     @Published var garbageData: Garbage?
 
@@ -24,7 +24,7 @@ class GarbageCollectionStateModel: ObservableObject {
         Task { @MainActor in
             isLoading = true
             do {
-                garbageData = try await NetworkManager.shared.getGarbageDetails(atAddress: textString)
+                garbageData = try await NetworkManager.shared.getGarbageDetails(atAddress: searchString)
                 sortData()
                 isLoading = false
             } catch {

@@ -11,7 +11,7 @@ import SwiftUI
 struct DSNYPickupApp: App {
     var body: some Scene {
         WindowGroup {
-            GarbageCollectionView()
+            TabBarView()
         }
     }
 }
