@@ -7,7 +7,9 @@
 
 import SwiftUI
 import Collections
+import MapKit
 
+@MainActor
 class GarbageCollectionStateModel: ObservableObject {
     @Published var garbage: OrderedDictionary = WeekDay.week
     @Published var largeItems: OrderedDictionary = WeekDay.week
@@ -16,9 +18,11 @@ class GarbageCollectionStateModel: ObservableObject {
     @Published var isLoading = false
     @Published var alertItem: AlertItem?
     
-    @Published var searchString = "12 Jamaica ave"
+    @Published var searchString = ""
+    @Published var stringViewString = ""
     
     @Published var garbageData: Garbage?
+    @Published var places = [PlaceViewModel]()
 
     func getGarbageCollectionData() {
         Task { @MainActor in
@@ -48,6 +52,7 @@ class GarbageCollectionStateModel: ObservableObject {
     
     func sortData() {
         resetArrayData()
+        stringViewString = garbageData?.formattedAddress ?? ""
         garbage = organizeCollection(from: garbageData?.regularCollectionSchedule, dictionary: &garbage)
         largeItems = organizeCollection(from: garbageData?.bulkPickupCollectionSchedule, dictionary: &largeItems)
         recycling = organizeCollection(from: garbageData?.recyclingCollectionSchedule, dictionary: &recycling)
@@ -82,5 +87,21 @@ class GarbageCollectionStateModel: ObservableObject {
         composting.forEach({ (key, value) -> Void in
             composting[key] = false
         })
+    }
+    
+    func search(text: String, region: MKCoordinateRegion) {
+        let searchRequest = MKLocalSearch.Request()
+        searchRequest.naturalLanguageQuery = text
+        searchRequest.region
+        let search = MKLocalSearch(request: searchRequest)
+        
+        search.start { response, error in
+            guard let response = response else {
+                print ("Error: \(error?.localizedDescription ?? "Unknown error")")
+                return
+            }
+            
+            self.places = response.mapItems.map(PlaceViewModel.init)
+        }
     }
 }

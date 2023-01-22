@@ -9,6 +9,11 @@ import SwiftUI
 
 struct GarbageCollectionView: View {
     @StateObject var viewModel = GarbageCollectionStateModel()
+    @StateObject private var locationManager = LocationManager()
+    
+    @Environment(\.dismiss) private var dismiss
+    @Environment(\.dismissSearch) private var dismissSearch
+    @Environment(\.isSearching) private var isSearching
     
     init() {
         UILabel.appearance(whenContainedInInstancesOf: [UINavigationBar.self]).adjustsFontSizeToFitWidth = true
@@ -17,8 +22,11 @@ struct GarbageCollectionView: View {
     var body: some View {
         ZStack {
             ScrollView {
-                VStack {
-                    AddressSearchView(viewModel: viewModel)
+                VStack(alignment: .leading) {
+                    Text("\(viewModel.stringViewString)")
+                        .font(.title)
+                        .padding(.top)
+                        .padding(.horizontal)
                     
                     GarbageCollectionGridView(
                         garbage: viewModel.garbage,
@@ -30,6 +38,18 @@ struct GarbageCollectionView: View {
                 }.onAppear {
                     viewModel.getGarbageCollectionData()
                 }
+                .searchable(text: $viewModel.searchString, placement: .navigationBarDrawer(displayMode: .always), prompt: viewModel.searchString.isEmpty ? "When is Collection at..." : viewModel.searchString) {
+                                    ForEach(viewModel.places) { place in
+                                        SearchView(place: place.name, viewModel: viewModel)
+                                    }
+                                }
+                                .onSubmit(of: .search) {
+                                    viewModel.getGarbageCollectionData()
+                                }
+                                .onChange (of: viewModel.searchString, perform: { searchText in
+                                    viewModel.search(text: searchText, region: locationManager.region)
+                //                    viewModel.getGarbageCollectionData()
+                                })
             }.navigationTitle("DSNY Garbage Collection")
                 .toolbarColorScheme(.dark, for: .navigationBar)
                 .toolbarBackground(Color.accentColor, for: .navigationBar)
@@ -114,5 +134,23 @@ struct AddressSearchView: View {
                 viewModel.getGarbageCollectionData()
             }
         }.padding()
+    }
+}
+
+struct SearchView: View {
+    var place: String
+    @StateObject var viewModel: GarbageCollectionStateModel
+    @Environment(\.dismiss) private var dismiss
+    @Environment(\.dismissSearch) private var dismissSearch
+    
+    var body: some View {
+        Text(place)
+            .onTapGesture {
+                Task { @MainActor in
+                    viewModel.searchString = place
+                    viewModel.getGarbageCollectionData()
+                }
+                dismissSearch()
+            }
     }
 }

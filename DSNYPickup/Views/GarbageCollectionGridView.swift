@@ -132,6 +132,6 @@ struct GarbageCollectionGridView: View {
                 }
             }
             Divider()            
-        }.padding(.horizontal, 10)
+        }.padding(.all, 10)
     }
 }
