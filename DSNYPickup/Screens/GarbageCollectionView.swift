@@ -34,22 +34,32 @@ struct GarbageCollectionView: View {
                         recycling: viewModel.recycling,
                         composting: viewModel.composting
                     )
+                    
+                    Button {
+                        // TODO: - Need to add Core Data to save address
+                        print("Saved")
+                    } label: {
+                        Label("Add to Favorites", systemImage: "star")
+                            .bold()
+                    }
+                    .padding(.horizontal)
+                    .buttonStyle(RoundedRectangleButtonStyle())
+                    
                     Spacer()
                 }.onAppear {
                     viewModel.getGarbageCollectionData()
                 }
                 .searchable(text: $viewModel.searchString, placement: .navigationBarDrawer(displayMode: .always), prompt: viewModel.searchString.isEmpty ? "When is Collection at..." : viewModel.searchString) {
-                                    ForEach(viewModel.places) { place in
-                                        SearchView(place: place.name, viewModel: viewModel)
-                                    }
-                                }
-                                .onSubmit(of: .search) {
-                                    viewModel.getGarbageCollectionData()
-                                }
-                                .onChange (of: viewModel.searchString, perform: { searchText in
-                                    viewModel.search(text: searchText, region: locationManager.region)
-                //                    viewModel.getGarbageCollectionData()
-                                })
+                    ForEach(viewModel.places) { place in
+                        SearchView(place: place.name, viewModel: viewModel)
+                    }
+                }
+                .onSubmit(of: .search) {
+                    viewModel.getGarbageCollectionData()
+                }
+                .onChange (of: viewModel.searchString, perform: { searchText in
+                    viewModel.search(text: searchText, region: locationManager.region)
+                })
             }.navigationTitle("DSNY Garbage Collection")
                 .toolbarColorScheme(.dark, for: .navigationBar)
                 .toolbarBackground(Color.accentColor, for: .navigationBar)
@@ -103,8 +113,14 @@ extension View {
 
 struct RoundedRectangleButtonStyle: ButtonStyle {
   func makeBody(configuration: Configuration) -> some View {
-      configuration.label
-        .scaleEffect(configuration.isPressed ? 0.95 : 1)
+      HStack {
+            Spacer()
+            configuration.label.foregroundColor(.white)
+            Spacer()
+          }
+          .padding()
+          .background(Color.accentColor.cornerRadius(8))
+          .scaleEffect(configuration.isPressed ? 0.95 : 1)
   }
 }
 
