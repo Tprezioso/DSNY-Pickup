@@ -11,10 +11,6 @@ struct GarbageCollectionView: View {
     @StateObject var viewModel = GarbageCollectionStateModel()
     @StateObject private var locationManager = LocationManager()
     
-    @Environment(\.dismiss) private var dismiss
-    @Environment(\.dismissSearch) private var dismissSearch
-    @Environment(\.isSearching) private var isSearching
-    
     init() {
         UILabel.appearance(whenContainedInInstancesOf: [UINavigationBar.self]).adjustsFontSizeToFitWidth = true
     }
@@ -61,9 +57,10 @@ struct GarbageCollectionView: View {
                     viewModel.search(text: searchText, region: locationManager.region)
                 })
             }.navigationTitle("DSNY Garbage Collection")
-                .toolbarColorScheme(.dark, for: .navigationBar)
-                .toolbarBackground(Color.accentColor, for: .navigationBar)
-                .toolbarBackground(.visible, for: .navigationBar)
+            .toolbarColorScheme(.dark, for: .navigationBar)
+            .toolbarBackground(Color.accentColor, for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
+            
             if viewModel.isLoading {
                 ProgressView()
             }
@@ -156,7 +153,6 @@ struct AddressSearchView: View {
 struct SearchView: View {
     var place: String
     @StateObject var viewModel: GarbageCollectionStateModel
-    @Environment(\.dismiss) private var dismiss
     @Environment(\.dismissSearch) private var dismissSearch
     
     var body: some View {

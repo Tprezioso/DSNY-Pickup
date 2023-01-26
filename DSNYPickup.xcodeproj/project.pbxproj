@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		55576E9C29821F8F0089861A /* ItemToDispose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55576E9B29821F8F0089861A /* ItemToDispose.swift */; };
+		55576E9E298221940089861A /* DisposeOfItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55576E9D298221940089861A /* DisposeOfItemView.swift */; };
 		5590824325A3CB7900F2CF62 /* DSNYPickupApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5590824225A3CB7900F2CF62 /* DSNYPickupApp.swift */; };
 		5590824525A3CB7900F2CF62 /* GarbageCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5590824425A3CB7900F2CF62 /* GarbageCollectionView.swift */; };
 		5590824725A3CB7A00F2CF62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5590824625A3CB7A00F2CF62 /* Assets.xcassets */; };
@@ -29,6 +31,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		55576E9B29821F8F0089861A /* ItemToDispose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemToDispose.swift; sourceTree = "<group>"; };
+		55576E9D298221940089861A /* DisposeOfItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisposeOfItemView.swift; sourceTree = "<group>"; };
 		5590823F25A3CB7900F2CF62 /* DSNYPickup.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DSNYPickup.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5590824225A3CB7900F2CF62 /* DSNYPickupApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSNYPickupApp.swift; sourceTree = "<group>"; };
 		5590824425A3CB7900F2CF62 /* GarbageCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GarbageCollectionView.swift; sourceTree = "<group>"; };
@@ -118,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				55F6791529722F94003331C5 /* Garbage.swift */,
+				55576E9B29821F8F0089861A /* ItemToDispose.swift */,
 				55F6792429737328003331C5 /* WeekDay.swift */,
 				55BDDBF4297CB4CC00988C8E /* PlaceView.swift */,
 			);
@@ -139,6 +144,7 @@
 				55AE1C21297B9472006208A2 /* TabBarView.swift */,
 				5590824425A3CB7900F2CF62 /* GarbageCollectionView.swift */,
 				55F679222973600D003331C5 /* GarbageCollectionStateModel.swift */,
+				55576E9D298221940089861A /* DisposeOfItemView.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -236,10 +242,12 @@
 				55AE1C20297B50F8006208A2 /* CollectionInfo.swift in Sources */,
 				55B2513F2969B8AF0045364E /* APIToken.swift in Sources */,
 				55B2513D2969B7D40045364E /* NetworkManager.swift in Sources */,
+				55576E9E298221940089861A /* DisposeOfItemView.swift in Sources */,
 				55F679232973600D003331C5 /* GarbageCollectionStateModel.swift in Sources */,
 				5590824525A3CB7900F2CF62 /* GarbageCollectionView.swift in Sources */,
 				55F9C42B2974B7A50038A427 /* Alert.swift in Sources */,
 				55AE1C22297B9472006208A2 /* TabBarView.swift in Sources */,
+				55576E9C29821F8F0089861A /* ItemToDispose.swift in Sources */,
 				5590824325A3CB7900F2CF62 /* DSNYPickupApp.swift in Sources */,
 				55BDDBF3297CAB8E00988C8E /* LocationManager.swift in Sources */,
 			);

@@ -24,7 +24,7 @@ struct TabBarView: View {
             }.tag(2)
             
             NavigationStack {
-                EmptyView()
+                DisposeOfItemView()
             }.tabItem {
                 Label("Trash", systemImage: "trash")
             }.tag(3)
@@ -33,7 +33,7 @@ struct TabBarView: View {
                 EmptyView()
             }.tabItem {
                 Label("More", systemImage: "ellipsis")
-            }.tag(2)
+            }.tag(4)
         }
     }
 }
