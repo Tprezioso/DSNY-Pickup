@@ -9,11 +9,13 @@ import SwiftUI
 
 struct DisposeOfItemView: View {
     @StateObject var viewModel = DisposeOfItemViewModel()
+    @State var test = ""
     var body: some View {
-        Text("Hello")
-            .onAppear {
-                viewModel.getItemDisposalDetails()
-            }
+        
+        Text(LocalizedStringKey(viewModel.itemsToDisposeData?.first?.excerpt ?? "WTFFF"))
+        .onAppear {
+            viewModel.getItemDisposalDetails()
+        }
     }
 }
 
@@ -27,13 +29,13 @@ struct DisposeOfItemView_Previews: PreviewProvider {
 class DisposeOfItemViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var alertItem: AlertItem?
-    @Published var garbageData: ItemsToDispose?
+    @Published var itemsToDisposeData: ItemsToDispose?
     
     func getItemDisposalDetails() {
         Task { @MainActor in
             isLoading = true
             do {
-                garbageData = try await NetworkManager.shared.getItemDisposalDetails(for: "asdf")
+                itemsToDisposeData = try await NetworkManager.shared.getItemDisposalDetails(for: "auto batteries")
                 isLoading = false
             } catch {
                 print("❌ Error getting garbage data")

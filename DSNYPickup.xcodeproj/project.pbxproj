@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		55576E9C29821F8F0089861A /* ItemToDispose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55576E9B29821F8F0089861A /* ItemToDispose.swift */; };
 		55576E9E298221940089861A /* DisposeOfItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55576E9D298221940089861A /* DisposeOfItemView.swift */; };
+		55576EA72982C97B0089861A /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 55576EA62982C97B0089861A /* SwiftSoup */; };
 		5590824325A3CB7900F2CF62 /* DSNYPickupApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5590824225A3CB7900F2CF62 /* DSNYPickupApp.swift */; };
 		5590824525A3CB7900F2CF62 /* GarbageCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5590824425A3CB7900F2CF62 /* GarbageCollectionView.swift */; };
 		5590824725A3CB7A00F2CF62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5590824625A3CB7A00F2CF62 /* Assets.xcassets */; };
@@ -59,6 +60,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				55F6791D29734F54003331C5 /* Collections in Frameworks */,
+				55576EA72982C97B0089861A /* SwiftSoup in Frameworks */,
 				55F6792129734F54003331C5 /* OrderedCollections in Frameworks */,
 				55F6791F29734F54003331C5 /* DequeModule in Frameworks */,
 			);
@@ -177,6 +179,7 @@
 				55F6791C29734F54003331C5 /* Collections */,
 				55F6791E29734F54003331C5 /* DequeModule */,
 				55F6792029734F54003331C5 /* OrderedCollections */,
+				55576EA62982C97B0089861A /* SwiftSoup */,
 			);
 			productName = DSNYPickup;
 			productReference = 5590823F25A3CB7900F2CF62 /* DSNYPickup.app */;
@@ -207,6 +210,7 @@
 			mainGroup = 5590823625A3CB7900F2CF62;
 			packageReferences = (
 				55F6791B29734F54003331C5 /* XCRemoteSwiftPackageReference "swift-collections" */,
+				55576EA52982C97B0089861A /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 			);
 			productRefGroup = 5590824025A3CB7900F2CF62 /* Products */;
 			projectDirPath = "";
@@ -440,6 +444,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		55576EA52982C97B0089861A /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scinfu/SwiftSoup.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		55F6791B29734F54003331C5 /* XCRemoteSwiftPackageReference "swift-collections" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-collections.git";
@@ -451,6 +463,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		55576EA62982C97B0089861A /* SwiftSoup */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 55576EA52982C97B0089861A /* XCRemoteSwiftPackageReference "SwiftSoup" */;
+			productName = SwiftSoup;
+		};
 		55F6791C29734F54003331C5 /* Collections */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 55F6791B29734F54003331C5 /* XCRemoteSwiftPackageReference "swift-collections" */;
