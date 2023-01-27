@@ -22,7 +22,12 @@ struct DisposeOfItemView: View {
                         Text(itemToDispose.name ?? "")
                     }
                 }
+                
             }.searchable(text: $viewModel.searchText)
+            .onSubmit(of: .search) { 
+                    print("submit")
+                viewModel.getItemDisposalDetails()
+            }
             .navigationTitle("How to Get Rid of ...")
         
         .onAppear {
@@ -48,7 +53,7 @@ class DisposeOfItemViewModel: ObservableObject {
         Task { @MainActor in
             isLoading = true
             do {
-                itemsToDisposeData = try await NetworkManager.shared.getItemDisposalDetails(for: "batteries")
+                itemsToDisposeData = try await NetworkManager.shared.getItemDisposalDetails(for: searchText)
             
                 isLoading = false
             } catch {
