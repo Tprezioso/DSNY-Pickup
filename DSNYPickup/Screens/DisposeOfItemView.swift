@@ -18,12 +18,15 @@ struct DisposeOfItemView: View {
     var body: some View {
             List {
                 ForEach(viewModel.itemsToDisposeData ?? []) { itemToDispose in
-                    NavigationLink(itemToDispose.name ?? "") {
-                        Text(itemToDispose.name ?? "")
+                    NavigationLink((itemToDispose.name ?? "").capitalized.replacingOccurrences(of: "-", with: " ")) {
+                        Text((itemToDispose.name ?? "").capitalized)
+                            
                     }
                 }
                 
             }.searchable(text: $viewModel.searchText)
+            .onChange(of: viewModel.searchText) { _ in viewModel.getItemDisposalDetails() }
+            
             .onSubmit(of: .search) { 
                     print("submit")
                 viewModel.getItemDisposalDetails()
