@@ -15,7 +15,6 @@ class NetworkManager {
     let collectionURL = "https://a827-donatenyc.nyc.gov/DSNYGeoCoder/api/DSNYCollection/CollectionSchedule?address="
     let itemDisposalURL = "https://dsny.cityofnewyork.us/wp-json/dsny/v1/searchDisposalItems?s="
     
-    
     func getGarbageDetails(atAddress addressString: String) async throws -> Garbage {
         
         guard let searchableAddress = collectionURL.appending(addressString).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
@@ -40,7 +39,7 @@ class NetworkManager {
         }
     }
     
-    func getItemDisposalDetails(for itemString: String) async throws -> [ItemToDispose] {
+    func getItemDisposalDetails(for itemString: String) async throws -> ItemsToDispose {
         
         guard let searchableAddress = itemDisposalURL.appending(itemString).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
             print(" ❌ Invalid URL")
