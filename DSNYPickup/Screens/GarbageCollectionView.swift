@@ -17,32 +17,42 @@ struct GarbageCollectionView: View {
     
     var body: some View {
         ZStack {
-            ScrollView {
-                VStack(alignment: .leading) {
-                    Text("\(viewModel.stringViewString)")
-                        .font(.title)
-                        .padding(.top)
-                        .padding(.horizontal)
-                    
-                    GarbageCollectionGridView(
-                        garbage: viewModel.garbage,
-                        largeItems: viewModel.largeItems,
-                        recycling: viewModel.recycling,
-                        composting: viewModel.composting
-                    )
-                    
-                    Button {
-                        // TODO: - Need to add Core Data to save address
-                        print("Saved")
-                    } label: {
-                        Label("Add to Favorites", systemImage: "star")
-                            .bold()
+                VStack {
+                    ScrollView {
+                    VStack(alignment: .leading) {
+                        Text("\(viewModel.stringViewString)")
+                            .font(.title)
+                            .padding(.top)
+                            .padding(.horizontal)
+                        
+                        GarbageCollectionGridView(
+                            garbage: viewModel.garbage,
+                            largeItems: viewModel.largeItems,
+                            recycling: viewModel.recycling,
+                            composting: viewModel.composting
+                        )
+                        
+                        
+                        
+                        Spacer()
+                    }.onAppear {
+                        viewModel.getGarbageCollectionData()
                     }
-                    .padding(.horizontal)
-                    .buttonStyle(RoundedRectangleButtonStyle())
+                    .searchable(text: $viewModel.searchString, placement: .navigationBarDrawer(displayMode: .always), prompt: viewModel.searchString.isEmpty ? "When is Collection at..." : viewModel.searchString) {
+                        ForEach(viewModel.places) { place in
+                            SearchView(place: place.name, viewModel: viewModel)
+                        }
+                    }
+                    .onSubmit(of: .search) {
+                        viewModel.getGarbageCollectionData()
+                    }
                     
-                    Spacer()
-                }.onAppear {
+                    
+                }.navigationTitle("DSNY Garbage Collection")
+                .toolbarColorScheme(.dark, for: .navigationBar)
+                .toolbarBackground(Color.accentColor, for: .navigationBar)
+                .toolbarBackground(.visible, for: .navigationBar)
+                .onAppear {
                     viewModel.getGarbageCollectionData()
                 }
                 .searchable(text: $viewModel.searchString, placement: .navigationBarDrawer(displayMode: .always), prompt: viewModel.searchString.isEmpty ? "When is Collection at..." : viewModel.searchString) {
@@ -55,11 +65,18 @@ struct GarbageCollectionView: View {
                 }
                 .onChange (of: viewModel.searchString, perform: { searchText in
                     viewModel.search(text: searchText, region: locationManager.region)
-                })
-            }.navigationTitle("DSNY Garbage Collection")
-            .toolbarColorScheme(.dark, for: .navigationBar)
-            .toolbarBackground(Color.accentColor, for: .navigationBar)
-            .toolbarBackground(.visible, for: .navigationBar)
+                    
+            })
+                    Button {
+                        // TODO: - Need to add Core Data to save address
+                        print("Saved")
+                    } label: {
+                        Label("Add to Favorites", systemImage: "star")
+                            .bold()
+                    }
+                    .padding()
+                    .buttonStyle(RoundedRectangleButtonStyle())
+            }
             
             if viewModel.isLoading {
                 ProgressView()
