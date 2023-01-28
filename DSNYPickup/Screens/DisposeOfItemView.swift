@@ -17,16 +17,18 @@ struct DisposeOfItemView: View {
     
     var body: some View {
             List {
-                ForEach(viewModel.itemsToDisposeData ?? []) { itemToDispose in
-                    NavigationLink((itemToDispose.name ?? "").capitalized.replacingOccurrences(of: "-", with: " ")) {
-                        Text((itemToDispose.name ?? "").capitalized)
+                ForEach(viewModel.sortedItemsToDispose, id: \.key) { itemToDispose in
+                    NavigationLink((itemToDispose.key).capitalized.replacingOccurrences(of: "-", with: " ")) {
+                        DisposeItemDetailView(itemToDispose: itemToDispose.value.first!)
                             
                     }
                 }
                 
-            }.searchable(text: $viewModel.searchText)
-            .onChange(of: viewModel.searchText) { _ in viewModel.getItemDisposalDetails() }
-            
+            }.searchable(text: $viewModel.searchText, placement: .navigationBarDrawer(displayMode: .always))
+            .onChange(of: viewModel.searchText) { text in
+                viewModel.getItemDisposalDetails()
+                viewModel.sortedItemsToDispose = viewModel.sortedItemsToDispose.filter { $0.key.starts(with: text.capitalized) }
+            }            
             .onSubmit(of: .search) { 
                     print("submit")
                 viewModel.getItemDisposalDetails()
@@ -51,30 +53,35 @@ class DisposeOfItemViewModel: ObservableObject {
     @Published var alertItem: AlertItem?
     @Published var itemsToDisposeData: ItemsToDispose?
     @Published var searchText = ""
+    @Published var sortedItemsToDispose = [Dictionary<String, ItemsToDispose>.Element]()
     
     func getItemDisposalDetails() {
         Task { @MainActor in
             isLoading = true
-            do {
-                itemsToDisposeData = try await NetworkManager.shared.getItemDisposalDetails(for: searchText)
-            
-                isLoading = false
-            } catch {
-                print("❌ Error getting garbage data")
-                switch error {
-                case NetworkError.invalidData:
-                    self.alertItem = AlertContext.invalidData
-                    
-                case NetworkError.invalidURL:
-                    self.alertItem = AlertContext.invalidURL
-                    
-                case NetworkError.invalidResponse:
-                    self.alertItem = AlertContext.invalidResponse
-                default:
-                    self.alertItem = AlertContext.unableToComplete
-                }
-                isLoading = false
+            await getItemsData()
+            sortedItemsToDispose = sortNamesOfItemsIntoDictionary(items: itemsToDisposeData ?? ItemsToDispose())
+        }
+    }
+    
+    func getItemsData() async {
+        do {
+            itemsToDisposeData = try await NetworkManager.shared.getItemDisposalDetails(for: searchText)
+            isLoading = false
+        } catch {
+            print("❌ Error getting garbage data")
+            switch error {
+            case NetworkError.invalidData:
+                self.alertItem = AlertContext.invalidData
+                
+            case NetworkError.invalidURL:
+                self.alertItem = AlertContext.invalidURL
+                
+            case NetworkError.invalidResponse:
+                self.alertItem = AlertContext.invalidResponse
+            default:
+                self.alertItem = AlertContext.unableToComplete
             }
+            isLoading = false
         }
     }
     
@@ -99,6 +106,12 @@ class DisposeOfItemViewModel: ObservableObject {
             print("error")
             return "Error"
         }
-        
     }
+    
+    func sortNamesOfItemsIntoDictionary(items: ItemsToDispose) -> [Dictionary<String, ItemsToDispose>.Element] {
+            let groupByName = Dictionary(grouping: items) { (device) -> String in
+                return device.name!
+            }
+            return groupByName.sorted{ $0.key < $1.key }
+        }
 }

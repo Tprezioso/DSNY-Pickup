@@ -11,7 +11,7 @@ import UIKit
 class NetworkManager {
     static let shared = NetworkManager()
     let decoder = JSONDecoder()
-    let baseURL = "https://www1.nyc.gov/assets/dsny/site/"
+    static let baseURL = "https://www1.nyc.gov/assets/dsny/site/"
     let collectionURL = "https://a827-donatenyc.nyc.gov/DSNYGeoCoder/api/DSNYCollection/CollectionSchedule?address="
     let itemDisposalURL = "https://dsny.cityofnewyork.us/wp-json/dsny/v1/searchDisposalItems?s="
     

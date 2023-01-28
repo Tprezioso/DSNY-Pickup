@@ -8,20 +8,33 @@
 import Foundation
 
 // MARK: - ItemToDisposeElement
-struct ItemToDisposeElement: Codable, Identifiable {
+struct ItemToDispose: Identifiable {
     let id = UUID()
     let header, excerpt, content, name: String?
     let postType: String?
     let linkedPage: LinkedPageUnion?
     let otherSearchWords, keyWords: String?
-
-    enum CodingKeys: String, CodingKey {
-        case header, excerpt, content, name
-        case postType = "post_type"
-        case linkedPage = "linked_page"
-        case otherSearchWords = "other_search_words"
-        case keyWords = "key_words"
+    var url: String?
+    
+    init(header: String?, excerpt: String?, content: String?, name: String?, postType: String?, linkedPage: LinkedPageUnion?, otherSearchWords: String?, keyWords: String?, url: String?) {
+        self.header = header
+        self.excerpt = excerpt
+        self.content = content
+        self.name = name
+        self.postType = postType
+        self.linkedPage = linkedPage
+        self.otherSearchWords = otherSearchWords
+        self.keyWords = keyWords
+        self.url = url
     }
+    
+//    enum CodingKeys: String, CodingKey {
+//        case header, excerpt, content, name
+//        case postType = "post_type"
+//        case linkedPage = "linked_page"
+//        case otherSearchWords = "other_search_words"
+//        case keyWords = "key_words"
+//    }
 }
 
 enum LinkedPageUnion: Codable {
@@ -59,4 +72,18 @@ struct LinkedPageClass: Codable, Identifiable {
     let url: String?
 }
 
-typealias ItemsToDispose = [ItemToDisposeElement]
+typealias ItemsToDispose = [ItemToDispose]
+
+
+extension ItemToDispose: Decodable {
+    struct CodingData: Decodable {
+        let header, excerpt, content, name, url: String?
+        let postType: String?
+        let linkedPage: LinkedPageUnion?
+        let otherSearchWords, keyWords: String?
+        
+        var itemToDispose: ItemToDispose {
+            ItemToDispose(header: header, excerpt: excerpt, content: content, name: name, postType: postType, linkedPage: linkedPage, otherSearchWords: otherSearchWords, keyWords: keyWords, url: url)
+        }
+    }
+}
