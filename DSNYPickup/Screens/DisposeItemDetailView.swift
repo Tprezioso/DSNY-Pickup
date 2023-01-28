@@ -13,25 +13,32 @@ struct DisposeItemDetailView: View {
 
     var body: some View {
         VStack {
-            Text(stateModel.parseHTMLStringFromData(string: stateModel.itemToDispose.excerpt ?? ""))
-            
-            Link("More Information", destination: (URL(string: stateModel.parseForURL(string: stateModel.itemToDispose.excerpt ?? NetworkManager.baseURL)) ?? URL(string: NetworkManager.baseURL))!)
-                .buttonStyle(RoundedRectangleButtonStyle())
-                .padding(.horizontal)
+            ScrollView {
+                Text(stateModel.parseHTMLStringFromData(string: stateModel.itemToDispose.excerpt ?? ""))
+                    .font(.title3)
+            }
+            Spacer()
+            ForEach(stateModel.buttons) { button in
+                Link(button.name.capitalized, destination: (URL(string: button.url) ?? URL(string: NetworkManager.baseURL))!)
+                    .buttonStyle(RoundedRectangleButtonStyle())
+            }
+        }.padding()
+        .onAppear {
+            stateModel.parseForURL(string: stateModel.itemToDispose.excerpt ?? "")
         }
         .navigationTitle(stateModel.itemToDispose.name?.capitalized.replacingOccurrences(of: "-", with: " ") ?? "")
     }
 }
 
-//struct DisposeItemDetailView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        DisposeItemDetailView(itemToDispose: MockData.detailSearchItemToDispose)
-//    }
-//}
+struct DisposeItemDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        DisposeItemDetailView(stateModel: DisposeItemDetailStateModel(itemToDispose: MockData.detailSearchItemToDispose))
+    }
+}
 
 class DisposeItemDetailStateModel: ObservableObject {
     @State var itemToDispose: ItemToDispose
-//    @Published var buttons: String
+    @Published var buttons = [DetailItemButton]()
     
     init(itemToDispose: ItemToDispose) {
         self.itemToDispose = itemToDispose
@@ -55,30 +62,32 @@ class DisposeItemDetailStateModel: ObservableObject {
     }
     
     // TODO: - make buttons model and iterate over for options depending on description
-    func parseForURL(string: String) -> String {
+    func parseForURL(string: String) {
         
         do {
             let html: String = "<p>\(string)</p>"
             let doc: Document = try SwiftSoup.parse(html)
-            let link: Element? = try doc.select("a").first()
-            if let link = link {
-                let linkHref: String = try link.attr("href") // "http://example.com/"
-                let linkText: String = try link.text() // "example"
-                
-                let linkOuterH: String = try link.outerHtml() // "<a href="http://example.com/"><b>example</b></a>"
-                let linkInnerH: String = try link.html() // "<b>example</b>"
-                //                 = linkHref
-                return linkHref
+            let links: Elements? = try doc.select("a")
+            if let links {
+                for link in links {
+                    let linkHref: String = try link.attr("href") // "http://example.com/"
+                    let linkText: String = try link.text() // "example"
+                    
+                    let linkOuterH: String = try link.outerHtml() // "<a href="http://example.com/"><b>example</b></a>"
+                    let linkInnerH: String = try link.html() // "<b>example</b>"
+                    var button = DetailItemButton(name: linkText, url: linkHref)
+                    self.buttons.append(button)
+                }
             }
-            
-           
         } catch Exception.Error(let type, let message) {
             print(message)
-            return message
         } catch {
             print("error")
-            return ""
         }
-        return ""
+        
+        if self.buttons.isEmpty {
+            self.buttons.append(DetailItemButton(name: "More Information", url: NetworkManager.baseURL))
+        }
+        
     }
 }
