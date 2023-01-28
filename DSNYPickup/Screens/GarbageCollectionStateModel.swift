@@ -92,7 +92,7 @@ class GarbageCollectionStateModel: ObservableObject {
     func search(text: String, region: MKCoordinateRegion) {
         let searchRequest = MKLocalSearch.Request()
         searchRequest.naturalLanguageQuery = text
-        searchRequest.region
+        searchRequest.region = region
         let search = MKLocalSearch(request: searchRequest)
         
         search.start { response, error in
