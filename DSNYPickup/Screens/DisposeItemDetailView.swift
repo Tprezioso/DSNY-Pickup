@@ -16,11 +16,21 @@ struct DisposeItemDetailView: View {
             ScrollView {
                 Text(stateModel.parseHTMLStringFromData(string: stateModel.itemToDispose.excerpt ?? ""))
                     .font(.title3)
+                
+                if stateModel.buttons.count > 3 {
+                    ForEach(stateModel.buttons) { button in
+                        Link(button.name.capitalized, destination: (URL(string: button.url) ?? URL(string: NetworkManager.baseURL))!)
+                            .buttonStyle(RoundedRectangleButtonStyle())
+                    }
+                }
             }
-            Spacer()
-            ForEach(stateModel.buttons) { button in
-                Link(button.name.capitalized, destination: (URL(string: button.url) ?? URL(string: NetworkManager.baseURL))!)
-                    .buttonStyle(RoundedRectangleButtonStyle())
+            
+            if stateModel.buttons.count <= 3 {
+                Spacer()
+                ForEach(stateModel.buttons) { button in
+                    Link(button.name.capitalized, destination: (URL(string: button.url) ?? URL(string: NetworkManager.baseURL))!)
+                        .buttonStyle(RoundedRectangleButtonStyle())
+                }
             }
         }.padding()
         .onAppear {
@@ -58,12 +68,9 @@ class DisposeItemDetailStateModel: ObservableObject {
             print("error")
             return ""
         }
-        
     }
     
-    // TODO: - make buttons model and iterate over for options depending on description
     func parseForURL(string: String) {
-        
         do {
             let html: String = "<p>\(string)</p>"
             let doc: Document = try SwiftSoup.parse(html)
@@ -71,16 +78,13 @@ class DisposeItemDetailStateModel: ObservableObject {
             if let links {
                 for link in links {
                     let linkHref: String = try link.attr("href") // "http://example.com/"
-                    let linkText: String = try link.text() // "example"
-                    
-                    let linkOuterH: String = try link.outerHtml() // "<a href="http://example.com/"><b>example</b></a>"
-                    let linkInnerH: String = try link.html() // "<b>example</b>"
-                    var button = DetailItemButton(name: linkText, url: linkHref)
+                    let linkText: String = try link.text()
+                    let button = DetailItemButton(name: linkText, url: linkHref)
                     self.buttons.append(button)
                 }
             }
         } catch Exception.Error(let type, let message) {
-            print(message)
+            print("\(type): \(message)")
         } catch {
             print("error")
         }
@@ -88,6 +92,5 @@ class DisposeItemDetailStateModel: ObservableObject {
         if self.buttons.isEmpty {
             self.buttons.append(DetailItemButton(name: "More Information", url: NetworkManager.baseURL))
         }
-        
     }
 }

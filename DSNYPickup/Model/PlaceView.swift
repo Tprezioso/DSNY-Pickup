@@ -14,7 +14,6 @@ struct PlaceViewModel: Identifiable {
     
     init (mapItem: MKMapItem) {
         self.mapItem = mapItem
-        
     }
     
     var name: String {

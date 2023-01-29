@@ -20,10 +20,8 @@ struct DisposeOfItemView: View {
                 ForEach(viewModel.sortedItemsToDispose, id: \.key) { itemToDispose in
                     NavigationLink((itemToDispose.key).capitalized.replacingOccurrences(of: "-", with: " ")) {
                         DisposeItemDetailView(stateModel: DisposeItemDetailStateModel(itemToDispose: itemToDispose.value.first!))
-                            
                     }
                 }
-                
             }.searchable(text: $viewModel.searchText, placement: .navigationBarDrawer(displayMode: .always))
             .onChange(of: viewModel.searchText) { text in
                 viewModel.getItemDisposalDetails()
