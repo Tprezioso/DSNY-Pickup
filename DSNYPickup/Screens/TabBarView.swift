@@ -18,7 +18,7 @@ struct TabBarView: View {
             .tag(1)
             
             NavigationStack {
-                EmptyView()
+                FavoritesView()
             }.tabItem {
                 Label("Favorites", systemImage: "star")
             }.tag(2)

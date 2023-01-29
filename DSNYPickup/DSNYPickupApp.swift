@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct DSNYPickupApp: App {
+    @StateObject private var manager: DataManager = DataManager()
+    
     var body: some Scene {
         WindowGroup {
             TabBarView()
+                .environmentObject(manager)
+                .environment(\.managedObjectContext, manager.container.viewContext)
         }
     }
 }

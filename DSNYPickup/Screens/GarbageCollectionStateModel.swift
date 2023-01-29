@@ -23,6 +23,7 @@ class GarbageCollectionStateModel: ObservableObject {
     
     @Published var garbageData: Garbage?
     @Published var places = [PlaceViewModel]()
+    
 
     func getGarbageCollectionData() {
         Task { @MainActor in
@@ -103,5 +104,9 @@ class GarbageCollectionStateModel: ObservableObject {
             
             self.places = response.mapItems.map(PlaceViewModel.init)
         }
+    }
+    
+    func addGarbageCollectionItem() {
+        
     }
 }

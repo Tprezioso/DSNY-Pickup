@@ -10,6 +10,7 @@ import SwiftUI
 struct GarbageCollectionView: View {
     @StateObject var viewModel = GarbageCollectionStateModel()
     @StateObject private var locationManager = LocationManager()
+    @Environment(\.managedObjectContext) var viewContext
     
     init() {
         UILabel.appearance(whenContainedInInstancesOf: [UINavigationBar.self]).adjustsFontSizeToFitWidth = true
@@ -31,9 +32,6 @@ struct GarbageCollectionView: View {
                             recycling: viewModel.recycling,
                             composting: viewModel.composting
                         )
-                        
-                        
-                        
                         Spacer()
                     }.onAppear {
                         viewModel.getGarbageCollectionData()
@@ -69,6 +67,13 @@ struct GarbageCollectionView: View {
             })
                     Button {
                         // TODO: - Need to add Core Data to save address
+                        var newTask = GarbageCollection(context: viewContext)
+                        newTask.formattedAddress = viewModel.garbageData?.formattedAddress
+                        newTask.bulkPickupCollectionSchedule = viewModel.garbageData?.bulkPickupCollectionSchedule
+                        newTask.organicsCollectionSchedule = viewModel.garbageData?.organicsCollectionSchedule
+                        newTask.regularCollectionSchedule = viewModel.garbageData?.regularCollectionSchedule
+                        newTask.recyclingCollectionSchedule = viewModel.garbageData?.recyclingCollectionSchedule
+                        try? viewContext.save()
                         print("Saved")
                     } label: {
                         Label("Add to Favorites", systemImage: "star")
