@@ -105,8 +105,4 @@ class GarbageCollectionStateModel: ObservableObject {
             self.places = response.mapItems.map(PlaceViewModel.init)
         }
     }
-    
-    func addGarbageCollectionItem() {
-        
-    }
 }

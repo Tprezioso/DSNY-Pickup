@@ -63,11 +63,10 @@ struct GarbageCollectionView: View {
                 }
                 .onChange (of: viewModel.searchString, perform: { searchText in
                     viewModel.search(text: searchText, region: locationManager.region)
-                    
             })
                     Button {
                         // TODO: - Need to add Core Data to save address
-                        var newTask = GarbageCollection(context: viewContext)
+                        let newTask = GarbageCollection(context: viewContext)
                         newTask.formattedAddress = viewModel.garbageData?.formattedAddress
                         newTask.bulkPickupCollectionSchedule = viewModel.garbageData?.bulkPickupCollectionSchedule
                         newTask.organicsCollectionSchedule = viewModel.garbageData?.organicsCollectionSchedule
@@ -78,7 +77,7 @@ struct GarbageCollectionView: View {
                     } label: {
                         Label("Add to Favorites", systemImage: "star")
                             .bold()
-                    }
+                    }.disabled(viewModel.stringViewString.isEmpty)
                     .padding()
                     .buttonStyle(RoundedRectangleButtonStyle())
             }

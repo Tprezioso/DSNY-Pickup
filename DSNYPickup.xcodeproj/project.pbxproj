@@ -81,6 +81,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		55576EB7298718690089861A /* GarbageCollectionsView */ = {
+			isa = PBXGroup;
+			children = (
+				5590824425A3CB7900F2CF62 /* GarbageCollectionView.swift */,
+				55F679222973600D003331C5 /* GarbageCollectionStateModel.swift */,
+			);
+			path = GarbageCollectionsView;
+			sourceTree = "<group>";
+		};
+		55576EB82987188F0089861A /* DisposeOfItemsViews */ = {
+			isa = PBXGroup;
+			children = (
+				55576E9D298221940089861A /* DisposeOfItemView.swift */,
+				55576EA829848E230089861A /* DisposeItemDetailView.swift */,
+			);
+			path = DisposeOfItemsViews;
+			sourceTree = "<group>";
+		};
+		55576EB9298718AD0089861A /* FavoritesView */ = {
+			isa = PBXGroup;
+			children = (
+				55576EB52986ECA70089861A /* FavoritesView.swift */,
+			);
+			path = FavoritesView;
+			sourceTree = "<group>";
+		};
 		5590823625A3CB7900F2CF62 = {
 			isa = PBXGroup;
 			children = (
@@ -107,6 +133,7 @@
 				55F6792A2973A17D003331C5 /* Manager */,
 				55F679292973A174003331C5 /* Model */,
 				55B2513E2969B8AF0045364E /* APIToken.swift */,
+				55576EB0298605E20089861A /* GarbageCollection.xcdatamodeld */,
 				5590824625A3CB7A00F2CF62 /* Assets.xcassets */,
 				5590824B25A3CB7A00F2CF62 /* Info.plist */,
 				5590824825A3CB7A00F2CF62 /* Preview Content */,
@@ -136,7 +163,6 @@
 			isa = PBXGroup;
 			children = (
 				55F6791529722F94003331C5 /* Garbage.swift */,
-				55576EB0298605E20089861A /* GarbageCollection.xcdatamodeld */,
 				55576E9B29821F8F0089861A /* ItemToDispose.swift */,
 				55F6792429737328003331C5 /* WeekDay.swift */,
 				55BDDBF4297CB4CC00988C8E /* PlaceView.swift */,
@@ -160,11 +186,9 @@
 			isa = PBXGroup;
 			children = (
 				55AE1C21297B9472006208A2 /* TabBarView.swift */,
-				5590824425A3CB7900F2CF62 /* GarbageCollectionView.swift */,
-				55F679222973600D003331C5 /* GarbageCollectionStateModel.swift */,
-				55576E9D298221940089861A /* DisposeOfItemView.swift */,
-				55576EA829848E230089861A /* DisposeItemDetailView.swift */,
-				55576EB52986ECA70089861A /* FavoritesView.swift */,
+				55576EB7298718690089861A /* GarbageCollectionsView */,
+				55576EB9298718AD0089861A /* FavoritesView */,
+				55576EB82987188F0089861A /* DisposeOfItemsViews */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
