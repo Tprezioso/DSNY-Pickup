@@ -16,6 +16,7 @@
 		55576EB2298605E20089861A /* GarbageCollection.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 55576EB0298605E20089861A /* GarbageCollection.xcdatamodeld */; };
 		55576EB42986EBF10089861A /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55576EB32986EBF10089861A /* DataManager.swift */; };
 		55576EB62986ECA70089861A /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55576EB52986ECA70089861A /* FavoritesView.swift */; };
+		55576EBB2988C41D0089861A /* MoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55576EBA2988C41D0089861A /* MoreView.swift */; };
 		5590824325A3CB7900F2CF62 /* DSNYPickupApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5590824225A3CB7900F2CF62 /* DSNYPickupApp.swift */; };
 		5590824525A3CB7900F2CF62 /* GarbageCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5590824425A3CB7900F2CF62 /* GarbageCollectionView.swift */; };
 		5590824725A3CB7A00F2CF62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5590824625A3CB7A00F2CF62 /* Assets.xcassets */; };
@@ -46,6 +47,7 @@
 		55576EB1298605E20089861A /* Garbage.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Garbage.xcdatamodel; sourceTree = "<group>"; };
 		55576EB32986EBF10089861A /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		55576EB52986ECA70089861A /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
+		55576EBA2988C41D0089861A /* MoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreView.swift; sourceTree = "<group>"; };
 		5590823F25A3CB7900F2CF62 /* DSNYPickup.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DSNYPickup.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5590824225A3CB7900F2CF62 /* DSNYPickupApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSNYPickupApp.swift; sourceTree = "<group>"; };
 		5590824425A3CB7900F2CF62 /* GarbageCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GarbageCollectionView.swift; sourceTree = "<group>"; };
@@ -105,6 +107,14 @@
 				55576EB52986ECA70089861A /* FavoritesView.swift */,
 			);
 			path = FavoritesView;
+			sourceTree = "<group>";
+		};
+		55576EBC2988C4280089861A /* MoreView */ = {
+			isa = PBXGroup;
+			children = (
+				55576EBA2988C41D0089861A /* MoreView.swift */,
+			);
+			path = MoreView;
 			sourceTree = "<group>";
 		};
 		5590823625A3CB7900F2CF62 = {
@@ -189,6 +199,7 @@
 				55576EB7298718690089861A /* GarbageCollectionsView */,
 				55576EB9298718AD0089861A /* FavoritesView */,
 				55576EB82987188F0089861A /* DisposeOfItemsViews */,
+				55576EBC2988C4280089861A /* MoreView */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -288,6 +299,7 @@
 				55F6792729738A68003331C5 /* GarbageCollectionGridView.swift in Sources */,
 				55576EB2298605E20089861A /* GarbageCollection.xcdatamodeld in Sources */,
 				55AE1C20297B50F8006208A2 /* CollectionInfo.swift in Sources */,
+				55576EBB2988C41D0089861A /* MoreView.swift in Sources */,
 				55B2513F2969B8AF0045364E /* APIToken.swift in Sources */,
 				55576EA929848E230089861A /* DisposeItemDetailView.swift in Sources */,
 				55B2513D2969B7D40045364E /* NetworkManager.swift in Sources */,

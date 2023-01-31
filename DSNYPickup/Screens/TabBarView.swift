@@ -30,7 +30,7 @@ struct TabBarView: View {
             }.tag(3)
             
             NavigationStack {
-                EmptyView()
+                MoreView()
             }.tabItem {
                 Label("More", systemImage: "ellipsis")
             }.tag(4)
