@@ -59,7 +59,7 @@ struct CollectionInfo: View {
                 .multilineTextAlignment(.leading)
             .padding()
             }
-        }
+        }.navigationTitle("Collection Information")
     }
 }
 

@@ -17,6 +17,8 @@
 		55576EB42986EBF10089861A /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55576EB32986EBF10089861A /* DataManager.swift */; };
 		55576EB62986ECA70089861A /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55576EB52986ECA70089861A /* FavoritesView.swift */; };
 		55576EBB2988C41D0089861A /* MoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55576EBA2988C41D0089861A /* MoreView.swift */; };
+		55576EF3298B5D6A0089861A /* Navigation+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55576EF2298B5D6A0089861A /* Navigation+Ext.swift */; };
+		55576EF5298B5DAD0089861A /* View+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55576EF4298B5DAD0089861A /* View+Ext.swift */; };
 		5590824325A3CB7900F2CF62 /* DSNYPickupApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5590824225A3CB7900F2CF62 /* DSNYPickupApp.swift */; };
 		5590824525A3CB7900F2CF62 /* GarbageCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5590824425A3CB7900F2CF62 /* GarbageCollectionView.swift */; };
 		5590824725A3CB7A00F2CF62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5590824625A3CB7A00F2CF62 /* Assets.xcassets */; };
@@ -48,6 +50,8 @@
 		55576EB32986EBF10089861A /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		55576EB52986ECA70089861A /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		55576EBA2988C41D0089861A /* MoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreView.swift; sourceTree = "<group>"; };
+		55576EF2298B5D6A0089861A /* Navigation+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Navigation+Ext.swift"; sourceTree = "<group>"; };
+		55576EF4298B5DAD0089861A /* View+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Ext.swift"; sourceTree = "<group>"; };
 		5590823F25A3CB7900F2CF62 /* DSNYPickup.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DSNYPickup.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5590824225A3CB7900F2CF62 /* DSNYPickupApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSNYPickupApp.swift; sourceTree = "<group>"; };
 		5590824425A3CB7900F2CF62 /* GarbageCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GarbageCollectionView.swift; sourceTree = "<group>"; };
@@ -143,6 +147,8 @@
 				55F6792A2973A17D003331C5 /* Manager */,
 				55F679292973A174003331C5 /* Model */,
 				55B2513E2969B8AF0045364E /* APIToken.swift */,
+				55576EF2298B5D6A0089861A /* Navigation+Ext.swift */,
+				55576EF4298B5DAD0089861A /* View+Ext.swift */,
 				55576EB0298605E20089861A /* GarbageCollection.xcdatamodeld */,
 				5590824625A3CB7A00F2CF62 /* Assets.xcassets */,
 				5590824B25A3CB7A00F2CF62 /* Info.plist */,
@@ -298,6 +304,7 @@
 				55F6792529737328003331C5 /* WeekDay.swift in Sources */,
 				55F6792729738A68003331C5 /* GarbageCollectionGridView.swift in Sources */,
 				55576EB2298605E20089861A /* GarbageCollection.xcdatamodeld in Sources */,
+				55576EF5298B5DAD0089861A /* View+Ext.swift in Sources */,
 				55AE1C20297B50F8006208A2 /* CollectionInfo.swift in Sources */,
 				55576EBB2988C41D0089861A /* MoreView.swift in Sources */,
 				55B2513F2969B8AF0045364E /* APIToken.swift in Sources */,
@@ -310,6 +317,7 @@
 				55F9C42B2974B7A50038A427 /* Alert.swift in Sources */,
 				55576EAB29848FF40089861A /* MockData.swift in Sources */,
 				55AE1C22297B9472006208A2 /* TabBarView.swift in Sources */,
+				55576EF3298B5D6A0089861A /* Navigation+Ext.swift in Sources */,
 				55576E9C29821F8F0089861A /* ItemToDispose.swift in Sources */,
 				55576EAF298595B00089861A /* DetailItemButton.swift in Sources */,
 				5590824325A3CB7900F2CF62 /* DSNYPickupApp.swift in Sources */,

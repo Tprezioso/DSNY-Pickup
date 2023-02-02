@@ -12,8 +12,10 @@ import MapKit
 class LocationManager: NSObject, ObservableObject {
     @Published var location: CLLocation?
     @Published var region: MKCoordinateRegion = MKCoordinateRegion.defaultRegion()
+    @Published var invalid: Bool = false
     private let locationManager = CLLocationManager()
-    
+    lazy var geocoder = CLGeocoder()
+
     override init() {
         super.init()
         
@@ -23,6 +25,34 @@ class LocationManager: NSObject, ObservableObject {
         locationManager.startUpdatingLocation()
         locationManager.delegate = self
     }
+      
+    func openMapWithAddress(location: String) {
+           geocoder.geocodeAddressString(location) { placemarks, error in
+               if let error = error {
+                   DispatchQueue.main.async {
+                       self.invalid = true
+                   }
+                   print(error.localizedDescription)
+               }
+               
+               guard let placemark = placemarks?.first else {
+                   return
+               }
+               
+               guard let lat = placemark.location?.coordinate.latitude else{return}
+               
+               guard let lon = placemark.location?.coordinate.longitude else{return}
+               
+               let coords = CLLocationCoordinate2DMake(lat, lon)
+               
+               let place = MKPlacemark(coordinate: coords)
+               
+               let mapItem = MKMapItem(placemark: place)
+               mapItem.name = location
+               mapItem.openInMaps(launchOptions: nil)
+           }
+           
+       }
 }
 
 extension LocationManager: CLLocationManagerDelegate {

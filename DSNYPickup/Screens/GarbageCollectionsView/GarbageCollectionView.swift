@@ -122,13 +122,6 @@ enum EnumDays: Int, CustomStringConvertible {
     case MONDAY,TUESDAY,WEDNESDAY,THURSDAY,FRIDAY,SATURDAY,SUNDAY
 }
 
-extension View {
-  func dismissKeyboardOnTap() {
-    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder),
-                                    to: nil, from: nil, for: nil)
-  }
-}
-
 struct RoundedRectangleButtonStyle: ButtonStyle {
   func makeBody(configuration: Configuration) -> some View {
       HStack {
