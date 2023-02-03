@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Lottie
 
 struct GarbageCollectionView: View {
     @StateObject var viewModel = GarbageCollectionStateModel()
@@ -73,6 +74,8 @@ struct GarbageCollectionView: View {
                         newTask.regularCollectionSchedule = viewModel.garbageData?.regularCollectionSchedule
                         newTask.recyclingCollectionSchedule = viewModel.garbageData?.recyclingCollectionSchedule
                         try? viewContext.save()
+                        viewModel.isAddFavoritesEnabled = true
+
                         print("Saved")
                     } label: {
                         Label("Add to Favorites", systemImage: "star")
@@ -84,6 +87,11 @@ struct GarbageCollectionView: View {
             
             if viewModel.isLoading {
                 ProgressView()
+            }
+            if viewModel.isAddFavoritesEnabled {
+                LottieView(name: "Check", loopMode: .playOnce, isShowing: $viewModel.isAddFavoritesEnabled)
+                    .frame(width: 250, height: 250)
+               
             }
         }.alert(item: $viewModel.alertItem) { alertItem in
             Alert.init(title: alertItem.title, message: alertItem.message, dismissButton: alertItem.dismissButton)

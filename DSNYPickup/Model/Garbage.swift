@@ -9,23 +9,12 @@
 import Foundation
 
 struct Garbage: Codable {
+    let routingTime: RoutingTime?
     let bulkPickupCollectionSchedule, regularCollectionSchedule, recyclingCollectionSchedule, organicsCollectionSchedule: String?
     let formattedAddress: String?
 
-    init(bulkPickupCollectionSchedule: String? = "",
-         regularCollectionSchedule: String? = "",
-         recyclingCollectionSchedule: String? = "",
-         organicsCollectionSchedule: String? = "",
-         formattedAddress: String? = ""
-    ) {
-        self.bulkPickupCollectionSchedule = bulkPickupCollectionSchedule
-        self.regularCollectionSchedule = regularCollectionSchedule
-        self.recyclingCollectionSchedule = recyclingCollectionSchedule
-        self.organicsCollectionSchedule = organicsCollectionSchedule
-        self.formattedAddress = formattedAddress
-    }
-    
     enum CodingKeys: String, CodingKey {
+        case routingTime = "RoutingTime"
         case bulkPickupCollectionSchedule = "BulkPickupCollectionSchedule"
         case regularCollectionSchedule = "RegularCollectionSchedule"
         case recyclingCollectionSchedule = "RecyclingCollectionSchedule"
@@ -34,18 +23,14 @@ struct Garbage: Codable {
     }
 }
 
-extension Garbage {
-    struct CodingData: Decodable {
-        let bulkPickupCollectionSchedule, regularCollectionSchedule, recyclingCollectionSchedule, organicsCollectionSchedule: String
-        let formattedAddress: String
-        
-        var garbage: Garbage {
-            Garbage(bulkPickupCollectionSchedule: bulkPickupCollectionSchedule,
-                    regularCollectionSchedule: regularCollectionSchedule,
-                    recyclingCollectionSchedule: recyclingCollectionSchedule,
-                    organicsCollectionSchedule: organicsCollectionSchedule,
-                    formattedAddress: formattedAddress
-            )
-        }
+// MARK: - RoutingTime
+struct RoutingTime: Codable {
+    let commercialRoutingTime, residentialRoutingTime, mixedUseRoutingTime, additionalLinks: String?
+
+    enum CodingKeys: String, CodingKey {
+        case commercialRoutingTime = "CommercialRoutingTime"
+        case residentialRoutingTime = "ResidentialRoutingTime"
+        case mixedUseRoutingTime = "MixedUseRoutingTime"
+        case additionalLinks = "AdditionalLinks"
     }
 }

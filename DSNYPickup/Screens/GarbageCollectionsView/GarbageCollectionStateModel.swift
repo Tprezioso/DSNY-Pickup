@@ -20,6 +20,7 @@ class GarbageCollectionStateModel: ObservableObject {
     
     @Published var searchString = ""
     @Published var stringViewString = ""
+    @Published var isAddFavoritesEnabled: Bool = false
     
     @Published var garbageData: Garbage?
     @Published var places = [PlaceViewModel]()
@@ -28,7 +29,7 @@ class GarbageCollectionStateModel: ObservableObject {
     func getGarbageCollectionData() {
         Task { @MainActor in
             isLoading = true
-            do {
+            do {                
                 garbageData = try await NetworkManager.shared.getGarbageDetails(atAddress: searchString)
                 sortData()
                 isLoading = false

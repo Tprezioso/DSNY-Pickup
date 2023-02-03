@@ -18,10 +18,12 @@ struct FavoritesView: View {
                 Text("No Favorites found")
             }
             ForEach(garbageCollectionItems) { item in
-                Text(item.formattedAddress ?? "No Name")
-                    .frame(maxWidth: .infinity, alignment: .leading).contentShape(Rectangle())
-                    .onTapGesture {
-                    }
+                NavigationLink {
+                    FavoritesDetailView(garbageCollection: item)
+                } label: {
+                    Text(item.formattedAddress ?? "No Name")
+                        .frame(maxWidth: .infinity, alignment: .leading).contentShape(Rectangle())
+                }
             }.onDelete(perform: removeFavorite)
         }.navigationTitle("Favorites")
             .toolbarColorScheme(.dark, for: .navigationBar)

@@ -19,6 +19,12 @@
 		55576EBB2988C41D0089861A /* MoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55576EBA2988C41D0089861A /* MoreView.swift */; };
 		55576EF3298B5D6A0089861A /* Navigation+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55576EF2298B5D6A0089861A /* Navigation+Ext.swift */; };
 		55576EF5298B5DAD0089861A /* View+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55576EF4298B5DAD0089861A /* View+Ext.swift */; };
+		55576EF7298C864E0089861A /* SpecialWasteDropOffLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55576EF6298C864E0089861A /* SpecialWasteDropOffLocation.swift */; };
+		55576EF9298C96A90089861A /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55576EF8298C96A90089861A /* NotificationManager.swift */; };
+		55576EFB298CAB780089861A /* FavoritesDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55576EFA298CAB780089861A /* FavoritesDetailView.swift */; };
+		55576EFE298DBD890089861A /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 55576EFD298DBD890089861A /* Lottie */; };
+		55576F00298DBF430089861A /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55576EFF298DBF430089861A /* LottieView.swift */; };
+		55576F02298DC3C30089861A /* Check.json in Resources */ = {isa = PBXBuildFile; fileRef = 55576F01298DC3C20089861A /* Check.json */; };
 		5590824325A3CB7900F2CF62 /* DSNYPickupApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5590824225A3CB7900F2CF62 /* DSNYPickupApp.swift */; };
 		5590824525A3CB7900F2CF62 /* GarbageCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5590824425A3CB7900F2CF62 /* GarbageCollectionView.swift */; };
 		5590824725A3CB7A00F2CF62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5590824625A3CB7A00F2CF62 /* Assets.xcassets */; };
@@ -52,6 +58,11 @@
 		55576EBA2988C41D0089861A /* MoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreView.swift; sourceTree = "<group>"; };
 		55576EF2298B5D6A0089861A /* Navigation+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Navigation+Ext.swift"; sourceTree = "<group>"; };
 		55576EF4298B5DAD0089861A /* View+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Ext.swift"; sourceTree = "<group>"; };
+		55576EF6298C864E0089861A /* SpecialWasteDropOffLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialWasteDropOffLocation.swift; sourceTree = "<group>"; };
+		55576EF8298C96A90089861A /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		55576EFA298CAB780089861A /* FavoritesDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesDetailView.swift; sourceTree = "<group>"; };
+		55576EFF298DBF430089861A /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
+		55576F01298DC3C20089861A /* Check.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Check.json; sourceTree = "<group>"; };
 		5590823F25A3CB7900F2CF62 /* DSNYPickup.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DSNYPickup.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5590824225A3CB7900F2CF62 /* DSNYPickupApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSNYPickupApp.swift; sourceTree = "<group>"; };
 		5590824425A3CB7900F2CF62 /* GarbageCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GarbageCollectionView.swift; sourceTree = "<group>"; };
@@ -77,6 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55576EFE298DBD890089861A /* Lottie in Frameworks */,
 				55F6791D29734F54003331C5 /* Collections in Frameworks */,
 				55576EA72982C97B0089861A /* SwiftSoup in Frameworks */,
 				55F6792129734F54003331C5 /* OrderedCollections in Frameworks */,
@@ -109,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				55576EB52986ECA70089861A /* FavoritesView.swift */,
+				55576EFA298CAB780089861A /* FavoritesDetailView.swift */,
 			);
 			path = FavoritesView;
 			sourceTree = "<group>";
@@ -117,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				55576EBA2988C41D0089861A /* MoreView.swift */,
+				55576EF6298C864E0089861A /* SpecialWasteDropOffLocation.swift */,
 			);
 			path = MoreView;
 			sourceTree = "<group>";
@@ -169,6 +183,8 @@
 			isa = PBXGroup;
 			children = (
 				55F6792629738A68003331C5 /* GarbageCollectionGridView.swift */,
+				55576EFF298DBF430089861A /* LottieView.swift */,
+				55576F01298DC3C20089861A /* Check.json */,
 				55F67917297327CB003331C5 /* CalendarHeaderView.swift */,
 				55AE1C1F297B50F8006208A2 /* CollectionInfo.swift */,
 			);
@@ -194,6 +210,7 @@
 				55B2513C2969B7D40045364E /* NetworkManager.swift */,
 				55BDDBF2297CAB8E00988C8E /* LocationManager.swift */,
 				55576EB32986EBF10089861A /* DataManager.swift */,
+				55576EF8298C96A90089861A /* NotificationManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -239,6 +256,7 @@
 				55F6791E29734F54003331C5 /* DequeModule */,
 				55F6792029734F54003331C5 /* OrderedCollections */,
 				55576EA62982C97B0089861A /* SwiftSoup */,
+				55576EFD298DBD890089861A /* Lottie */,
 			);
 			productName = DSNYPickup;
 			productReference = 5590823F25A3CB7900F2CF62 /* DSNYPickup.app */;
@@ -270,6 +288,7 @@
 			packageReferences = (
 				55F6791B29734F54003331C5 /* XCRemoteSwiftPackageReference "swift-collections" */,
 				55576EA52982C97B0089861A /* XCRemoteSwiftPackageReference "SwiftSoup" */,
+				55576EFC298DBD890089861A /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = 5590824025A3CB7900F2CF62 /* Products */;
 			projectDirPath = "";
@@ -287,6 +306,7 @@
 			files = (
 				5590824A25A3CB7A00F2CF62 /* Preview Assets.xcassets in Resources */,
 				5590824725A3CB7A00F2CF62 /* Assets.xcassets in Resources */,
+				55576F02298DC3C30089861A /* Check.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,6 +317,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55576F00298DBF430089861A /* LottieView.swift in Sources */,
 				55576EB62986ECA70089861A /* FavoritesView.swift in Sources */,
 				55F6791629722F94003331C5 /* Garbage.swift in Sources */,
 				55F67918297327CB003331C5 /* CalendarHeaderView.swift in Sources */,
@@ -309,10 +330,13 @@
 				55576EBB2988C41D0089861A /* MoreView.swift in Sources */,
 				55B2513F2969B8AF0045364E /* APIToken.swift in Sources */,
 				55576EA929848E230089861A /* DisposeItemDetailView.swift in Sources */,
+				55576EF9298C96A90089861A /* NotificationManager.swift in Sources */,
+				55576EFB298CAB780089861A /* FavoritesDetailView.swift in Sources */,
 				55B2513D2969B7D40045364E /* NetworkManager.swift in Sources */,
 				55576EB42986EBF10089861A /* DataManager.swift in Sources */,
 				55576E9E298221940089861A /* DisposeOfItemView.swift in Sources */,
 				55F679232973600D003331C5 /* GarbageCollectionStateModel.swift in Sources */,
+				55576EF7298C864E0089861A /* SpecialWasteDropOffLocation.swift in Sources */,
 				5590824525A3CB7900F2CF62 /* GarbageCollectionView.swift in Sources */,
 				55F9C42B2974B7A50038A427 /* Alert.swift in Sources */,
 				55576EAB29848FF40089861A /* MockData.swift in Sources */,
@@ -520,6 +544,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		55576EFC298DBD890089861A /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 		55F6791B29734F54003331C5 /* XCRemoteSwiftPackageReference "swift-collections" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-collections.git";
@@ -535,6 +567,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 55576EA52982C97B0089861A /* XCRemoteSwiftPackageReference "SwiftSoup" */;
 			productName = SwiftSoup;
+		};
+		55576EFD298DBD890089861A /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 55576EFC298DBD890089861A /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
 		};
 		55F6791C29734F54003331C5 /* Collections */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -29,10 +29,7 @@ struct MoreView: View {
             }
             
             NavigationLink("Special Waste Drop-Off Locations") {
-                Text("alskdjfhlakjsfh")
-                    .onTapGesture {
-                        locationManager.openMapWithAddress(location: BoroDropOffAddress.bronx)
-                    }
+                SpecialWasteDropOffLocation()
             }
         }.navigationTitle("More")
     }
@@ -44,10 +41,41 @@ struct MoreView_Previews: PreviewProvider {
     }
 }
 
-enum BoroDropOffAddress {
-   static let brooklyn = "459 N Henry St, Brooklyn, NY 11222"
-   static let bronx = "800 Food Center Drive, The Bronx, NY 10474"
-   static let queens = "120-15 31st Ave Flushing, NY 11354"
-   static let manhattan = "74 Pike Slip, New York, NY 10002"
-   static let statanIsland = "1323 W Service Rd Staten Island, NY 10309"
+enum BoroDropOffAddress: String, CaseIterable {
+   case brooklyn
+   case bronx
+   case queens
+   case manhattan
+   case statanIsland
+    
+    var name: String {
+            switch self {
+            case .brooklyn:
+               return "Brooklyn"
+            case .bronx:
+                return "Bronx"
+            case .queens:
+                return "Queens"
+            case .manhattan:
+                return "Manhattan"
+            case .statanIsland:
+                return "Staten Island"
+            }
+        }
+    
+    var address: String {
+        switch self {
+            
+        case .brooklyn:
+            return "459 N Henry St, Brooklyn, NY 11222"
+        case .bronx:
+            return "800 Food Center Drive, The Bronx, NY 10474"
+        case .queens:
+            return "120-15 31st Ave Flushing, NY 11354"
+        case .manhattan:
+            return  "74 Pike Slip, New York, NY 10002"
+        case .statanIsland:
+            return  "1323 W Service Rd Staten Island, NY 10309"
+        }
+    }
 }
