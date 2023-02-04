@@ -17,7 +17,7 @@ struct FavoritesDetailView: View {
     @State var isLoading = false
     
     var body: some View {
-        VStack {
+        ScrollView {
             Text(garbageCollection.formattedAddress ?? "")
                 .font(.title)
             GarbageCollectionGridView(
@@ -27,12 +27,15 @@ struct FavoritesDetailView: View {
                 composting: composting
             )
             Spacer()
-        }
+        }.padding()
+        .navigationTitle("Collection Details")
+        .toolbarColorScheme(.dark, for: .navigationBar)
+        .toolbarBackground(Color.accentColor, for: .navigationBar)
+        .toolbarBackground(.visible, for: .navigationBar)
         .onAppear {
             sortData()
         }
     }
-    
     
      func sortData() {
         resetArrayData()
@@ -41,7 +44,7 @@ struct FavoritesDetailView: View {
         recycling = organizeCollection(from: garbageCollection.recyclingCollectionSchedule, dictionary: &recycling)
         composting = organizeCollection(from: garbageCollection.organicsCollectionSchedule, dictionary: &composting)
     }
-    
+
     func organizeCollection(from schedule: String?, dictionary: inout OrderedDictionary<String, Bool>) -> OrderedDictionary<String, Bool> {
         if let regularCollection = schedule {
             let splitArray = regularCollection.split(separator: ",")
@@ -52,11 +55,11 @@ struct FavoritesDetailView: View {
                     }
                 }
             }
-            
+
         }
         return dictionary
     }
-   
+
      func resetArrayData() {
         garbage.forEach({ (key, value) -> Void in
             garbage[key] = false

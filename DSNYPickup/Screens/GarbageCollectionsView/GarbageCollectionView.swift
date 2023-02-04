@@ -48,39 +48,40 @@ struct GarbageCollectionView: View {
                     
                     
                 }.navigationTitle("DSNY Garbage Collection")
-                .toolbarColorScheme(.dark, for: .navigationBar)
-                .toolbarBackground(Color.accentColor, for: .navigationBar)
-                .toolbarBackground(.visible, for: .navigationBar)
-                .onAppear {
-                    viewModel.getGarbageCollectionData()
-                }
-                .searchable(text: $viewModel.searchString, placement: .navigationBarDrawer(displayMode: .always), prompt: viewModel.searchString.isEmpty ? "When is Collection at..." : viewModel.searchString) {
-                    ForEach(viewModel.places) { place in
-                        SearchView(place: place.name, viewModel: viewModel)
+                    .toolbarColorScheme(.dark, for: .navigationBar)
+                    .toolbarBackground(Color.accentColor, for: .navigationBar)
+                    .toolbarBackground(.visible, for: .navigationBar)
+                    .onAppear {
+                        viewModel.getGarbageCollectionData()
                     }
-                }
-                .onSubmit(of: .search) {
-                    viewModel.getGarbageCollectionData()
-                }
-                .onChange (of: viewModel.searchString, perform: { searchText in
-                    viewModel.search(text: searchText, region: locationManager.region)
-            })
-                    Button {
-                        // TODO: - Need to add Core Data to save address
-                        let newTask = GarbageCollection(context: viewContext)
-                        newTask.formattedAddress = viewModel.garbageData?.formattedAddress
-                        newTask.bulkPickupCollectionSchedule = viewModel.garbageData?.bulkPickupCollectionSchedule
-                        newTask.organicsCollectionSchedule = viewModel.garbageData?.organicsCollectionSchedule
-                        newTask.regularCollectionSchedule = viewModel.garbageData?.regularCollectionSchedule
-                        newTask.recyclingCollectionSchedule = viewModel.garbageData?.recyclingCollectionSchedule
-                        try? viewContext.save()
-                        viewModel.isAddFavoritesEnabled = true
-
-                        print("Saved")
-                    } label: {
-                        Label("Add to Favorites", systemImage: "star")
-                            .bold()
-                    }.disabled(viewModel.stringViewString.isEmpty)
+                    .searchable(text: $viewModel.searchString, placement: .navigationBarDrawer(displayMode: .always), prompt: viewModel.searchString.isEmpty ? "When is Collection at..." : viewModel.searchString) {
+                        ForEach(viewModel.places) { place in
+                            SearchView(place: place.name, viewModel: viewModel)
+                        }
+                    }
+                    .onSubmit(of: .search) {
+                        viewModel.getGarbageCollectionData()
+                    }
+                    .onChange (of: viewModel.searchString, perform: { searchText in
+                        viewModel.search(text: searchText, region: locationManager.region)
+                    })
+                Button {
+                    let newTask = GarbageCollection(context: viewContext)
+                    newTask.formattedAddress = viewModel.garbageData?.formattedAddress
+                    newTask.bulkPickupCollectionSchedule = viewModel.garbageData?.bulkPickupCollectionSchedule
+                    newTask.organicsCollectionSchedule = viewModel.garbageData?.organicsCollectionSchedule
+                    newTask.regularCollectionSchedule = viewModel.garbageData?.regularCollectionSchedule
+                    newTask.recyclingCollectionSchedule = viewModel.garbageData?.recyclingCollectionSchedule
+                    newTask.commercialRoutingTime = viewModel.garbageData?.routingTime?.commercialRoutingTime
+                    newTask.residentialRoutingTime = viewModel.garbageData?.routingTime?.residentialRoutingTime
+                    newTask.mixedUseRoutingTime = viewModel.garbageData?.routingTime?.mixedUseRoutingTime
+                    newTask.additionalLinks = viewModel.garbageData?.routingTime?.additionalLinks
+                    try? viewContext.save()
+                    viewModel.isAddFavoritesEnabled = true
+                } label: {
+                    Label("Add to Favorites", systemImage: "star")
+                        .bold()
+                }.disabled(viewModel.stringViewString.isEmpty)
                     .padding()
                     .buttonStyle(RoundedRectangleButtonStyle())
             }
@@ -91,7 +92,7 @@ struct GarbageCollectionView: View {
             if viewModel.isAddFavoritesEnabled {
                 LottieView(name: "Check", loopMode: .playOnce, isShowing: $viewModel.isAddFavoritesEnabled)
                     .frame(width: 250, height: 250)
-               
+                
             }
         }.alert(item: $viewModel.alertItem) { alertItem in
             Alert.init(title: alertItem.title, message: alertItem.message, dismissButton: alertItem.dismissButton)
@@ -131,16 +132,16 @@ enum EnumDays: Int, CustomStringConvertible {
 }
 
 struct RoundedRectangleButtonStyle: ButtonStyle {
-  func makeBody(configuration: Configuration) -> some View {
-      HStack {
+    func makeBody(configuration: Configuration) -> some View {
+        HStack {
             Spacer()
             configuration.label.foregroundColor(.white)
             Spacer()
-          }
-          .padding()
-          .background(Color.accentColor.cornerRadius(8))
-          .scaleEffect(configuration.isPressed ? 0.95 : 1)
-  }
+        }
+        .padding()
+        .background(Color.accentColor.cornerRadius(8))
+        .scaleEffect(configuration.isPressed ? 0.95 : 1)
+    }
 }
 
 struct AddressSearchView: View {
