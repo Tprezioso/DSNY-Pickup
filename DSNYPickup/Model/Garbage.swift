@@ -8,7 +8,12 @@
 
 import Foundation
 
-struct Garbage: Codable {
+struct Garbage: Codable, Identifiable, Equatable {
+    static func == (lhs: Garbage, rhs: Garbage) -> Bool {
+        lhs.id == rhs.id
+    }
+    
+    var id = UUID()
     let routingTime: RoutingTime?
     let bulkPickupCollectionSchedule, regularCollectionSchedule, recyclingCollectionSchedule, organicsCollectionSchedule: String?
     let formattedAddress: String?

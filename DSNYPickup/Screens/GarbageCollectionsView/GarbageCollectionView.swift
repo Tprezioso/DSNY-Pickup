@@ -27,12 +27,7 @@ struct GarbageCollectionView: View {
                             .padding(.top)
                             .padding(.horizontal)
                         
-                        GarbageCollectionGridView(
-                            garbage: viewModel.garbage,
-                            largeItems: viewModel.largeItems,
-                            recycling: viewModel.recycling,
-                            composting: viewModel.composting
-                        )
+                        GarbageCollectionGridView(garbageData: viewModel.garbageData)
                         Spacer()
                     }.onAppear {
                         viewModel.getGarbageCollectionData()

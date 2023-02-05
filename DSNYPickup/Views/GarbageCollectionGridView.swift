@@ -9,11 +9,19 @@ import SwiftUI
 import OrderedCollections
 
 struct GarbageCollectionGridView: View {
-    var garbage: OrderedDictionary<String, Bool>
-    var largeItems: OrderedDictionary<String, Bool>
-    var recycling: OrderedDictionary<String, Bool>
-    var composting: OrderedDictionary<String, Bool>
-
+    var garbageData: Garbage?
+    @State var garbages: Garbage?
+    var garbageCollection: GarbageCollection?
+    @State var garbage: OrderedDictionary = WeekDay.week
+    @State var largeItems: OrderedDictionary = WeekDay.week
+    @State var recycling: OrderedDictionary = WeekDay.week
+    @State var composting: OrderedDictionary = WeekDay.week
+    
+    init(garbageData: Garbage? = nil, garbageCollection: GarbageCollection? = nil) {
+        self.garbageData = garbageData
+        self.garbageCollection = garbageCollection
+    }
+    
     var body: some View {
         Grid {
             GridRow { CalendarHeaderView() }
@@ -133,5 +141,60 @@ struct GarbageCollectionGridView: View {
             }
             Divider()            
         }.padding(.all, 10)
+            .onAppear {
+                sortData()
+            }
+            .onChange(of: garbageData) { newValue in
+                garbages = newValue
+                sortData()
+                print("Name changed to \(garbageData)!")
+            }
     }
+    
+    func sortData() {
+        resetArrayData()
+        
+        if garbages?.formattedAddress != nil {
+            garbage = organizeCollection(from: garbages?.regularCollectionSchedule, dictionary: &garbage)
+            largeItems = organizeCollection(from: garbages?.bulkPickupCollectionSchedule, dictionary: &largeItems)
+            recycling = organizeCollection(from: garbages?.recyclingCollectionSchedule, dictionary: &recycling)
+            composting = organizeCollection(from: garbages?.organicsCollectionSchedule, dictionary: &composting)
+        } else if garbageCollection != nil {
+            garbage = organizeCollection(from: garbageCollection?.regularCollectionSchedule, dictionary: &garbage)
+            largeItems = organizeCollection(from: garbageCollection?.bulkPickupCollectionSchedule, dictionary: &largeItems)
+            recycling = organizeCollection(from: garbageCollection?.recyclingCollectionSchedule, dictionary: &recycling)
+            composting = organizeCollection(from: garbageCollection?.organicsCollectionSchedule, dictionary: &composting)
+        }
+    }
+
+   func organizeCollection(from schedule: String?, dictionary: inout OrderedDictionary<String, Bool>) -> OrderedDictionary<String, Bool> {
+       if let regularCollection = schedule {
+           let splitArray = regularCollection.split(separator: ",")
+           for pick in splitArray {
+               for day in dictionary.keys.sorted() {
+                   if pick == day {
+                       dictionary[day] = true
+                   }
+               }
+           }
+
+       }
+       return dictionary
+   }
+
+    func resetArrayData() {
+       garbage.forEach({ (key, value) -> Void in
+           garbage[key] = false
+       })
+       largeItems.forEach({ (key, value) -> Void in
+           largeItems[key] = false
+       })
+       recycling.forEach({ (key, value) -> Void in
+           recycling[key] = false
+       })
+       composting.forEach({ (key, value) -> Void in
+           composting[key] = false
+       })
+   }
+
 }
