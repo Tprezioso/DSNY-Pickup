@@ -10,8 +10,8 @@ import OrderedCollections
 
 struct GarbageCollectionGridView: View {
     var garbageData: Garbage?
-    @State var garbages: Garbage?
     var garbageCollection: GarbageCollection?
+    @State var garbages: Garbage?
     @State var garbage: OrderedDictionary = WeekDay.week
     @State var largeItems: OrderedDictionary = WeekDay.week
     @State var recycling: OrderedDictionary = WeekDay.week
@@ -147,7 +147,6 @@ struct GarbageCollectionGridView: View {
             .onChange(of: garbageData) { newValue in
                 garbages = newValue
                 sortData()
-                print("Name changed to \(garbageData)!")
             }
     }
     

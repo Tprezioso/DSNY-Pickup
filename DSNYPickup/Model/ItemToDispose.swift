@@ -74,7 +74,6 @@ struct LinkedPageClass: Codable, Identifiable {
 
 typealias ItemsToDispose = [ItemToDispose]
 
-
 extension ItemToDispose: Decodable {
     struct CodingData: Decodable {
         let header, excerpt, content, name, url: String?

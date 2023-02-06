@@ -51,8 +51,3 @@ struct FavoritesView_Previews: PreviewProvider {
         FavoritesView()
     }
 }
-
-class FavoritesStateModelView: ObservableObject {
-    
-    
-}

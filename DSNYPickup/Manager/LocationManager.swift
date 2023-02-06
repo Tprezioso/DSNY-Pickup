@@ -18,7 +18,6 @@ class LocationManager: NSObject, ObservableObject {
 
     override init() {
         super.init()
-        
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.distanceFilter = kCLDistanceFilterNone
         locationManager.requestAlwaysAuthorization()
@@ -27,32 +26,29 @@ class LocationManager: NSObject, ObservableObject {
     }
       
     func openMapWithAddress(location: String) {
-           geocoder.geocodeAddressString(location) { placemarks, error in
-               if let error = error {
-                   DispatchQueue.main.async {
-                       self.invalid = true
-                   }
-                   print(error.localizedDescription)
-               }
-               
-               guard let placemark = placemarks?.first else {
-                   return
-               }
-               
-               guard let lat = placemark.location?.coordinate.latitude else{return}
-               
-               guard let lon = placemark.location?.coordinate.longitude else{return}
-               
-               let coords = CLLocationCoordinate2DMake(lat, lon)
-               
-               let place = MKPlacemark(coordinate: coords)
-               
-               let mapItem = MKMapItem(placemark: place)
-               mapItem.name = location
-               mapItem.openInMaps(launchOptions: nil)
-           }
-           
-       }
+        geocoder.geocodeAddressString(location) { placemarks, error in
+            if let error = error {
+                DispatchQueue.main.async {
+                    self.invalid = true
+                }
+                print(error.localizedDescription)
+            }
+            
+            guard let placemark = placemarks?.first else {
+                return
+            }
+            
+            guard let lat = placemark.location?.coordinate.latitude else { return }
+            
+            guard let lon = placemark.location?.coordinate.longitude else { return }
+            
+            let coords = CLLocationCoordinate2DMake(lat, lon)
+            let place = MKPlacemark(coordinate: coords)
+            let mapItem = MKMapItem(placemark: place)
+            mapItem.name = location
+            mapItem.openInMaps(launchOptions: nil)
+        }
+    }
 }
 
 extension LocationManager: CLLocationManagerDelegate {
@@ -68,7 +64,10 @@ extension LocationManager: CLLocationManagerDelegate {
 
 extension MKCoordinateRegion {
     static func defaultRegion () -> MKCoordinateRegion {
-        MKCoordinateRegion(center: CLLocationCoordinate2D.init(latitude: 40.7484, longitude: 73.9857),
-                           latitudinalMeters: 100, longitudinalMeters: 100)
+        MKCoordinateRegion(
+            center: CLLocationCoordinate2D.init(latitude: 40.7484, longitude: 73.9857),
+            latitudinalMeters: 100,
+            longitudinalMeters: 100
+        )
     }
 }
