@@ -17,9 +17,7 @@ struct FavoritesDetailView: View {
         ScrollView {
             Text(garbageCollection.formattedAddress ?? "")
                 .font(.title)
-            GarbageCollectionGridView(
-                garbageCollection: garbageCollection
-            )
+            GarbageCollectionGridView(garbageCollection: garbageCollection)
             Spacer()
         }.padding()
         .navigationTitle("Collection Details")
