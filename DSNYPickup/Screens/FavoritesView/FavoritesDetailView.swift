@@ -10,6 +10,7 @@ import Collections
 
 struct FavoritesDetailView: View {
     var garbageCollection: GarbageCollection
+    @StateObject var notificationManager = NotificationManager()
     
     @State var isLoading = false
     
@@ -32,3 +33,7 @@ struct FavoritesDetailView: View {
 //        FavoritesDetailView(garbageCollection: .init())
 //    }
 //}
+
+class FavoritesDetailViewStateModel: ObservableObject {
+    
+}
