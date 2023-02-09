@@ -104,7 +104,7 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
-enum EnumDays: Int, CustomStringConvertible {
+enum EnumDays: Int, CustomStringConvertible, CaseIterable {
     var description: String {
         switch self {
         case .MONDAY:
@@ -123,6 +123,33 @@ enum EnumDays: Int, CustomStringConvertible {
             return "Sunday"
         }
     }
+    
+    var number: Int {
+        switch self {
+        case .MONDAY:
+            return 2
+        case .TUESDAY:
+            return 3
+        case .WEDNESDAY:
+            return 4
+        case .THURSDAY:
+            return 5
+        case .FRIDAY:
+            return 6
+        case .SATURDAY:
+            return 7
+        case .SUNDAY:
+            return 1
+        }
+    }
+    
+    static func dayToNumber(_ days: [String]) -> [EnumDays?] {
+       return days.map { day in
+           self.allCases.first {"\($0)" == day }
+        }
+             
+    }
+    
     case MONDAY,TUESDAY,WEDNESDAY,THURSDAY,FRIDAY,SATURDAY,SUNDAY
 }
 
