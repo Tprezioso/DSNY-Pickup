@@ -58,11 +58,11 @@ struct FavoritesDetailView: View {
     }
 }
 
-//struct FavoritesDetailView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        FavoritesDetailView(garbageCollection: .init())
-//    }
-//}
+struct FavoritesDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        FavoritesDetailView(stateModel: FavoritesDetailViewStateModel(garbageCollection: GarbageCollection()))
+    }
+}
 
 class FavoritesDetailViewStateModel: ObservableObject {
     @Published var id = UUID()
