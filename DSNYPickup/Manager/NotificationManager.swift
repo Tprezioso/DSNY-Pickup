@@ -37,12 +37,12 @@ final class NotificationManager: ObservableObject {
     }
     
     func createLocalNotification(id: String, days: [EnumDays?], hour: Int, minute: Int) async {
-      let safeDays = days.compactMap {$0}
+        let safeDays = days.compactMap { $0 }.removeDuplicates()
         
         for day in safeDays {
             var dateComponents = DateComponents()
             dateComponents.calendar = Calendar.current
-            dateComponents.day = day.number
+            dateComponents.weekday = day.number
             dateComponents.hour = hour
             dateComponents.minute = minute
             let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
@@ -84,5 +84,19 @@ final class NotificationManager: ObservableObject {
                 }
             }
         }
+    }
+}
+
+extension Array where Element:Equatable {
+    func removeDuplicates() -> [Element] {
+        var result = [Element]()
+
+        for value in self {
+            if result.contains(value) == false {
+                result.append(value)
+            }
+        }
+
+        return result
     }
 }

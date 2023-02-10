@@ -37,10 +37,10 @@ struct FavoritesDetailView: View {
                         let days = EnumDays.dayToNumber(stateModel.dates)
                         guard let hour = dateComponents.hour, let minute = dateComponents.minute else { return }
                         await notificationManager.createLocalNotification(id: stateModel.id.uuidString, days: days, hour: hour, minute: minute)
-                        //                                                                      let savedPrescription = Prescriptions(context: moc)
-                        //                                                                      stateModel.savePrescription(savedPrescription)
-                        //                                                                      try? moc.save()
-                        //                                                                      isShowingDetail = false
+//                        let savedPrescription = Prescriptions(context: moc)
+//                        stateModel.savePrescription(savedPrescription)
+//                        try? moc.save()
+//                        isShowingDetail = false
                     }
                 } label: {
                     Text("save")
@@ -53,6 +53,7 @@ struct FavoritesDetailView: View {
             .toolbarBackground(.visible, for: .navigationBar)
             .onAppear {
                 stateModel.sortData()
+                notificationManager.reloadAuthorizationStatus()
             }
     }
 }

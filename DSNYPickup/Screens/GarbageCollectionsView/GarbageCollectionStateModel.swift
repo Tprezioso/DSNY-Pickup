@@ -27,6 +27,7 @@ class GarbageCollectionStateModel: ObservableObject {
             isLoading = true
             do {                
                 garbageData = try await NetworkManager.shared.getGarbageDetails(atAddress: searchString)
+                stringViewString = garbageData?.formattedAddress ?? ""
                 isLoading = false
             } catch {
                 print("❌ Error getting garbage data")
