@@ -25,36 +25,41 @@ struct FavoritesDetailView: View {
                 Text("Please go into your setting and enable Notification to use daily notification reminders")
             } else {
                 Toggle("Daily notification reminder", isOn: $stateModel.isNotificationOn)
+                    .padding(.trailing, 2)
                     .onChange(of: stateModel.isNotificationOn) { value in
                         if !value { notificationManager.removeNotificationWith(id: stateModel.id.uuidString) }
                     }
                 if stateModel.isNotificationOn {
-                    DatePicker("Time", selection: $stateModel.date, displayedComponents: [.hourAndMinute])
-                }
-                Button {
-                    Task { @MainActor in
-                        let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: stateModel.date)
-                        let days = EnumDays.dayToNumber(stateModel.dates)
-                        guard let hour = dateComponents.hour, let minute = dateComponents.minute else { return }
-                        await notificationManager.createLocalNotification(id: stateModel.id.uuidString, days: days, hour: hour, minute: minute)
-//                        let savedPrescription = Prescriptions(context: moc)
-//                        stateModel.savePrescription(savedPrescription)
-//                        try? moc.save()
-//                        isShowingDetail = false
+                    let _ = print(stateModel.dates.removeDuplicates().joined(separator: ", "))
+                    VStack(alignment: .leading) {
+                        Text("For \(stateModel.dates.removeDuplicates().joined(separator: ", "))")
+                        DatePicker("Time", selection: $stateModel.date, displayedComponents: [.hourAndMinute])
                     }
-                } label: {
-                    Text("save")
+                    Button {
+                        Task { @MainActor in
+                            let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: stateModel.date)
+                            let days = EnumDays.dayToNumber(stateModel.dates)
+                            guard let hour = dateComponents.hour, let minute = dateComponents.minute else { return }
+                            await notificationManager.createLocalNotification(id: stateModel.id.uuidString, days: days, hour: hour, minute: minute)
+                            //                        let savedPrescription = Prescriptions(context: moc)
+                            //                        stateModel.savePrescription(savedPrescription)
+                            //                        try? moc.save()
+                            //                        isShowingDetail = false
+                        }
+                    } label: {
+                        Text("Save")
+                    }.buttonStyle(RoundedRectangleButtonStyle())
                 }
             }
         }.padding()
-            .navigationTitle("Collection Details")
-            .toolbarColorScheme(.dark, for: .navigationBar)
-            .toolbarBackground(Color.accentColor, for: .navigationBar)
-            .toolbarBackground(.visible, for: .navigationBar)
-            .onAppear {
-                stateModel.sortData()
-                notificationManager.reloadAuthorizationStatus()
-            }
+        .navigationTitle("Collection Details")
+        .toolbarColorScheme(.dark, for: .navigationBar)
+        .toolbarBackground(Color.accentColor, for: .navigationBar)
+        .toolbarBackground(.visible, for: .navigationBar)
+        .onAppear {
+            stateModel.sortData()
+            notificationManager.reloadAuthorizationStatus()
+        }
     }
 }
 
