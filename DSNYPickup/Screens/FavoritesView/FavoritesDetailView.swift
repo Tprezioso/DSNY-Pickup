@@ -16,49 +16,57 @@ struct FavoritesDetailView: View {
     @State var isLoading = false
     
     var body: some View {
-        ScrollView {
-            Text(stateModel.garbageCollection.formattedAddress ?? "")
-                .font(.title)
-            GarbageCollectionGridView(garbageCollection: stateModel.garbageCollection)
-            Spacer()
-            if notificationManager.authorizationStatus == .denied {
-                Text("Please go into your setting and enable Notification to use daily notification reminders")
-            } else {
-                Toggle("Daily notification reminder", isOn: $stateModel.isNotificationOn)
-                    .padding(.trailing, 2)
-                    .onChange(of: stateModel.isNotificationOn) { value in
-                        if !value { notificationManager.removeNotificationWith(id: stateModel.id.uuidString) }
-                    }
-                if stateModel.isNotificationOn {
-                    let _ = print(stateModel.dates.removeDuplicates().joined(separator: ", "))
-                    VStack(alignment: .leading) {
-                        Text("For \(stateModel.dates.removeDuplicates().joined(separator: ", "))")
-                        DatePicker("Time", selection: $stateModel.date, displayedComponents: [.hourAndMinute])
-                    }
-                    Button {
-                        Task { @MainActor in
-                            let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: stateModel.date)
-                            let days = EnumDays.dayToNumber(stateModel.dates)
-                            guard let hour = dateComponents.hour, let minute = dateComponents.minute else { return }
-                            await notificationManager.createLocalNotification(id: stateModel.id.uuidString, days: days, hour: hour, minute: minute)
-                            //                        let savedPrescription = Prescriptions(context: moc)
-                            //                        stateModel.savePrescription(savedPrescription)
-                            //                        try? moc.save()
-                            //                        isShowingDetail = false
+        ZStack {
+            ScrollView {
+                Text(stateModel.garbageCollection.formattedAddress ?? "")
+                    .font(.title)
+                GarbageCollectionGridView(garbageCollection: stateModel.garbageCollection)
+                Spacer()
+                if notificationManager.authorizationStatus == .denied {
+                    Text("Please go into your setting and enable Notification to use daily notification reminders")
+                } else {
+                    Toggle("Set Notification Reminder", isOn: $stateModel.isNotificationOn)
+                        .padding(.trailing, 2)
+                        .onChange(of: stateModel.isNotificationOn) { value in
+                            if !value { notificationManager.removeNotificationWith(id: stateModel.id.uuidString) }
                         }
-                    } label: {
-                        Text("Save")
-                    }.buttonStyle(RoundedRectangleButtonStyle())
+                    if stateModel.isNotificationOn {
+                        let _ = print(stateModel.dates.removeDuplicates().joined(separator: ", "))
+                        VStack(alignment: .leading) {
+                            Text("For Days: \(stateModel.dates.removeDuplicates().joined(separator: ", "))")
+                            DatePicker("Time", selection: $stateModel.date, displayedComponents: [.hourAndMinute])
+                        }
+                        Button {
+                            Task { @MainActor in
+                                let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: stateModel.date)
+                                let days = EnumDays.dayToNumber(stateModel.dates)
+                                guard let hour = dateComponents.hour, let minute = dateComponents.minute else { return }
+                                await notificationManager.createLocalNotification(id: stateModel.id.uuidString, days: days, hour: hour, minute: minute)
+                                stateModel.garbageCollection.isNotificationsOn = stateModel.isNotificationOn
+                                try? viewContext.save()
+                                stateModel.savedNotificationTapped = true
+                            }
+                        } label: {
+                            Text("Save")
+                        }.buttonStyle(RoundedRectangleButtonStyle())
+                    }
                 }
+                
+                
+            }.padding()
+            .navigationTitle("Collection Details")
+            .toolbarColorScheme(.dark, for: .navigationBar)
+            .toolbarBackground(Color.accentColor, for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
+            .onAppear {
+                stateModel.sortData()
+                notificationManager.reloadAuthorizationStatus()
+        }
+            if stateModel.savedNotificationTapped {
+                LottieView(name: "Check", loopMode: .playOnce, isShowing: $stateModel.savedNotificationTapped)
+                    .frame(width: 250, height: 250)
+                
             }
-        }.padding()
-        .navigationTitle("Collection Details")
-        .toolbarColorScheme(.dark, for: .navigationBar)
-        .toolbarBackground(Color.accentColor, for: .navigationBar)
-        .toolbarBackground(.visible, for: .navigationBar)
-        .onAppear {
-            stateModel.sortData()
-            notificationManager.reloadAuthorizationStatus()
         }
     }
 }
@@ -74,6 +82,7 @@ class FavoritesDetailViewStateModel: ObservableObject {
     @Published var date = Date()
     @Published var dates = [String]()
     @Published var isNotificationOn = false
+    @Published var savedNotificationTapped = false
     @Published var garbageCollection: GarbageCollection
     
     @State var garbage: OrderedDictionary = WeekDay.week
@@ -83,6 +92,7 @@ class FavoritesDetailViewStateModel: ObservableObject {
     
     init(garbageCollection: GarbageCollection) {
         self.garbageCollection = garbageCollection
+        self.isNotificationOn = garbageCollection.isNotificationsOn
     }
     
     func sortData() {
@@ -92,7 +102,6 @@ class FavoritesDetailViewStateModel: ObservableObject {
         let largeItems = organizeCollection(from: garbageCollection.bulkPickupCollectionSchedule ?? "")
         let recycling = organizeCollection(from: garbageCollection.recyclingCollectionSchedule ?? "")
         let composting = organizeCollection(from: garbageCollection.organicsCollectionSchedule ?? "")
-//        self.dates = [garbage]
       
         self.dates = garbage + largeItems + recycling + composting 
     }
@@ -115,4 +124,8 @@ class FavoritesDetailViewStateModel: ObservableObject {
            composting[key] = false
        })
    }
+    
+    func saveGarbageCollection(_ garbageCollection: GarbageCollection) {
+         garbageCollection.isNotificationsOn = isNotificationOn
+    }
 }
