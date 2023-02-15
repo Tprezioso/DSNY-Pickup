@@ -43,12 +43,14 @@ struct FavoritesDetailView: View {
                                 guard let hour = dateComponents.hour, let minute = dateComponents.minute else { return }
                                 await notificationManager.createLocalNotification(id: stateModel.id.uuidString, days: days, hour: hour, minute: minute)
                                 stateModel.garbageCollection.isNotificationsOn = stateModel.isNotificationOn
+                                stateModel.garbageCollection.savedDate = stateModel.date
                                 try? viewContext.save()
                                 stateModel.savedNotificationTapped = true
                             }
                         } label: {
                             Text("Save")
                         }.buttonStyle(RoundedRectangleButtonStyle())
+                        .disabled(stateModel.isSaveButtonEnabled)
                     }
                 }
                 
@@ -85,6 +87,10 @@ class FavoritesDetailViewStateModel: ObservableObject {
     @Published var savedNotificationTapped = false
     @Published var garbageCollection: GarbageCollection
     
+    var isSaveButtonEnabled: Bool {
+        garbageCollection.savedDate == self.date
+    }
+    
     @State var garbage: OrderedDictionary = WeekDay.week
     @State var largeItems: OrderedDictionary = WeekDay.week
     @State var recycling: OrderedDictionary = WeekDay.week
@@ -93,6 +99,7 @@ class FavoritesDetailViewStateModel: ObservableObject {
     init(garbageCollection: GarbageCollection) {
         self.garbageCollection = garbageCollection
         self.isNotificationOn = garbageCollection.isNotificationsOn
+        self.date = garbageCollection.savedDate ?? Date()
     }
     
     func sortData() {

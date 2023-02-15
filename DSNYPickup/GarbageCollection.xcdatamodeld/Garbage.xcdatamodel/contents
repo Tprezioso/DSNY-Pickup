@@ -11,5 +11,6 @@
         <attribute name="recyclingCollectionSchedule" optional="YES" attributeType="String"/>
         <attribute name="regularCollectionSchedule" optional="YES" attributeType="String"/>
         <attribute name="residentialRoutingTime" optional="YES" attributeType="String"/>
+        <attribute name="savedDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
 </model>
