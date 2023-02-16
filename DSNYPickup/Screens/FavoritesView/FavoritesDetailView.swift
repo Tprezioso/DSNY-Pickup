@@ -53,8 +53,6 @@ struct FavoritesDetailView: View {
                         .disabled(stateModel.isSaveButtonEnabled)
                     }
                 }
-                
-                
             }.padding()
             .navigationTitle("Collection Details")
             .toolbarColorScheme(.dark, for: .navigationBar)
