@@ -63,6 +63,7 @@ struct GarbageCollectionView: View {
                     })
                 Button {
                     let newTask = GarbageCollection(context: viewContext)
+                    newTask.id = UUID()
                     newTask.formattedAddress = viewModel.garbageData?.formattedAddress
                     newTask.bulkPickupCollectionSchedule = viewModel.garbageData?.bulkPickupCollectionSchedule
                     newTask.organicsCollectionSchedule = viewModel.garbageData?.organicsCollectionSchedule

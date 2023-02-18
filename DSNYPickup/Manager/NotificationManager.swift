@@ -9,7 +9,7 @@ import Foundation
 import UserNotifications
 
 final class NotificationManager: ObservableObject {
-    @Published private var notification: [UNNotificationRequest] = []
+    @Published var notification: [UNNotificationRequest] = []
     @Published var authorizationStatus: UNAuthorizationStatus?
     
     func reloadAuthorizationStatus() {

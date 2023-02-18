@@ -20,7 +20,7 @@ struct FavoritesView: View {
             }
             ForEach(garbageCollectionItems) { item in
                 NavigationLink {
-                    FavoritesDetailView(stateModel: FavoritesDetailViewStateModel(garbageCollection: item), notificationManager: notificationManager)
+                    FavoritesDetailView(stateModel: FavoritesDetailViewStateModel(garbageCollection: item, notificationManager: notificationManager))
                 } label: {
                     Text(item.formattedAddress ?? "No Name")
                         .frame(maxWidth: .infinity, alignment: .leading).contentShape(Rectangle())

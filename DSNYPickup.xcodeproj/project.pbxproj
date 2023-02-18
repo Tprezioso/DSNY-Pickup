@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5545A31529A04CF400352A57 /* FavoritesNotificationSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5545A31429A04CF400352A57 /* FavoritesNotificationSheetView.swift */; };
 		55576E9C29821F8F0089861A /* ItemToDispose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55576E9B29821F8F0089861A /* ItemToDispose.swift */; };
 		55576E9E298221940089861A /* DisposeOfItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55576E9D298221940089861A /* DisposeOfItemView.swift */; };
 		55576EA72982C97B0089861A /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 55576EA62982C97B0089861A /* SwiftSoup */; };
@@ -48,6 +49,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5545A31429A04CF400352A57 /* FavoritesNotificationSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesNotificationSheetView.swift; sourceTree = "<group>"; };
 		55576E9B29821F8F0089861A /* ItemToDispose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemToDispose.swift; sourceTree = "<group>"; };
 		55576E9D298221940089861A /* DisposeOfItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisposeOfItemView.swift; sourceTree = "<group>"; };
 		55576EA829848E230089861A /* DisposeItemDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisposeItemDetailView.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 			children = (
 				55576EB52986ECA70089861A /* FavoritesView.swift */,
 				55576EFA298CAB780089861A /* FavoritesDetailView.swift */,
+				5545A31429A04CF400352A57 /* FavoritesNotificationSheetView.swift */,
 			);
 			path = FavoritesView;
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 			files = (
 				55576F00298DBF430089861A /* LottieView.swift in Sources */,
 				55576EB62986ECA70089861A /* FavoritesView.swift in Sources */,
+				5545A31529A04CF400352A57 /* FavoritesNotificationSheetView.swift in Sources */,
 				55F6791629722F94003331C5 /* Garbage.swift in Sources */,
 				55F67918297327CB003331C5 /* CalendarHeaderView.swift in Sources */,
 				55BDDBF5297CB4CC00988C8E /* PlaceView.swift in Sources */,
