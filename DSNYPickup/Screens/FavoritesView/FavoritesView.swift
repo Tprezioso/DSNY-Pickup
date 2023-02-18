@@ -9,8 +9,9 @@ import SwiftUI
 
 struct FavoritesView: View {
     @EnvironmentObject var manager: DataManager
-        @Environment(\.managedObjectContext) private var viewContext
-        @FetchRequest(sortDescriptors: []) private var garbageCollectionItems: FetchedResults<GarbageCollection>
+    @Environment(\.managedObjectContext) private var viewContext
+    @FetchRequest(sortDescriptors: []) private var garbageCollectionItems: FetchedResults<GarbageCollection>
+    @StateObject var notificationManager = NotificationManager()
     
     var body: some View {
         List {
@@ -19,7 +20,7 @@ struct FavoritesView: View {
             }
             ForEach(garbageCollectionItems) { item in
                 NavigationLink {
-                    FavoritesDetailView(stateModel: FavoritesDetailViewStateModel(garbageCollection: item))
+                    FavoritesDetailView(stateModel: FavoritesDetailViewStateModel(garbageCollection: item), notificationManager: notificationManager)
                 } label: {
                     Text(item.formattedAddress ?? "No Name")
                         .frame(maxWidth: .infinity, alignment: .leading).contentShape(Rectangle())
@@ -35,6 +36,7 @@ struct FavoritesView: View {
     func removeFavorite(at offsets: IndexSet) {
         for index in offsets {
             let garbageCollectionItem = garbageCollectionItems[index]
+            notificationManager.removeNotificationWith(id: garbageCollectionItem.id?.uuidString ?? UUID().uuidString)
             viewContext.delete(garbageCollectionItem)
             do {
                 try viewContext.save()

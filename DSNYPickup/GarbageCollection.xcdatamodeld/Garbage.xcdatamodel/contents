@@ -5,6 +5,7 @@
         <attribute name="bulkPickupCollectionSchedule" optional="YES" attributeType="String"/>
         <attribute name="commercialRoutingTime" optional="YES" attributeType="String"/>
         <attribute name="formattedAddress" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="isNotificationsOn" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="mixedUseRoutingTime" optional="YES" attributeType="String"/>
         <attribute name="organicsCollectionSchedule" optional="YES" attributeType="String"/>

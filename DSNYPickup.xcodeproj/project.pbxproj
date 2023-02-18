@@ -33,6 +33,7 @@
 		55AE1C22297B9472006208A2 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AE1C21297B9472006208A2 /* TabBarView.swift */; };
 		55B2513D2969B7D40045364E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B2513C2969B7D40045364E /* NetworkManager.swift */; };
 		55B2513F2969B8AF0045364E /* APIToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B2513E2969B8AF0045364E /* APIToken.swift */; };
+		55BB1DD2299EE1910032DDDD /* NotificationToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BB1DD1299EE1910032DDDD /* NotificationToggleStyle.swift */; };
 		55BDDBF3297CAB8E00988C8E /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BDDBF2297CAB8E00988C8E /* LocationManager.swift */; };
 		55BDDBF5297CB4CC00988C8E /* PlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BDDBF4297CB4CC00988C8E /* PlaceView.swift */; };
 		55F6791629722F94003331C5 /* Garbage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F6791529722F94003331C5 /* Garbage.swift */; };
@@ -73,6 +74,7 @@
 		55AE1C21297B9472006208A2 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		55B2513C2969B7D40045364E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		55B2513E2969B8AF0045364E /* APIToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIToken.swift; sourceTree = "<group>"; };
+		55BB1DD1299EE1910032DDDD /* NotificationToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationToggleStyle.swift; sourceTree = "<group>"; };
 		55BDDBF2297CAB8E00988C8E /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		55BDDBF4297CB4CC00988C8E /* PlaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceView.swift; sourceTree = "<group>"; };
 		55F6791529722F94003331C5 /* Garbage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Garbage.swift; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 				55576F01298DC3C20089861A /* Check.json */,
 				55F67917297327CB003331C5 /* CalendarHeaderView.swift */,
 				55AE1C1F297B50F8006208A2 /* CollectionInfo.swift */,
+				55BB1DD1299EE1910032DDDD /* NotificationToggleStyle.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -341,6 +344,7 @@
 				55F9C42B2974B7A50038A427 /* Alert.swift in Sources */,
 				55576EAB29848FF40089861A /* MockData.swift in Sources */,
 				55AE1C22297B9472006208A2 /* TabBarView.swift in Sources */,
+				55BB1DD2299EE1910032DDDD /* NotificationToggleStyle.swift in Sources */,
 				55576EF3298B5D6A0089861A /* Navigation+Ext.swift in Sources */,
 				55576E9C29821F8F0089861A /* ItemToDispose.swift in Sources */,
 				55576EAF298595B00089861A /* DetailItemButton.swift in Sources */,

@@ -10,8 +10,9 @@ import Collections
 
 struct FavoritesDetailView: View {
     @Environment(\.managedObjectContext) var viewContext
+    @Environment(\.dismiss) var dismiss
     @StateObject var stateModel: FavoritesDetailViewStateModel
-    @StateObject var notificationManager = NotificationManager()
+    @StateObject var notificationManager: NotificationManager
     
     @State var isLoading = false
     
@@ -25,39 +26,52 @@ struct FavoritesDetailView: View {
                 if notificationManager.authorizationStatus == .denied {
                     Text("Please go into your setting and enable Notification to use daily notification reminders")
                 } else {
-                    Toggle("Set Notification Reminder", isOn: $stateModel.isNotificationOn)
-                        .padding(.trailing, 2)
-                        .onChange(of: stateModel.isNotificationOn) { value in
-                            if !value { notificationManager.removeNotificationWith(id: stateModel.id.uuidString) }
-                        }
-                    if stateModel.isNotificationOn {
-                        let _ = print(stateModel.dates.removeDuplicates().joined(separator: ", "))
-                        VStack(alignment: .leading) {
-                            Text("For Days: \(stateModel.dates.removeDuplicates().joined(separator: ", "))")
-                            DatePicker("Time", selection: $stateModel.date, displayedComponents: [.hourAndMinute])
-                        }
-                        Button {
-                            Task { @MainActor in
-                                let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: stateModel.date)
-                                let days = EnumDays.dayToNumber(stateModel.dates)
-                                guard let hour = dateComponents.hour, let minute = dateComponents.minute else { return }
-                                await notificationManager.createLocalNotification(id: stateModel.id.uuidString, days: days, hour: hour, minute: minute)
-                                stateModel.garbageCollection.isNotificationsOn = stateModel.isNotificationOn
-                                stateModel.garbageCollection.savedDate = stateModel.date
-                                try? viewContext.save()
-                                stateModel.savedNotificationTapped = true
-                            }
-                        } label: {
-                            Text("Save")
-                        }.buttonStyle(RoundedRectangleButtonStyle())
-                        .disabled(stateModel.isSaveButtonEnabled)
+                    Button("Notification Reminder") {
+                        // SF Symbol for animated toggle: iphone.gen3.radiowaves.left.and.right.circle.fill
+                        stateModel.isShowingEditNotification.toggle()
                     }
+                    
                 }
             }.padding()
+            .sheet(isPresented: $stateModel.isShowingEditNotification) {
+                Toggle("Set Notification Reminder", isOn: $stateModel.isNotificationOn)
+                    .toggleStyle(SymbolToggleStyle(systemImage: "iphone.gen3.radiowaves.left.and.right.circle.fill", activeColor: .accentColor))
+                    .padding(.trailing, 2)
+                    .onChange(of: stateModel.isNotificationOn) { value in
+                        if !value { notificationManager.removeNotificationWith(id: stateModel.id.uuidString) }
+                    }
+                if stateModel.isNotificationOn {
+                    VStack(alignment: .leading) {
+                        Text("For Days: \(stateModel.dates.removeDuplicates().joined(separator: ", "))")
+                        DatePicker("Time",
+                                   selection: $stateModel.date,
+                                   displayedComponents: [.hourAndMinute]
+                        )
+                    }
+                    Button {
+                        Task { @MainActor in
+                            notificationManager.removeNotificationWith(id: stateModel.id.uuidString)
+                            let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: stateModel.date)
+                            let days = EnumDays.dayToNumber(stateModel.dates)
+                            guard let hour = dateComponents.hour, let minute = dateComponents.minute else { return }
+                            await notificationManager.createLocalNotification(id: stateModel.id.uuidString, days: days, hour: hour, minute: minute)
+                            stateModel.garbageCollection.isNotificationsOn = stateModel.isNotificationOn
+                            stateModel.garbageCollection.savedDate = stateModel.date
+                            try? viewContext.save()
+                            stateModel.savedNotificationTapped = true
+                            stateModel.isShowingEditNotification.toggle()
+                        }
+                    } label: {
+                        Text("Save")
+                    }.buttonStyle(RoundedRectangleButtonStyle())
+                    .disabled(stateModel.isSaveButtonEnabled)
+                }
+            }
             .navigationTitle("Collection Details")
             .toolbarColorScheme(.dark, for: .navigationBar)
             .toolbarBackground(Color.accentColor, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
+            
             .onAppear {
                 stateModel.sortData()
                 notificationManager.reloadAuthorizationStatus()
@@ -73,7 +87,7 @@ struct FavoritesDetailView: View {
 
 struct FavoritesDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        FavoritesDetailView(stateModel: FavoritesDetailViewStateModel(garbageCollection: GarbageCollection()))
+        FavoritesDetailView(stateModel: FavoritesDetailViewStateModel(garbageCollection: GarbageCollection()), notificationManager: NotificationManager())
     }
 }
 
@@ -84,6 +98,7 @@ class FavoritesDetailViewStateModel: ObservableObject {
     @Published var isNotificationOn = false
     @Published var savedNotificationTapped = false
     @Published var garbageCollection: GarbageCollection
+    @Published var isShowingEditNotification = false
     
     var isSaveButtonEnabled: Bool {
         garbageCollection.savedDate == self.date
