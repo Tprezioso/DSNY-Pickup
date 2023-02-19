@@ -29,6 +29,7 @@ struct FavoritesDetailView: View {
             }.padding()
             .sheet(isPresented: $stateModel.isShowingEditNotification) {
                 FavoritesNotificationSheetView(stateModel: stateModel)
+                    .presentationDetents([.medium])
             }
             .navigationTitle("Collection Details")
             .toolbarColorScheme(.dark, for: .navigationBar)
@@ -55,7 +56,6 @@ struct FavoritesDetailView_Previews: PreviewProvider {
 }
 
 class FavoritesDetailViewStateModel: ObservableObject {
-//    @Published var id = UUID()
     @Published var date = Date()
     @Published var dates = [String]()
     @Published var isNotificationOn = false
@@ -63,6 +63,19 @@ class FavoritesDetailViewStateModel: ObservableObject {
     @Published var garbageCollection: GarbageCollection
     @Published var isShowingEditNotification = false
     @Published var notificationManager: NotificationManager
+    
+    var isSaveButtonEnabled: Bool {
+        garbageCollection.savedDate == date && notificationManager.notification.filter { $0.identifier == garbageCollection.id?.uuidString
+        }.isEmpty
+    }
+    
+    var daysFor: String {
+        if dates.removeDuplicates().filter({ $0 != ""}).count > 1 {
+           return dates.removeDuplicates().joined(separator: ", ")
+        } else {
+            return dates.removeDuplicates().filter({ $0 != ""}).first!
+        }
+    }
     
     @State var garbage: OrderedDictionary = WeekDay.week
     @State var largeItems: OrderedDictionary = WeekDay.week

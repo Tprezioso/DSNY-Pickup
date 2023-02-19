@@ -11,10 +11,7 @@ struct FavoritesNotificationSheetView: View {
     @Environment(\.managedObjectContext) var viewContext
     @StateObject var stateModel: FavoritesDetailViewStateModel
     
-    var isSaveButtonEnabled: Bool {
-        stateModel.garbageCollection.savedDate == stateModel.date && stateModel.notificationManager.notification.filter { $0.identifier == stateModel.garbageCollection.id?.uuidString
-        }.isEmpty
-    }
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -26,7 +23,7 @@ struct FavoritesNotificationSheetView: View {
                     }
                 if stateModel.isNotificationOn {
                     VStack(alignment: .leading) {
-                        Text("For Days: \(stateModel.dates.removeDuplicates().joined(separator: ", "))")
+                        Text("For Days: \(stateModel.daysFor)")
                         DatePicker("Time",
                                    selection: $stateModel.date,
                                    displayedComponents: [.hourAndMinute]
@@ -43,20 +40,25 @@ struct FavoritesNotificationSheetView: View {
                             stateModel.garbageCollection.savedDate = stateModel.date
                             try? viewContext.save()
                             stateModel.savedNotificationTapped = true
-                            stateModel.isShowingEditNotification.toggle()
+                            stateModel.isShowingEditNotification = false
                         }
                     } label: {
                         Text("Save")
                     }.buttonStyle(RoundedRectangleButtonStyle())
-                    .disabled(isSaveButtonEnabled)
+                    .disabled(stateModel.isSaveButtonEnabled)
                 }
                 Spacer()
             }.padding()
+            .onAppear {
+                if let savedDate = stateModel.garbageCollection.savedDate {
+                    stateModel.date = savedDate
+                }
+            }
             .navigationTitle("Notification Reminder")
             .toolbar {
                 ToolbarItem(placement: .automatic) {
                     Button {
-                        stateModel.isShowingEditNotification.toggle()
+                        stateModel.isShowingEditNotification = false
                     } label: {
                         Image(systemName: "xmark")
                     }
