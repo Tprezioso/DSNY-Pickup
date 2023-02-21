@@ -35,11 +35,10 @@ struct FavoritesDetailView: View {
             .toolbarColorScheme(.dark, for: .navigationBar)
             .toolbarBackground(Color.accentColor, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
-            
             .onAppear {
                 stateModel.sortData()
                 stateModel.notificationManager.reloadAuthorizationStatus()
-        }
+            }
             if stateModel.savedNotificationTapped {
                 LottieView(name: "Check", loopMode: .playOnce, isShowing: $stateModel.savedNotificationTapped)
                     .frame(width: 250, height: 250)

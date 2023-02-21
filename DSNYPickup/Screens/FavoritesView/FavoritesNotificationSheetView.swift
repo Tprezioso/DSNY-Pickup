@@ -11,7 +11,6 @@ struct FavoritesNotificationSheetView: View {
     @Environment(\.managedObjectContext) var viewContext
     @StateObject var stateModel: FavoritesDetailViewStateModel
     
-    
     var body: some View {
         NavigationStack {
             VStack {
@@ -31,7 +30,6 @@ struct FavoritesNotificationSheetView: View {
                     }
                     Button {
                         Task { @MainActor in
-
                             let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: stateModel.date)
                             let days = EnumDays.dayToNumber(stateModel.dates)
                             guard let hour = dateComponents.hour, let minute = dateComponents.minute else { return }
