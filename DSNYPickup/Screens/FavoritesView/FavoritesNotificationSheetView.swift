@@ -10,6 +10,8 @@ import SwiftUI
 struct FavoritesNotificationSheetView: View {
     @Environment(\.managedObjectContext) var viewContext
     @StateObject var stateModel: FavoritesDetailViewStateModel
+    @State var selected = ""
+    var array = ["Day Before", "Day Of", "Both"]
     
     var body: some View {
         NavigationStack {
@@ -27,11 +29,16 @@ struct FavoritesNotificationSheetView: View {
                                    selection: $stateModel.date,
                                    displayedComponents: [.hourAndMinute]
                         )
+                        Picker("What is your favorite color?", selection: $selected) {
+                            ForEach(array, id: \.self) {
+                                Text($0)
+                            }
+                        }.pickerStyle(.segmented)
                     }
                     Button {
                         Task { @MainActor in
                             let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: stateModel.date)
-                            let days = EnumDays.dayToNumber(stateModel.dates)
+                            let days = EnumDays.dayBefore(stateModel.dates)
                             guard let hour = dateComponents.hour, let minute = dateComponents.minute else { return }
                             await stateModel.notificationManager.createLocalNotification(id: stateModel.garbageCollection.id?.uuidString ?? "0", days: days, hour: hour, minute: minute)
                             stateModel.garbageCollection.isNotificationsOn = stateModel.isNotificationOn
