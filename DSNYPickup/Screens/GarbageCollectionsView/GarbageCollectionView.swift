@@ -62,17 +62,17 @@ struct GarbageCollectionView: View {
                         viewModel.search(text: searchText, region: locationManager.region)
                     })
                 Button {
-                    let newTask = GarbageCollection(context: viewContext)
-                    newTask.id = UUID()
-                    newTask.formattedAddress = viewModel.garbageData?.formattedAddress
-                    newTask.bulkPickupCollectionSchedule = viewModel.garbageData?.bulkPickupCollectionSchedule
-                    newTask.organicsCollectionSchedule = viewModel.garbageData?.organicsCollectionSchedule
-                    newTask.regularCollectionSchedule = viewModel.garbageData?.regularCollectionSchedule
-                    newTask.recyclingCollectionSchedule = viewModel.garbageData?.recyclingCollectionSchedule
-                    newTask.commercialRoutingTime = viewModel.garbageData?.routingTime?.commercialRoutingTime
-                    newTask.residentialRoutingTime = viewModel.garbageData?.routingTime?.residentialRoutingTime
-                    newTask.mixedUseRoutingTime = viewModel.garbageData?.routingTime?.mixedUseRoutingTime
-                    newTask.additionalLinks = viewModel.garbageData?.routingTime?.additionalLinks
+                    let newGarbageCollection = GarbageCollection(context: viewContext)
+                    newGarbageCollection.id = UUID()
+                    newGarbageCollection.formattedAddress = viewModel.garbageData?.formattedAddress
+                    newGarbageCollection.bulkPickupCollectionSchedule = viewModel.garbageData?.bulkPickupCollectionSchedule
+                    newGarbageCollection.organicsCollectionSchedule = viewModel.garbageData?.organicsCollectionSchedule
+                    newGarbageCollection.regularCollectionSchedule = viewModel.garbageData?.regularCollectionSchedule
+                    newGarbageCollection.recyclingCollectionSchedule = viewModel.garbageData?.recyclingCollectionSchedule
+                    newGarbageCollection.commercialRoutingTime = viewModel.garbageData?.routingTime?.commercialRoutingTime
+                    newGarbageCollection.residentialRoutingTime = viewModel.garbageData?.routingTime?.residentialRoutingTime
+                    newGarbageCollection.mixedUseRoutingTime = viewModel.garbageData?.routingTime?.mixedUseRoutingTime
+                    newGarbageCollection.additionalLinks = viewModel.garbageData?.routingTime?.additionalLinks
 //                    newTask.savedDate = 
                     try? viewContext.save()
                     viewModel.isAddFavoritesEnabled = true
