@@ -10,7 +10,13 @@ import SwiftUI
 struct CollectionInfo: View {
     var body: some View {
         ScrollView {
-            VStack {
+            VStack(alignment: .leading) {
+                Link(destination: URL(string: "https://www.nyc.gov/assets/dsny/site/services/collection-setout-times")!) {
+                    Text("Setout Times")
+                        .font(.headline)
+                }.buttonStyle(RoundedRectangleButtonStyle())
+                .padding(.horizontal)
+                
                 Text("""
     • Before Collection: Set items curbside after 4pm the night before your scheduled collection.
         

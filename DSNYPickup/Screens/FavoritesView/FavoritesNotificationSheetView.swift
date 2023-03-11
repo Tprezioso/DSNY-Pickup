@@ -25,9 +25,10 @@ struct FavoritesNotificationSheetView: View {
                 if stateModel.isNotificationOn {
                     VStack(alignment: .leading) {
                         Text("For Days: \(stateModel.daysFor)")
-                        DatePicker("Time",
-                                   selection: $stateModel.date,
-                                   displayedComponents: [.hourAndMinute]
+                        DatePicker(
+                            "Time",
+                            selection: $stateModel.date,
+                            displayedComponents: [.hourAndMinute]
                         )
                         Picker("Day Of", selection: $selected) {
                             ForEach(DayOf.allCases, id: \.self) {
@@ -99,16 +100,5 @@ enum DayOf: String, CaseIterable, CustomStringConvertible, Equatable {
         }
     }
     
-    case dayBefore, dayOf
-    
-//    var localizedName: LocalizedStringKey { LocalizedStringKey(rawValue) }
-    //    var description: String {
-    //        switch self {
-    //        case .dayBefore: return "Day Before"
-    //        case .dayOf: return "Day Of"
-    //        case .both: return "Both"
-    //        }
-    //    }
-    //    case dayBefore, dayOf, both
-    
+    case dayBefore, dayOf    
 }

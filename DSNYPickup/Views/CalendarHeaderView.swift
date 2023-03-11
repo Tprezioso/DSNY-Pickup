@@ -13,7 +13,6 @@ struct CalendarHeaderView: View {
     var font: Font = .body
 
     var body: some View {
-        
             ForEach(daysOfWeek, id: \.self) { dayOfWeek in
                 Text(dayOfWeek)
                     .font(font)

@@ -74,7 +74,6 @@ struct GarbageCollectionView: View {
                     newGarbageCollection.mixedUseRoutingTime = viewModel.garbageData?.routingTime?.mixedUseRoutingTime
                     newGarbageCollection.additionalLinks = viewModel.garbageData?.routingTime?.additionalLinks
                     newGarbageCollection.frequencyOfDays = DayOf.dayOf.description
-//                    newTask.savedDate = 
                     try? viewContext.save()
                     viewModel.isAddFavoritesEnabled = true
                 } label: {
@@ -88,6 +87,7 @@ struct GarbageCollectionView: View {
             if viewModel.isLoading {
                 ProgressView()
             }
+            
             if viewModel.isAddFavoritesEnabled {
                 LottieView(name: "Check", loopMode: .playOnce, isShowing: $viewModel.isAddFavoritesEnabled)
                     .frame(width: 250, height: 250)
