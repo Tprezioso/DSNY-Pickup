@@ -73,6 +73,7 @@ struct GarbageCollectionView: View {
                     newGarbageCollection.residentialRoutingTime = viewModel.garbageData?.routingTime?.residentialRoutingTime
                     newGarbageCollection.mixedUseRoutingTime = viewModel.garbageData?.routingTime?.mixedUseRoutingTime
                     newGarbageCollection.additionalLinks = viewModel.garbageData?.routingTime?.additionalLinks
+                    newGarbageCollection.frequencyOfDays = DayOf.dayOf.description
 //                    newTask.savedDate = 
                     try? viewContext.save()
                     viewModel.isAddFavoritesEnabled = true

@@ -10,8 +10,8 @@ import SwiftUI
 struct FavoritesNotificationSheetView: View {
     @Environment(\.managedObjectContext) var viewContext
     @StateObject var stateModel: FavoritesDetailViewStateModel
-    @State var selected = ""
-    var array = ["Day Before", "Day Of", "Both"]
+    @State var selected = DayOf.dayOf
+    var array = DayOf.allCases
     
     var body: some View {
         NavigationStack {
@@ -29,20 +29,22 @@ struct FavoritesNotificationSheetView: View {
                                    selection: $stateModel.date,
                                    displayedComponents: [.hourAndMinute]
                         )
-                        Picker("What is your favorite color?", selection: $selected) {
-                            ForEach(array, id: \.self) {
-                                Text($0)
+                        Picker("Day Of", selection: $selected) {
+                            ForEach(DayOf.allCases, id: \.self) {
+                                Text($0.description)
                             }
                         }.pickerStyle(.segmented)
                     }
                     Button {
                         Task { @MainActor in
                             let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: stateModel.date)
-                            let days = EnumDays.dayBefore(stateModel.dates)
+                            let days = selected == DayOf.dayOf ? EnumDays.dayToNumber(stateModel.dates) : EnumDays.dayBefore(stateModel.dates)
+                            
                             guard let hour = dateComponents.hour, let minute = dateComponents.minute else { return }
                             await stateModel.notificationManager.createLocalNotification(id: stateModel.garbageCollection.id?.uuidString ?? "0", days: days, hour: hour, minute: minute)
                             stateModel.garbageCollection.isNotificationsOn = stateModel.isNotificationOn
                             stateModel.garbageCollection.savedDate = stateModel.date
+                            stateModel.garbageCollection.frequencyOfDays = selected.description
                             try? viewContext.save()
                             stateModel.savedNotificationTapped = true
                             stateModel.isShowingEditNotification = false
@@ -57,6 +59,13 @@ struct FavoritesNotificationSheetView: View {
             .onAppear {
                 if let savedDate = stateModel.garbageCollection.savedDate {
                     stateModel.date = savedDate
+                }
+                if let saveFrequency = stateModel.garbageCollection.frequencyOfDays {
+                    if saveFrequency == DayOf.dayOf.description {
+                        selected = DayOf.dayOf
+                    } else {
+                        selected = DayOf.dayBefore
+                    }
                 }
             }
             .navigationTitle("Notification Reminder")
@@ -77,4 +86,29 @@ struct FavoritesNotificationSheetView_Previews: PreviewProvider {
     static var previews: some View {
         FavoritesNotificationSheetView(stateModel: .init(garbageCollection: GarbageCollection(), notificationManager: NotificationManager()))
     }
+}
+
+
+enum DayOf: String, CaseIterable, CustomStringConvertible, Equatable {
+    var description: String {
+        switch self {
+        case .dayBefore:
+            return "Day Before"
+        case .dayOf:
+            return "Day Of"
+        }
+    }
+    
+    case dayBefore, dayOf
+    
+//    var localizedName: LocalizedStringKey { LocalizedStringKey(rawValue) }
+    //    var description: String {
+    //        switch self {
+    //        case .dayBefore: return "Day Before"
+    //        case .dayOf: return "Day Of"
+    //        case .both: return "Both"
+    //        }
+    //    }
+    //    case dayBefore, dayOf, both
+    
 }
