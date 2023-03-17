@@ -171,7 +171,7 @@ enum EnumDays: Int, CustomStringConvertible, CaseIterable {
     
     static func dayBefore(_ days: [String]) -> [EnumDays?] {
         return days.map { day in
-            self.allCases.first {"\($0.next())" == day }
+            self.allCases.first {"\($0)" == day }?.previous()
          }
      }
     

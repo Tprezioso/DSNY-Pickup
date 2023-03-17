@@ -36,7 +36,11 @@ struct FavoritesView: View {
     func removeFavorite(at offsets: IndexSet) {
         for index in offsets {
             let garbageCollectionItem = garbageCollectionItems[index]
-            notificationManager.removeNotificationWith(id: garbageCollectionItem.id?.uuidString ?? UUID().uuidString)
+            if let ids = garbageCollectionItem.notificationIDs {
+                for id in ids {
+                    notificationManager.removeNotificationWith(id: id)
+                }
+            }
             viewContext.delete(garbageCollectionItem)
             do {
                 try viewContext.save()

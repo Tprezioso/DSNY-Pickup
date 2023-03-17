@@ -39,10 +39,16 @@ struct FavoritesNotificationSheetView: View {
                     Button {
                         Task { @MainActor in
                             let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: stateModel.date)
-                            let days = selected == DayOf.dayOf ? EnumDays.dayToNumber(stateModel.dates) : EnumDays.dayBefore(stateModel.dates)
-                            
+                            var days = selected == DayOf.dayOf ? EnumDays.dayToNumber(stateModel.dates) : EnumDays.dayBefore(stateModel.dates)
+                            let safeDays = days.compactMap { $0 }.removeDuplicates()
                             guard let hour = dateComponents.hour, let minute = dateComponents.minute else { return }
-                            await stateModel.notificationManager.createLocalNotification(id: stateModel.garbageCollection.id?.uuidString ?? "0", days: days, hour: hour, minute: minute)
+                            var arrayOfIDs = [""]
+                            for safeDay in safeDays {
+                                let id = UUID()
+                                arrayOfIDs.append(id.uuidString)
+                                await stateModel.notificationManager.createLocalNotification(id: id.uuidString, days: safeDays, hour: hour, minute: minute)
+                            }
+                            stateModel.garbageCollection.notificationIDs = arrayOfIDs
                             stateModel.garbageCollection.isNotificationsOn = stateModel.isNotificationOn
                             stateModel.garbageCollection.savedDate = stateModel.date
                             stateModel.garbageCollection.frequencyOfDays = selected.description

@@ -9,6 +9,7 @@
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="isNotificationsOn" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="mixedUseRoutingTime" optional="YES" attributeType="String"/>
+        <attribute name="notificationIDs" optional="YES" attributeType="Transformable" customClassName="[String]"/>
         <attribute name="organicsCollectionSchedule" optional="YES" attributeType="String"/>
         <attribute name="recyclingCollectionSchedule" optional="YES" attributeType="String"/>
         <attribute name="regularCollectionSchedule" optional="YES" attributeType="String"/>

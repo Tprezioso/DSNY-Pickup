@@ -36,10 +36,8 @@ final class NotificationManager: ObservableObject {
         }
     }
     
-    func createLocalNotification(id: String, days: [EnumDays?], hour: Int, minute: Int) async {
-        let safeDays = days.compactMap { $0 }.removeDuplicates()
-        
-        for day in safeDays {
+    func createLocalNotification(id: String, days: [EnumDays], hour: Int, minute: Int) async {
+        for day in days {
             var dateComponents = DateComponents()
             dateComponents.calendar = Calendar.current
             dateComponents.weekday = day.number
