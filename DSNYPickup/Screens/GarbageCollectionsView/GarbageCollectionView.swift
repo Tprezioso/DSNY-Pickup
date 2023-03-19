@@ -226,14 +226,18 @@ struct SearchView: View {
     @Environment(\.dismissSearch) private var dismissSearch
     
     var body: some View {
-        Text(place)
-            .onTapGesture {
-                Task { @MainActor in
-                    viewModel.searchString = place
-                    viewModel.getGarbageCollectionData()
-                }
-                dismissSearch()
+        HStack {
+            Text(place)
+            Spacer()
+        }
+        .contentShape(Rectangle())
+        .onTapGesture {
+            Task { @MainActor in
+                viewModel.searchString = place
+                viewModel.getGarbageCollectionData()
             }
+            dismissSearch()
+        }
     }
 }
 
