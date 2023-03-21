@@ -46,7 +46,7 @@ struct FavoritesNotificationSheetView: View {
                             for safeDay in safeDays {
                                 let id = UUID()
                                 arrayOfIDs.append(id.uuidString)
-                                await stateModel.notificationManager.createLocalNotification(id: id.uuidString, days: safeDays, hour: hour, minute: minute)
+                                await stateModel.notificationManager.createLocalNotification(id: id.uuidString, day: safeDay, hour: hour, minute: minute)
                             }
                             stateModel.garbageCollection.notificationIDs = arrayOfIDs
                             stateModel.garbageCollection.isNotificationsOn = stateModel.isNotificationOn
