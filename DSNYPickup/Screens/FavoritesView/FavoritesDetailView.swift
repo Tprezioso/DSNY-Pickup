@@ -121,4 +121,24 @@ class FavoritesDetailViewStateModel: ObservableObject {
     func saveGarbageCollection(_ garbageCollection: GarbageCollection) {
          garbageCollection.isNotificationsOn = isNotificationOn
     }
+    
+    func saveNotification(selected: DayOf) async {
+        let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: date)
+        var days = selected == DayOf.dayOf ? EnumDays.dayToNumber(dates) : EnumDays.dayBefore(dates)
+        let safeDays = days.compactMap { $0 }.removeDuplicates()
+        guard let hour = dateComponents.hour, let minute = dateComponents.minute else { return }
+        var arrayOfIDs = [""]
+        for safeDay in safeDays {
+            let id = UUID()
+            arrayOfIDs.append(id.uuidString)
+            await notificationManager.createLocalNotification(id: id.uuidString, day: safeDay, hour: hour, minute: minute)
+        }
+        garbageCollection.notificationIDs = arrayOfIDs
+        garbageCollection.isNotificationsOn = isNotificationOn
+        garbageCollection.savedDate = date
+        garbageCollection.frequencyOfDays = selected.description
+        savedNotificationTapped = true
+        isShowingEditNotification = false
+
+    }
 }
