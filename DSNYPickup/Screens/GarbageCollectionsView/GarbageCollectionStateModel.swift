@@ -48,6 +48,20 @@ class GarbageCollectionStateModel: ObservableObject {
         }
     }
     
+    func saveGarbageCollectionData(newGarbageCollection: GarbageCollection) {
+        newGarbageCollection.id = UUID()
+        newGarbageCollection.formattedAddress = garbageData?.formattedAddress
+        newGarbageCollection.bulkPickupCollectionSchedule = garbageData?.bulkPickupCollectionSchedule
+        newGarbageCollection.organicsCollectionSchedule = garbageData?.organicsCollectionSchedule
+        newGarbageCollection.regularCollectionSchedule = garbageData?.regularCollectionSchedule
+        newGarbageCollection.recyclingCollectionSchedule = garbageData?.recyclingCollectionSchedule
+        newGarbageCollection.commercialRoutingTime = garbageData?.routingTime?.commercialRoutingTime
+        newGarbageCollection.residentialRoutingTime = garbageData?.routingTime?.residentialRoutingTime
+        newGarbageCollection.mixedUseRoutingTime = garbageData?.routingTime?.mixedUseRoutingTime
+        newGarbageCollection.additionalLinks = garbageData?.routingTime?.additionalLinks
+        newGarbageCollection.frequencyOfDays = DayOf.dayOf.description
+    }
+    
     func search(text: String, region: MKCoordinateRegion) {
         let searchRequest = MKLocalSearch.Request()
         searchRequest.naturalLanguageQuery = text

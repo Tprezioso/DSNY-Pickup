@@ -20,8 +20,8 @@ struct GarbageCollectionView: View {
     
     var body: some View {
         ZStack {
-                VStack {
-                    ScrollView {
+            VStack {
+                ScrollView {
                     VStack(alignment: .leading) {
                         Text("\(viewModel.stringViewString)")
                             .font(.title)
@@ -41,47 +41,34 @@ struct GarbageCollectionView: View {
                     .onSubmit(of: .search) {
                         viewModel.getGarbageCollectionData()
                     }
-                    
-                    
                 }.navigationTitle("DSNY Garbage Collection")
-                    .toolbarColorScheme(.dark, for: .navigationBar)
-                    .toolbarBackground(Color.accentColor, for: .navigationBar)
-                    .toolbarBackground(.visible, for: .navigationBar)
-                    .onAppear {
-                        viewModel.getGarbageCollectionData()
+                .toolbarColorScheme(.dark, for: .navigationBar)
+                .toolbarBackground(Color.accentColor, for: .navigationBar)
+                .toolbarBackground(.visible, for: .navigationBar)
+                .onAppear {
+                    viewModel.getGarbageCollectionData()
+                }
+                .searchable(text: $viewModel.searchString, placement: .navigationBarDrawer(displayMode: .always), prompt: viewModel.searchString.isEmpty ? "When is Collection at..." : viewModel.searchString) {
+                    ForEach(viewModel.places) { place in
+                        SearchView(place: place.name, viewModel: viewModel)
                     }
-                    .searchable(text: $viewModel.searchString, placement: .navigationBarDrawer(displayMode: .always), prompt: viewModel.searchString.isEmpty ? "When is Collection at..." : viewModel.searchString) {
-                        ForEach(viewModel.places) { place in
-                            SearchView(place: place.name, viewModel: viewModel)
-                        }
-                    }
-                    .onSubmit(of: .search) {
-                        viewModel.getGarbageCollectionData()
-                    }
-                    .onChange (of: viewModel.searchString, perform: { searchText in
-                        viewModel.search(text: searchText, region: locationManager.region)
-                    })
+                }
+                .onSubmit(of: .search) {
+                    viewModel.getGarbageCollectionData()
+                }
+                .onChange (of: viewModel.searchString, perform: { searchText in
+                    viewModel.search(text: searchText, region: locationManager.region)
+                })
                 Button {
-                    let newGarbageCollection = GarbageCollection(context: viewContext)
-                    newGarbageCollection.id = UUID()
-                    newGarbageCollection.formattedAddress = viewModel.garbageData?.formattedAddress
-                    newGarbageCollection.bulkPickupCollectionSchedule = viewModel.garbageData?.bulkPickupCollectionSchedule
-                    newGarbageCollection.organicsCollectionSchedule = viewModel.garbageData?.organicsCollectionSchedule
-                    newGarbageCollection.regularCollectionSchedule = viewModel.garbageData?.regularCollectionSchedule
-                    newGarbageCollection.recyclingCollectionSchedule = viewModel.garbageData?.recyclingCollectionSchedule
-                    newGarbageCollection.commercialRoutingTime = viewModel.garbageData?.routingTime?.commercialRoutingTime
-                    newGarbageCollection.residentialRoutingTime = viewModel.garbageData?.routingTime?.residentialRoutingTime
-                    newGarbageCollection.mixedUseRoutingTime = viewModel.garbageData?.routingTime?.mixedUseRoutingTime
-                    newGarbageCollection.additionalLinks = viewModel.garbageData?.routingTime?.additionalLinks
-                    newGarbageCollection.frequencyOfDays = DayOf.dayOf.description
+                    viewModel.saveGarbageCollectionData(newGarbageCollection: GarbageCollection(context: viewContext))
                     try? viewContext.save()
                     viewModel.isAddFavoritesEnabled = true
                 } label: {
                     Label("Add to Favorites", systemImage: "star")
                         .bold()
                 }.disabled(viewModel.stringViewString.isEmpty)
-                    .padding()
-                    .buttonStyle(RoundedRectangleButtonStyle())
+                .padding()
+                .buttonStyle(RoundedRectangleButtonStyle())
             }
             
             if viewModel.isLoading {
