@@ -38,7 +38,15 @@ struct FavoritesNotificationSheetView: View {
                     }
                     Button {
                         Task { @MainActor in
-                            await stateModel.saveNotification(selected: selected)
+                            if let savedNotificationIDs = stateModel.garbageCollection.notificationIDs {
+                                let notificationId = stateModel.notificationManager.notification.map { $0.identifier }
+                                
+                                if savedNotificationIDs.contains(notificationId) {
+                                    await stateModel.updateNotification(selected: selected)
+                                } else {
+                                    await stateModel.saveNotification(selected: selected)
+                                }
+                            }
                             try? viewContext.save()
                         }
                     } label: {
@@ -49,6 +57,9 @@ struct FavoritesNotificationSheetView: View {
                 Spacer()
             }.padding()
             .onAppear {
+                Task { @MainActor in
+                    stateModel.notificationManager.reloadLocalNotifications()
+                }
                 if let savedDate = stateModel.garbageCollection.savedDate {
                     stateModel.date = savedDate
                 }
