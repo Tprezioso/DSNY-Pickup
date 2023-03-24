@@ -62,6 +62,7 @@ class FavoritesDetailViewStateModel: ObservableObject {
     @Published var garbageCollection: GarbageCollection
     @Published var isShowingEditNotification = false
     @Published var notificationManager: NotificationManager
+    var notificationId: [String] { notificationManager.notification.map { $0.identifier } }
     
     var isSaveButtonEnabled: Bool {
         garbageCollection.savedDate == date && notificationManager.notification.filter { $0.identifier == garbageCollection.id?.uuidString
@@ -122,12 +123,13 @@ class FavoritesDetailViewStateModel: ObservableObject {
          garbageCollection.isNotificationsOn = isNotificationOn
     }
     
+    @MainActor
     func saveNotification(selected: DayOf) async {
         let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: date)
-        var days = selected == DayOf.dayOf ? EnumDays.dayToNumber(dates) : EnumDays.dayBefore(dates)
+        let days = selected == DayOf.dayOf ? EnumDays.dayToNumber(dates) : EnumDays.dayBefore(dates)
         let safeDays = days.compactMap { $0 }.removeDuplicates()
         guard let hour = dateComponents.hour, let minute = dateComponents.minute else { return }
-        var arrayOfIDs = [""]
+        var arrayOfIDs = [String]()
         for safeDay in safeDays {
             let id = UUID()
             arrayOfIDs.append(id.uuidString)
@@ -142,18 +144,15 @@ class FavoritesDetailViewStateModel: ObservableObject {
 
     }
     
-    func updateNotification(selected: DayOf) async {
+    @MainActor
+    func updateNotification(selected: DayOf, notifications: [UNNotificationRequest]) async {
         let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: date)
-        var days = selected == DayOf.dayOf ? EnumDays.dayToNumber(dates) : EnumDays.dayBefore(dates)
+        let days = selected == DayOf.dayOf ? EnumDays.dayToNumber(dates) : EnumDays.dayBefore(dates)
         let safeDays = days.compactMap { $0 }.removeDuplicates()
         guard let hour = dateComponents.hour, let minute = dateComponents.minute else { return }
-        var arrayOfIDs = [""]
-        for safeDay in safeDays {
-            let id = UUID()
-            arrayOfIDs.append(id.uuidString)
-            await notificationManager.updateLocalNotification(id: id.uuidString, day: safeDay, hour: hour, minute: minute)
+        for (index, notification) in notifications.enumerated() {
+            await notificationManager.updateLocalNotification(id: notification.identifier, day: safeDays[index], hour: hour, minute: minute)
         }
-        garbageCollection.notificationIDs = arrayOfIDs
         garbageCollection.isNotificationsOn = isNotificationOn
         garbageCollection.savedDate = date
         garbageCollection.frequencyOfDays = selected.description

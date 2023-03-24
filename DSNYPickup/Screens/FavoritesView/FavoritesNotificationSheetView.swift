@@ -38,14 +38,18 @@ struct FavoritesNotificationSheetView: View {
                     }
                     Button {
                         Task { @MainActor in
+                            stateModel.notificationManager.reloadLocalNotifications()
                             if let savedNotificationIDs = stateModel.garbageCollection.notificationIDs {
-                                let notificationId = stateModel.notificationManager.notification.map { $0.identifier }
-                                
-                                if savedNotificationIDs.contains(notificationId) {
-                                    await stateModel.updateNotification(selected: selected)
+                                let filterArray = stateModel.notificationManager.notification.filter {
+                                    savedNotificationIDs.contains($0.identifier)
+                                }
+                                if !filterArray.isEmpty {
+                                    await stateModel.updateNotification(selected: selected, notifications: filterArray)
                                 } else {
                                     await stateModel.saveNotification(selected: selected)
                                 }
+                            } else {
+                                await stateModel.saveNotification(selected: selected)
                             }
                             try? viewContext.save()
                         }
