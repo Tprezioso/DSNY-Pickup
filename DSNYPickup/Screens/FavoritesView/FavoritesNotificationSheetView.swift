@@ -10,7 +10,7 @@ import SwiftUI
 struct FavoritesNotificationSheetView: View {
     @Environment(\.managedObjectContext) var viewContext
     @StateObject var stateModel: FavoritesDetailViewStateModel
-    @State var selected = DayOf.dayOf
+    @State var selectedFrequency = DayOf.dayOf
     var array = DayOf.allCases
     
     var body: some View {
@@ -30,7 +30,7 @@ struct FavoritesNotificationSheetView: View {
                             selection: $stateModel.date,
                             displayedComponents: [.hourAndMinute]
                         )
-                        Picker("Day Of", selection: $selected) {
+                        Picker("Day Of", selection: $selectedFrequency) {
                             ForEach(DayOf.allCases, id: \.self) {
                                 Text($0.description)
                             }
@@ -44,12 +44,12 @@ struct FavoritesNotificationSheetView: View {
                                     savedNotificationIDs.contains($0.identifier)
                                 }
                                 if !filterArray.isEmpty {
-                                    await stateModel.updateNotification(selected: selected, notifications: filterArray)
+                                    await stateModel.updateNotification(selected: selectedFrequency, notifications: filterArray)
                                 } else {
-                                    await stateModel.saveNotification(selected: selected)
+                                    await stateModel.saveNotification(selected: selectedFrequency)
                                 }
                             } else {
-                                await stateModel.saveNotification(selected: selected)
+                                await stateModel.saveNotification(selected: selectedFrequency)
                             }
                             try? viewContext.save()
                         }
@@ -69,9 +69,9 @@ struct FavoritesNotificationSheetView: View {
                 }
                 if let saveFrequency = stateModel.garbageCollection.frequencyOfDays {
                     if saveFrequency == DayOf.dayOf.description {
-                        selected = DayOf.dayOf
+                        selectedFrequency = DayOf.dayOf
                     } else {
-                        selected = DayOf.dayBefore
+                        selectedFrequency = DayOf.dayBefore
                     }
                 }
             }
