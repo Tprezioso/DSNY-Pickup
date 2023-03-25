@@ -15,23 +15,30 @@ struct DisposeOfItemView: View {
     }
     
     var body: some View {
-        List {
-            ForEach(viewModel.sortedItemsToDispose, id: \.key) { itemToDispose in
-                NavigationLink((itemToDispose.key).capitalized.replacingOccurrences(of: "-", with: " ")) {
-                    DisposeItemDetailView(stateModel: DisposeItemDetailStateModel(itemToDispose: itemToDispose.value.first!))
+        ZStack {
+            List {
+                ForEach(viewModel.sortedItemsToDispose, id: \.key) { itemToDispose in
+                    NavigationLink((itemToDispose.key).capitalized.replacingOccurrences(of: "-", with: " ")) {
+                        DisposeItemDetailView(stateModel: DisposeItemDetailStateModel(itemToDispose: itemToDispose.value.first!))
+                    }
                 }
+                
+                
+            }
+            if viewModel.isLoading {
+                ProgressView()
             }
         }.searchable(text: $viewModel.searchText, placement: .navigationBarDrawer(displayMode: .always))
-        .onChange(of: viewModel.searchText) { text in
-            viewModel.getItemDisposalDetails()
-            viewModel.sortedItemsToDispose = viewModel.sortedItemsToDispose.filter { $0.key.starts(with: text.capitalized) }
-        }
-        .onSubmit(of: .search) {
-            viewModel.getItemDisposalDetails()
-        }
-        .navigationTitle("How to Get Rid of ...")
-        .onAppear {
-            viewModel.getItemDisposalDetails()
+            .onChange(of: viewModel.searchText) { text in
+                viewModel.getItemDisposalDetails()
+                viewModel.sortedItemsToDispose = viewModel.sortedItemsToDispose.filter { $0.key.starts(with: text.capitalized) }
+            }
+            .onSubmit(of: .search) {
+                viewModel.getItemDisposalDetails()
+            }
+            .navigationTitle("How to Get Rid of ...")
+            .onAppear {
+                viewModel.getItemDisposalDetails()
         }
     }
 }
