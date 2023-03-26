@@ -22,8 +22,6 @@ struct DisposeOfItemView: View {
                         DisposeItemDetailView(stateModel: DisposeItemDetailStateModel(itemToDispose: itemToDispose.value.first!))
                     }
                 }
-                
-                
             }
             if viewModel.isLoading {
                 ProgressView()
