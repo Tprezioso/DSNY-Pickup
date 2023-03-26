@@ -57,14 +57,14 @@ struct GarbageCollectionGridView: View {
             GridRow {
                 ForEach(largeItems.values, id: \.self) { day in
                     if day == true {
-                        VStack {
+                        VStack(spacing: 0) {
                             Image(systemName: "sofa")
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 40, height: 40)
                             
                             Text("Large Items")
-                                .font(.caption)
+                                .font(.caption2)
                                 .scaledToFit()
                                 .minimumScaleFactor(0.6)
                         }.foregroundColor(.green)

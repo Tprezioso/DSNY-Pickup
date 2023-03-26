@@ -29,16 +29,19 @@ struct DisposeOfItemView: View {
                 ProgressView()
             }
         }.searchable(text: $viewModel.searchText, placement: .navigationBarDrawer(displayMode: .always))
-            .onChange(of: viewModel.searchText) { text in
-                viewModel.getItemDisposalDetails()
-                viewModel.sortedItemsToDispose = viewModel.sortedItemsToDispose.filter { $0.key.starts(with: text.capitalized) }
-            }
-            .onSubmit(of: .search) {
-                viewModel.getItemDisposalDetails()
-            }
-            .navigationTitle("How to Get Rid of ...")
-            .onAppear {
-                viewModel.getItemDisposalDetails()
+        .onChange(of: viewModel.searchText) { text in
+            viewModel.getItemDisposalDetails()
+            viewModel.sortedItemsToDispose = viewModel.sortedItemsToDispose.filter { $0.key.starts(with: text.capitalized) }
+        }
+        .onSubmit(of: .search) {
+            viewModel.getItemDisposalDetails()
+        }
+        .navigationTitle("How to Get Rid of ...")
+        .onAppear {
+            viewModel.getItemDisposalDetails()
+        }
+        .refreshable {
+            viewModel.getItemDisposalDetails()
         }
     }
 }
