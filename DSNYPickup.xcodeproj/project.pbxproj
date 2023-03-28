@@ -26,6 +26,7 @@
 		55576EFE298DBD890089861A /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 55576EFD298DBD890089861A /* Lottie */; };
 		55576F00298DBF430089861A /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55576EFF298DBF430089861A /* LottieView.swift */; };
 		55576F02298DC3C30089861A /* Check.json in Resources */ = {isa = PBXBuildFile; fileRef = 55576F01298DC3C20089861A /* Check.json */; };
+		555AE9BF29D2796200A66411 /* Array+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555AE9BE29D2796200A66411 /* Array+Ext.swift */; };
 		5590824325A3CB7900F2CF62 /* DSNYPickupApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5590824225A3CB7900F2CF62 /* DSNYPickupApp.swift */; };
 		5590824525A3CB7900F2CF62 /* GarbageCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5590824425A3CB7900F2CF62 /* GarbageCollectionView.swift */; };
 		5590824725A3CB7A00F2CF62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5590824625A3CB7A00F2CF62 /* Assets.xcassets */; };
@@ -66,6 +67,7 @@
 		55576EFA298CAB780089861A /* FavoritesDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesDetailView.swift; sourceTree = "<group>"; };
 		55576EFF298DBF430089861A /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		55576F01298DC3C20089861A /* Check.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Check.json; sourceTree = "<group>"; };
+		555AE9BE29D2796200A66411 /* Array+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Ext.swift"; sourceTree = "<group>"; };
 		5590823F25A3CB7900F2CF62 /* DSNYPickup.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DSNYPickup.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5590824225A3CB7900F2CF62 /* DSNYPickupApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSNYPickupApp.swift; sourceTree = "<group>"; };
 		5590824425A3CB7900F2CF62 /* GarbageCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GarbageCollectionView.swift; sourceTree = "<group>"; };
@@ -140,6 +142,16 @@
 			path = MoreView;
 			sourceTree = "<group>";
 		};
+		555AE9C029D279AC00A66411 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				55576EF2298B5D6A0089861A /* Navigation+Ext.swift */,
+				555AE9BE29D2796200A66411 /* Array+Ext.swift */,
+				55576EF4298B5DAD0089861A /* View+Ext.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		5590823625A3CB7900F2CF62 = {
 			isa = PBXGroup;
 			children = (
@@ -165,9 +177,8 @@
 				55F9C42C2974B80D0038A427 /* Alert */,
 				55F6792A2973A17D003331C5 /* Manager */,
 				55F679292973A174003331C5 /* Model */,
+				555AE9C029D279AC00A66411 /* Extensions */,
 				55B2513E2969B8AF0045364E /* APIToken.swift */,
-				55576EF2298B5D6A0089861A /* Navigation+Ext.swift */,
-				55576EF4298B5DAD0089861A /* View+Ext.swift */,
 				55576EB0298605E20089861A /* GarbageCollection.xcdatamodeld */,
 				5590824625A3CB7A00F2CF62 /* Assets.xcassets */,
 				5590824B25A3CB7A00F2CF62 /* Info.plist */,
@@ -328,6 +339,7 @@
 				5545A31529A04CF400352A57 /* FavoritesNotificationSheetView.swift in Sources */,
 				55F6791629722F94003331C5 /* Garbage.swift in Sources */,
 				55F67918297327CB003331C5 /* CalendarHeaderView.swift in Sources */,
+				555AE9BF29D2796200A66411 /* Array+Ext.swift in Sources */,
 				55BDDBF5297CB4CC00988C8E /* PlaceView.swift in Sources */,
 				55F6792529737328003331C5 /* WeekDay.swift in Sources */,
 				55F6792729738A68003331C5 /* GarbageCollectionGridView.swift in Sources */,
