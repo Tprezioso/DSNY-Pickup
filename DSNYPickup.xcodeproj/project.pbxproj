@@ -27,6 +27,19 @@
 		55576F00298DBF430089861A /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55576EFF298DBF430089861A /* LottieView.swift */; };
 		55576F02298DC3C30089861A /* Check.json in Resources */ = {isa = PBXBuildFile; fileRef = 55576F01298DC3C20089861A /* Check.json */; };
 		555AE9BF29D2796200A66411 /* Array+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555AE9BE29D2796200A66411 /* Array+Ext.swift */; };
+		555AE9C829D3B41700A66411 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 555AE9C729D3B41700A66411 /* WidgetKit.framework */; };
+		555AE9CA29D3B41700A66411 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 555AE9C929D3B41700A66411 /* SwiftUI.framework */; };
+		555AE9CD29D3B41700A66411 /* DSNYPickupWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555AE9CC29D3B41700A66411 /* DSNYPickupWidgetBundle.swift */; };
+		555AE9CF29D3B41700A66411 /* DSNYPickupWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555AE9CE29D3B41700A66411 /* DSNYPickupWidget.swift */; };
+		555AE9D229D3B41900A66411 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 555AE9D129D3B41900A66411 /* Assets.xcassets */; };
+		555AE9D429D3B41900A66411 /* DSNYPickupWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 555AE9D029D3B41700A66411 /* DSNYPickupWidget.intentdefinition */; };
+		555AE9D529D3B41900A66411 /* DSNYPickupWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 555AE9D029D3B41700A66411 /* DSNYPickupWidget.intentdefinition */; };
+		555AE9D829D3B41900A66411 /* DSNYPickupWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 555AE9C529D3B41700A66411 /* DSNYPickupWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		555AE9DD29D3B44000A66411 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B2513C2969B7D40045364E /* NetworkManager.swift */; };
+		555AE9DE29D3B47600A66411 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55576EB32986EBF10089861A /* DataManager.swift */; };
+		555AE9E129D3DB0B00A66411 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555AE9E029D3DB0B00A66411 /* CoreData.swift */; };
+		555AE9E229D3DB0B00A66411 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555AE9E029D3DB0B00A66411 /* CoreData.swift */; };
+		555AE9E329D3DB7700A66411 /* GarbageCollection.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 55576EB0298605E20089861A /* GarbageCollection.xcdatamodeld */; };
 		5590824325A3CB7900F2CF62 /* DSNYPickupApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5590824225A3CB7900F2CF62 /* DSNYPickupApp.swift */; };
 		5590824525A3CB7900F2CF62 /* GarbageCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5590824425A3CB7900F2CF62 /* GarbageCollectionView.swift */; };
 		5590824725A3CB7A00F2CF62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5590824625A3CB7A00F2CF62 /* Assets.xcassets */; };
@@ -49,6 +62,30 @@
 		55F9C42B2974B7A50038A427 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F9C42A2974B7A50038A427 /* Alert.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		555AE9D629D3B41900A66411 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5590823725A3CB7900F2CF62 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 555AE9C429D3B41700A66411;
+			remoteInfo = DSNYPickupWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		555AE9DC29D3B41900A66411 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				555AE9D829D3B41900A66411 /* DSNYPickupWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		5545A31429A04CF400352A57 /* FavoritesNotificationSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesNotificationSheetView.swift; sourceTree = "<group>"; };
 		55576E9B29821F8F0089861A /* ItemToDispose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemToDispose.swift; sourceTree = "<group>"; };
@@ -68,6 +105,16 @@
 		55576EFF298DBF430089861A /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		55576F01298DC3C20089861A /* Check.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Check.json; sourceTree = "<group>"; };
 		555AE9BE29D2796200A66411 /* Array+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Ext.swift"; sourceTree = "<group>"; };
+		555AE9C529D3B41700A66411 /* DSNYPickupWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = DSNYPickupWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		555AE9C729D3B41700A66411 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		555AE9C929D3B41700A66411 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		555AE9CC29D3B41700A66411 /* DSNYPickupWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSNYPickupWidgetBundle.swift; sourceTree = "<group>"; };
+		555AE9CE29D3B41700A66411 /* DSNYPickupWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSNYPickupWidget.swift; sourceTree = "<group>"; };
+		555AE9D029D3B41700A66411 /* DSNYPickupWidget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = DSNYPickupWidget.intentdefinition; sourceTree = "<group>"; };
+		555AE9D129D3B41900A66411 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		555AE9D329D3B41900A66411 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		555AE9DF29D3D77900A66411 /* DSNYPickup.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DSNYPickup.entitlements; sourceTree = "<group>"; };
+		555AE9E029D3DB0B00A66411 /* CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
 		5590823F25A3CB7900F2CF62 /* DSNYPickup.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DSNYPickup.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5590824225A3CB7900F2CF62 /* DSNYPickupApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSNYPickupApp.swift; sourceTree = "<group>"; };
 		5590824425A3CB7900F2CF62 /* GarbageCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GarbageCollectionView.swift; sourceTree = "<group>"; };
@@ -90,6 +137,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		555AE9C229D3B41700A66411 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				555AE9CA29D3B41700A66411 /* SwiftUI.framework in Frameworks */,
+				555AE9C829D3B41700A66411 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5590823C25A3CB7900F2CF62 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -152,10 +208,33 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		555AE9C629D3B41700A66411 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				555AE9C729D3B41700A66411 /* WidgetKit.framework */,
+				555AE9C929D3B41700A66411 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		555AE9CB29D3B41700A66411 /* DSNYPickupWidget */ = {
+			isa = PBXGroup;
+			children = (
+				555AE9CC29D3B41700A66411 /* DSNYPickupWidgetBundle.swift */,
+				555AE9CE29D3B41700A66411 /* DSNYPickupWidget.swift */,
+				555AE9D029D3B41700A66411 /* DSNYPickupWidget.intentdefinition */,
+				555AE9D129D3B41900A66411 /* Assets.xcassets */,
+				555AE9D329D3B41900A66411 /* Info.plist */,
+			);
+			path = DSNYPickupWidget;
+			sourceTree = "<group>";
+		};
 		5590823625A3CB7900F2CF62 = {
 			isa = PBXGroup;
 			children = (
 				5590824125A3CB7900F2CF62 /* DSNYPickup */,
+				555AE9CB29D3B41700A66411 /* DSNYPickupWidget */,
+				555AE9C629D3B41700A66411 /* Frameworks */,
 				5590824025A3CB7900F2CF62 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -164,6 +243,7 @@
 			isa = PBXGroup;
 			children = (
 				5590823F25A3CB7900F2CF62 /* DSNYPickup.app */,
+				555AE9C529D3B41700A66411 /* DSNYPickupWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -171,6 +251,7 @@
 		5590824125A3CB7900F2CF62 /* DSNYPickup */ = {
 			isa = PBXGroup;
 			children = (
+				555AE9DF29D3D77900A66411 /* DSNYPickup.entitlements */,
 				5590824225A3CB7900F2CF62 /* DSNYPickupApp.swift */,
 				55F6792B2973A193003331C5 /* Screens */,
 				55F679282973A15C003331C5 /* Views */,
@@ -179,6 +260,7 @@
 				55F679292973A174003331C5 /* Model */,
 				555AE9C029D279AC00A66411 /* Extensions */,
 				55B2513E2969B8AF0045364E /* APIToken.swift */,
+				555AE9E029D3DB0B00A66411 /* CoreData.swift */,
 				55576EB0298605E20089861A /* GarbageCollection.xcdatamodeld */,
 				5590824625A3CB7A00F2CF62 /* Assets.xcassets */,
 				5590824B25A3CB7A00F2CF62 /* Info.plist */,
@@ -255,6 +337,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		555AE9C429D3B41700A66411 /* DSNYPickupWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 555AE9D929D3B41900A66411 /* Build configuration list for PBXNativeTarget "DSNYPickupWidgetExtension" */;
+			buildPhases = (
+				555AE9C129D3B41700A66411 /* Sources */,
+				555AE9C229D3B41700A66411 /* Frameworks */,
+				555AE9C329D3B41700A66411 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DSNYPickupWidgetExtension;
+			productName = DSNYPickupWidgetExtension;
+			productReference = 555AE9C529D3B41700A66411 /* DSNYPickupWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		5590823E25A3CB7900F2CF62 /* DSNYPickup */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5590824E25A3CB7A00F2CF62 /* Build configuration list for PBXNativeTarget "DSNYPickup" */;
@@ -262,10 +361,12 @@
 				5590823B25A3CB7900F2CF62 /* Sources */,
 				5590823C25A3CB7900F2CF62 /* Frameworks */,
 				5590823D25A3CB7900F2CF62 /* Resources */,
+				555AE9DC29D3B41900A66411 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				555AE9D729D3B41900A66411 /* PBXTargetDependency */,
 			);
 			name = DSNYPickup;
 			packageProductDependencies = (
@@ -285,9 +386,12 @@
 		5590823725A3CB7900F2CF62 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1230;
+				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1230;
 				TargetAttributes = {
+					555AE9C429D3B41700A66411 = {
+						CreatedOnToolsVersion = 14.2;
+					};
 					5590823E25A3CB7900F2CF62 = {
 						CreatedOnToolsVersion = 12.3;
 					};
@@ -312,11 +416,20 @@
 			projectRoot = "";
 			targets = (
 				5590823E25A3CB7900F2CF62 /* DSNYPickup */,
+				555AE9C429D3B41700A66411 /* DSNYPickupWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		555AE9C329D3B41700A66411 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				555AE9D229D3B41900A66411 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5590823D25A3CB7900F2CF62 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -330,6 +443,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		555AE9C129D3B41700A66411 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				555AE9DD29D3B44000A66411 /* NetworkManager.swift in Sources */,
+				555AE9DE29D3B47600A66411 /* DataManager.swift in Sources */,
+				555AE9CD29D3B41700A66411 /* DSNYPickupWidgetBundle.swift in Sources */,
+				555AE9CF29D3B41700A66411 /* DSNYPickupWidget.swift in Sources */,
+				555AE9E329D3DB7700A66411 /* GarbageCollection.xcdatamodeld in Sources */,
+				555AE9E229D3DB0B00A66411 /* CoreData.swift in Sources */,
+				555AE9D429D3B41900A66411 /* DSNYPickupWidget.intentdefinition in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5590823B25A3CB7900F2CF62 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -354,6 +481,7 @@
 				55B2513D2969B7D40045364E /* NetworkManager.swift in Sources */,
 				55576EB42986EBF10089861A /* DataManager.swift in Sources */,
 				55576E9E298221940089861A /* DisposeOfItemView.swift in Sources */,
+				555AE9E129D3DB0B00A66411 /* CoreData.swift in Sources */,
 				55F679232973600D003331C5 /* GarbageCollectionStateModel.swift in Sources */,
 				55576EF7298C864E0089861A /* SpecialWasteDropOffLocation.swift in Sources */,
 				5590824525A3CB7900F2CF62 /* GarbageCollectionView.swift in Sources */,
@@ -363,6 +491,7 @@
 				55BB1DD2299EE1910032DDDD /* NotificationToggleStyle.swift in Sources */,
 				55576EF3298B5D6A0089861A /* Navigation+Ext.swift in Sources */,
 				55576E9C29821F8F0089861A /* ItemToDispose.swift in Sources */,
+				555AE9D529D3B41900A66411 /* DSNYPickupWidget.intentdefinition in Sources */,
 				55576EAF298595B00089861A /* DetailItemButton.swift in Sources */,
 				5590824325A3CB7900F2CF62 /* DSNYPickupApp.swift in Sources */,
 				55BDDBF3297CAB8E00988C8E /* LocationManager.swift in Sources */,
@@ -371,7 +500,73 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		555AE9D729D3B41900A66411 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 555AE9C429D3B41700A66411 /* DSNYPickupWidgetExtension */;
+			targetProxy = 555AE9D629D3B41900A66411 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		555AE9DA29D3B41900A66411 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6JBM5ZNF6C;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DSNYPickupWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = DSNYPickupWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Swifttom.DSNYPickup.DSNYPickupWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		555AE9DB29D3B41900A66411 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6JBM5ZNF6C;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DSNYPickupWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = DSNYPickupWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Swifttom.DSNYPickup.DSNYPickupWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		5590824C25A3CB7A00F2CF62 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -491,8 +686,10 @@
 		5590824F25A3CB7A00F2CF62 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = DSNYPickup/DSNYPickup.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"DSNYPickup/Preview Content\"";
 				DEVELOPMENT_TEAM = 6JBM5ZNF6C;
@@ -513,8 +710,10 @@
 		5590825025A3CB7A00F2CF62 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = DSNYPickup/DSNYPickup.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"DSNYPickup/Preview Content\"";
 				DEVELOPMENT_TEAM = 6JBM5ZNF6C;
@@ -535,6 +734,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		555AE9D929D3B41900A66411 /* Build configuration list for PBXNativeTarget "DSNYPickupWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				555AE9DA29D3B41900A66411 /* Debug */,
+				555AE9DB29D3B41900A66411 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		5590823A25A3CB7900F2CF62 /* Build configuration list for PBXProject "DSNYPickup" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
