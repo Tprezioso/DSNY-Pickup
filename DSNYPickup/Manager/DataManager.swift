@@ -20,4 +20,20 @@ class DataManager: NSObject, ObservableObject {
             super.init()
             container.loadPersistentStores { _, _ in }
         }
+//
+//    let container: NSPersistentContainer = {
+//        let pc = NSPersistentContainer(name: "GarbageCollection")
+//        let storeURL = URL.storeURL(for: "group.com.Swifttom.DSNYPickup", databaseName: "group.com.Swifttom.DSNYPickup")
+//        let storeDescription = NSPersistentStoreDescription(url: storeURL)
+//        pc.persistentStoreDescriptions = [storeDescription]
+//        pc.loadPersistentStores { _, error in
+//            if let error = error {
+//                fatalError(error.localizedDescription)
+//            }
+//        }
+//        return pc
+//    }()
+//}
+//
 }
+

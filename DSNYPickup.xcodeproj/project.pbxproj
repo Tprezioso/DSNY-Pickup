@@ -40,6 +40,10 @@
 		555AE9E129D3DB0B00A66411 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555AE9E029D3DB0B00A66411 /* CoreData.swift */; };
 		555AE9E229D3DB0B00A66411 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555AE9E029D3DB0B00A66411 /* CoreData.swift */; };
 		555AE9E329D3DB7700A66411 /* GarbageCollection.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 55576EB0298605E20089861A /* GarbageCollection.xcdatamodeld */; };
+		555AE9E529D51A1700A66411 /* Garbage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F6791529722F94003331C5 /* Garbage.swift */; };
+		555AE9E629D51A1A00A66411 /* ItemToDispose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55576E9B29821F8F0089861A /* ItemToDispose.swift */; };
+		555AE9E729D51A2100A66411 /* WeekDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F6792429737328003331C5 /* WeekDay.swift */; };
+		555AE9E929D51ADF00A66411 /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 555AE9E829D51ADF00A66411 /* Collections */; };
 		5590824325A3CB7900F2CF62 /* DSNYPickupApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5590824225A3CB7900F2CF62 /* DSNYPickupApp.swift */; };
 		5590824525A3CB7900F2CF62 /* GarbageCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5590824425A3CB7900F2CF62 /* GarbageCollectionView.swift */; };
 		5590824725A3CB7A00F2CF62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5590824625A3CB7A00F2CF62 /* Assets.xcassets */; };
@@ -115,6 +119,7 @@
 		555AE9D329D3B41900A66411 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		555AE9DF29D3D77900A66411 /* DSNYPickup.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DSNYPickup.entitlements; sourceTree = "<group>"; };
 		555AE9E029D3DB0B00A66411 /* CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
+		555AE9E429D5165400A66411 /* DSNYPickupWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DSNYPickupWidgetExtension.entitlements; sourceTree = "<group>"; };
 		5590823F25A3CB7900F2CF62 /* DSNYPickup.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DSNYPickup.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5590824225A3CB7900F2CF62 /* DSNYPickupApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSNYPickupApp.swift; sourceTree = "<group>"; };
 		5590824425A3CB7900F2CF62 /* GarbageCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GarbageCollectionView.swift; sourceTree = "<group>"; };
@@ -141,6 +146,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				555AE9E929D51ADF00A66411 /* Collections in Frameworks */,
 				555AE9CA29D3B41700A66411 /* SwiftUI.framework in Frameworks */,
 				555AE9C829D3B41700A66411 /* WidgetKit.framework in Frameworks */,
 			);
@@ -232,6 +238,7 @@
 		5590823625A3CB7900F2CF62 = {
 			isa = PBXGroup;
 			children = (
+				555AE9E429D5165400A66411 /* DSNYPickupWidgetExtension.entitlements */,
 				5590824125A3CB7900F2CF62 /* DSNYPickup */,
 				555AE9CB29D3B41700A66411 /* DSNYPickupWidget */,
 				555AE9C629D3B41700A66411 /* Frameworks */,
@@ -350,6 +357,9 @@
 			dependencies = (
 			);
 			name = DSNYPickupWidgetExtension;
+			packageProductDependencies = (
+				555AE9E829D51ADF00A66411 /* Collections */,
+			);
 			productName = DSNYPickupWidgetExtension;
 			productReference = 555AE9C529D3B41700A66411 /* DSNYPickupWidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -447,7 +457,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				555AE9E629D51A1A00A66411 /* ItemToDispose.swift in Sources */,
 				555AE9DD29D3B44000A66411 /* NetworkManager.swift in Sources */,
+				555AE9E729D51A2100A66411 /* WeekDay.swift in Sources */,
+				555AE9E529D51A1700A66411 /* Garbage.swift in Sources */,
 				555AE9DE29D3B47600A66411 /* DataManager.swift in Sources */,
 				555AE9CD29D3B41700A66411 /* DSNYPickupWidgetBundle.swift in Sources */,
 				555AE9CF29D3B41700A66411 /* DSNYPickupWidget.swift in Sources */,
@@ -515,6 +528,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = DSNYPickupWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6JBM5ZNF6C;
@@ -544,6 +558,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = DSNYPickupWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6JBM5ZNF6C;
@@ -800,6 +815,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 55576EFC298DBD890089861A /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
+		};
+		555AE9E829D51ADF00A66411 /* Collections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 55F6791B29734F54003331C5 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = Collections;
 		};
 		55F6791C29734F54003331C5 /* Collections */ = {
 			isa = XCSwiftPackageProductDependency;
