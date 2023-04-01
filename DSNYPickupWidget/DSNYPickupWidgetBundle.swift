@@ -10,6 +10,7 @@ import SwiftUI
 
 @main
 struct DSNYPickupWidgetBundle: WidgetBundle {
+    @StateObject private var manager: DataManager = DataManager()
     var body: some Widget {
         DSNYPickupWidget()
     }

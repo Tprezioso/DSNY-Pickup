@@ -33,6 +33,13 @@ struct Provider: IntentTimelineProvider {
         let timeline = Timeline(entries: entries, policy: .atEnd)
         completion(timeline)
     }
+    
+    private func getData () throws -> [GarbageCollection] {
+        let context = DataManager().container.viewContext //PersistenceController.shared.container.viewContext
+        let request = GarbageCollection.fetchRequest ()
+        let result = try context.fetch(request)
+        return result
+    }
 }
 
 struct SimpleEntry: TimelineEntry {
