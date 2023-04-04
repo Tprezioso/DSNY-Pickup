@@ -34,7 +34,7 @@ struct Provider: IntentTimelineProvider {
         completion(timeline)
     }
     
-    private func getData () throws -> [GarbageCollection] {
+    private func getData() throws -> [GarbageCollection] {
         let context = DataManager().container.viewContext //PersistenceController.shared.container.viewContext
         let request = GarbageCollection.fetchRequest ()
         let result = try context.fetch(request)
