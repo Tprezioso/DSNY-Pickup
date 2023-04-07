@@ -10,23 +10,23 @@ import SwiftUI
 import Intents
 
 struct Provider: IntentTimelineProvider {
-    func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date())
+    func placeholder(in context: Context) -> GarbageCollectionEntry {
+        GarbageCollectionEntry(date: Date(), garbageCollection: MockData.garbageCollection)
     }
 
-    func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date())
+    func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (GarbageCollectionEntry) -> ()) {
+        let entry = GarbageCollectionEntry(date: Date(), garbageCollection: MockData.garbageCollection)
         completion(entry)
     }
 
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        var entries: [SimpleEntry] = []
+        var entries: [GarbageCollectionEntry] = []
 
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
         let currentDate = Date()
         for hourOffset in 0 ..< 5 {
             let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate)
+            let entry = GarbageCollectionEntry(date: entryDate, garbageCollection: MockData.garbageCollection)
             entries.append(entry)
         }
 
@@ -42,15 +42,16 @@ struct Provider: IntentTimelineProvider {
     }
 }
 
-struct SimpleEntry: TimelineEntry {
+struct GarbageCollectionEntry: TimelineEntry {
     let date: Date
+    let garbageCollection: Garbage
 }
 
 struct DSNYPickupWidgetEntryView : View {
-    var entry: Provider.Entry
+    var entry: GarbageCollectionEntry
 
     var body: some View {
-        Text(entry.date, style: .time)
+        Text(entry.garbageCollection.formattedAddress ?? "65-25 160th street")
     }
 }
 
@@ -68,7 +69,7 @@ struct DSNYPickupWidget: Widget {
 
 struct DSNYPickupWidget_Previews: PreviewProvider {
     static var previews: some View {
-        DSNYPickupWidgetEntryView(entry: SimpleEntry(date: Date()))
+        DSNYPickupWidgetEntryView(entry: GarbageCollectionEntry(date: Date(), garbageCollection: MockData.garbageCollection))
             .previewContext(WidgetPreviewContext(family: .systemSmall))
     }
 }
