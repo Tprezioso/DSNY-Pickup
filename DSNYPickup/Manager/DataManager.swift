@@ -11,9 +11,9 @@ import CoreData
 class DataManager: NSObject, ObservableObject {
     /// Dynamic properties that the UI will react to
     @Published var garbageCollectionItems: [GarbageCollection] = [GarbageCollection]()
-    
+    static let shared = DataManager()
     /// Add the Core Data container with the model name
-    let container: NSPersistentContainer = NSPersistentContainer(name: "GarbageCollection")
+//    let container: NSPersistentContainer = NSPersistentContainer(name: "GarbageCollection")
     
     /// Default init method. Load the Core Data container
         override init() {
@@ -21,18 +21,18 @@ class DataManager: NSObject, ObservableObject {
             container.loadPersistentStores { _, _ in }
         }
 //
-//    let container: NSPersistentContainer = {
-//        let pc = NSPersistentContainer(name: "GarbageCollection")
-//        let storeURL = URL.storeURL(for: "group.com.Swifttom.DSNYPickup", databaseName: "group.com.Swifttom.DSNYPickup")
-//        let storeDescription = NSPersistentStoreDescription(url: storeURL)
-//        pc.persistentStoreDescriptions = [storeDescription]
-//        pc.loadPersistentStores { _, error in
-//            if let error = error {
-//                fatalError(error.localizedDescription)
-//            }
-//        }
-//        return pc
-//    }()
+    let container: NSPersistentContainer = {
+        let pc = NSPersistentContainer(name: "GarbageCollection")
+        let storeURL = URL.storeURL(for: "group.com.Swifttom.DSNYPickup", databaseName: "group.com.Swifttom.DSNYPickup")
+        let storeDescription = NSPersistentStoreDescription(url: storeURL)
+        pc.persistentStoreDescriptions = [storeDescription]
+        pc.loadPersistentStores { _, error in
+            if let error = error {
+                fatalError(error.localizedDescription)
+            }
+        }
+        return pc
+    }()
 //}
 //
 }
