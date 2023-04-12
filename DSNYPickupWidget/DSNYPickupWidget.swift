@@ -34,21 +34,11 @@ struct Provider: IntentTimelineProvider {
         } catch {
             print(error)
         }
-        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-//        let currentDate = Date()
-//        for hourOffset in 0 ..< 5 {
-//            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-//            let entry = GarbageCollectionEntry(date: entryDate, garbageCollection: garbageCollectionItems.first ?? )
-//            entries.append(entry)
-//        }
-//
-//        let timeline = Timeline(entries: entries, policy: .atEnd)
-//        completion(timeline)
     }
     
     private func getData() throws -> [GarbageCollection] {
-        let context = DataManager.shared.container.viewContext //PersistenceController.shared.container.viewContext
-        let request = GarbageCollection.fetchRequest ()
+        let context = DataManager.shared.container.viewContext
+        let request = GarbageCollection.fetchRequest()
         let result = try context.fetch(request)
         return result
     }
@@ -79,9 +69,11 @@ struct DSNYPickupWidget: Widget {
     }
 }
 
-//struct DSNYPickupWidget_Previews: PreviewProvider {
-//    static var previews: some View {
-//        DSNYPickupWidgetEntryView(entry: GarbageCollectionEntry(date: Date(), garbageCollection: MockData.garbageCollection))
-//            .previewContext(WidgetPreviewContext(family: .systemSmall))
-//    }
-//}
+struct DSNYPickupWidget_Previews: PreviewProvider {
+    static var previews: some View {
+        let context = DataManager.shared.container.viewContext
+
+        DSNYPickupWidgetEntryView(entry: GarbageCollectionEntry(date: Date(), garbageCollection:  GarbageCollection(context: context)))
+            .previewContext(WidgetPreviewContext(family: .systemSmall))
+    }
+}
