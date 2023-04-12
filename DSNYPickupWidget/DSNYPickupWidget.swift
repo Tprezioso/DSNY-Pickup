@@ -53,7 +53,45 @@ struct DSNYPickupWidgetEntryView : View {
     var entry: GarbageCollectionEntry
 
     var body: some View {
-        Text(entry.garbageCollection.formattedAddress ?? "65-25 160th street")
+        VStack {
+            Spacer()
+            Text(entry.garbageCollection.formattedAddress ?? "85-12 Jamaica Ave, Queens, NY 11421, USA")
+                .font(.caption2)
+            HStack {
+                Spacer()
+                Image(systemName: "trash")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 40, height: 40)
+                    .foregroundColor(.green)
+                    
+                Spacer()
+                Image(systemName: "sofa")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 40, height: 40)
+                    .foregroundColor(.green)
+                Spacer()
+            }
+            Spacer()
+            HStack {
+                Spacer()
+                Image(systemName: "arrow.3.trianglepath")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 40, height: 40)
+                    .foregroundColor(.cyan)
+                Spacer()
+                Image(systemName: "leaf.circle")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 40, height: 40)
+                    .foregroundColor(.orange)
+                Spacer()
+            }
+            
+            Spacer()
+        }
     }
 }
 
