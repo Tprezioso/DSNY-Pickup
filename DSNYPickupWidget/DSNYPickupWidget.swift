@@ -51,7 +51,7 @@ struct GarbageCollectionEntry: TimelineEntry {
 
 struct DSNYPickupWidgetEntryView : View {
     var entry: GarbageCollectionEntry
-
+    
     var body: some View {
         VStack {
             Spacer()
@@ -63,14 +63,14 @@ struct DSNYPickupWidgetEntryView : View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 40, height: 40)
-                    .foregroundColor(.green)
-                    
+                    .foregroundColor(!(entry.garbageCollection.regularCollectionSchedule?.isEmpty ?? true) && entry.garbageCollection.savedDate?.dayNumberOfWeek() == entry.date.dayNumberOfWeek() ? .green : .secondary)
+                
                 Spacer()
                 Image(systemName: "sofa")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 40, height: 40)
-                    .foregroundColor(.green)
+                    .foregroundColor(!(entry.garbageCollection.bulkPickupCollectionSchedule?.isEmpty ?? true) && entry.garbageCollection.savedDate?.dayNumberOfWeek() == entry.date.dayNumberOfWeek() ? .green : .secondary)
                 Spacer()
             }
             Spacer()
@@ -80,13 +80,13 @@ struct DSNYPickupWidgetEntryView : View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 40, height: 40)
-                    .foregroundColor(.cyan)
+                    .foregroundColor(!(entry.garbageCollection.recyclingCollectionSchedule?.isEmpty ?? true) && entry.garbageCollection.savedDate?.dayNumberOfWeek() == entry.date.dayNumberOfWeek() ? .cyan : .secondary)
                 Spacer()
                 Image(systemName: "leaf.circle")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 40, height: 40)
-                    .foregroundColor(.orange)
+                    .foregroundColor(!(entry.garbageCollection.organicsCollectionSchedule?.isEmpty ?? true) && entry.garbageCollection.savedDate?.dayNumberOfWeek() == entry.date.dayNumberOfWeek() ? .orange : .secondary)
                 Spacer()
             }
             
@@ -113,5 +113,11 @@ struct DSNYPickupWidget_Previews: PreviewProvider {
 
         DSNYPickupWidgetEntryView(entry: GarbageCollectionEntry(date: Date(), garbageCollection:  GarbageCollection(context: context)))
             .previewContext(WidgetPreviewContext(family: .systemSmall))
+    }
+}
+
+extension Date {
+    func dayNumberOfWeek() -> Int? {
+        return Calendar.current.dateComponents([.weekday], from: self).weekday
     }
 }
