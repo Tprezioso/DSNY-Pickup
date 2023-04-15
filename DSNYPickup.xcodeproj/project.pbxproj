@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 53;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -37,8 +37,6 @@
 		555AE9D829D3B41900A66411 /* DSNYPickupWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 555AE9C529D3B41700A66411 /* DSNYPickupWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		555AE9DD29D3B44000A66411 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B2513C2969B7D40045364E /* NetworkManager.swift */; };
 		555AE9DE29D3B47600A66411 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55576EB32986EBF10089861A /* DataManager.swift */; };
-		555AE9E129D3DB0B00A66411 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555AE9E029D3DB0B00A66411 /* CoreData.swift */; };
-		555AE9E229D3DB0B00A66411 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555AE9E029D3DB0B00A66411 /* CoreData.swift */; };
 		555AE9E329D3DB7700A66411 /* GarbageCollection.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 55576EB0298605E20089861A /* GarbageCollection.xcdatamodeld */; };
 		555AE9E529D51A1700A66411 /* Garbage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F6791529722F94003331C5 /* Garbage.swift */; };
 		555AE9E629D51A1A00A66411 /* ItemToDispose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55576E9B29821F8F0089861A /* ItemToDispose.swift */; };
@@ -119,7 +117,6 @@
 		555AE9D129D3B41900A66411 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		555AE9D329D3B41900A66411 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		555AE9DF29D3D77900A66411 /* DSNYPickup.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DSNYPickup.entitlements; sourceTree = "<group>"; };
-		555AE9E029D3DB0B00A66411 /* CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
 		555AE9E429D5165400A66411 /* DSNYPickupWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DSNYPickupWidgetExtension.entitlements; sourceTree = "<group>"; };
 		5590823F25A3CB7900F2CF62 /* DSNYPickup.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DSNYPickup.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5590824225A3CB7900F2CF62 /* DSNYPickupApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSNYPickupApp.swift; sourceTree = "<group>"; };
@@ -268,7 +265,6 @@
 				55F679292973A174003331C5 /* Model */,
 				555AE9C029D279AC00A66411 /* Extensions */,
 				55B2513E2969B8AF0045364E /* APIToken.swift */,
-				555AE9E029D3DB0B00A66411 /* CoreData.swift */,
 				55576EB0298605E20089861A /* GarbageCollection.xcdatamodeld */,
 				5590824625A3CB7A00F2CF62 /* Assets.xcassets */,
 				5590824B25A3CB7A00F2CF62 /* Info.plist */,
@@ -397,8 +393,9 @@
 		5590823725A3CB7900F2CF62 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1420;
-				LastUpgradeCheck = 1230;
+				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					555AE9C429D3B41700A66411 = {
 						CreatedOnToolsVersion = 14.2;
@@ -466,7 +463,6 @@
 				555AE9CD29D3B41700A66411 /* DSNYPickupWidgetBundle.swift in Sources */,
 				555AE9CF29D3B41700A66411 /* DSNYPickupWidget.swift in Sources */,
 				555AE9E329D3DB7700A66411 /* GarbageCollection.xcdatamodeld in Sources */,
-				555AE9E229D3DB0B00A66411 /* CoreData.swift in Sources */,
 				556BDAF729DF9D0A000D9056 /* MockData.swift in Sources */,
 				555AE9D429D3B41900A66411 /* DSNYPickupWidget.intentdefinition in Sources */,
 			);
@@ -496,7 +492,6 @@
 				55B2513D2969B7D40045364E /* NetworkManager.swift in Sources */,
 				55576EB42986EBF10089861A /* DataManager.swift in Sources */,
 				55576E9E298221940089861A /* DisposeOfItemView.swift in Sources */,
-				555AE9E129D3DB0B00A66411 /* CoreData.swift in Sources */,
 				55F679232973600D003331C5 /* GarbageCollectionStateModel.swift in Sources */,
 				55576EF7298C864E0089861A /* SpecialWasteDropOffLocation.swift in Sources */,
 				5590824525A3CB7900F2CF62 /* GarbageCollectionView.swift in Sources */,

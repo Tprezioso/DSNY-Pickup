@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - ItemToDisposeElement
 struct ItemToDispose: Identifiable {
-    let id = UUID()
+    var id = UUID()
     let header, excerpt, content, name: String?
     let postType: String?
     let linkedPage: LinkedPageUnion?

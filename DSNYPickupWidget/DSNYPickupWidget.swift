@@ -55,7 +55,7 @@ struct DSNYPickupWidgetEntryView : View {
     var body: some View {
         VStack {
             Spacer()
-            Text(entry.garbageCollection.formattedAddress ?? "85-12 Jamaica Ave, Queens, NY 11421, USA")
+            Text(entry.garbageCollection.formattedAddress ?? "1234 Main st, Queens, NY 12345, USA")
                 .font(.caption2)
             HStack {
                 Spacer()
@@ -102,8 +102,8 @@ struct DSNYPickupWidget: Widget {
         IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
             DSNYPickupWidgetEntryView(entry: entry)
         }
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
+        .configurationDisplayName("DSNYPickup Widget")
+        .description("Know when NYC garbage is picked up")
     }
 }
 
