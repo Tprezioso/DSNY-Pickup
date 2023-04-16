@@ -15,7 +15,7 @@ struct Provider: IntentTimelineProvider {
         return GarbageCollectionEntry(date: Date(), garbageCollection: (data?.first!)!)
     }
 
-    func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (GarbageCollectionEntry) -> ()) {
+    func getSnapshot(for configuration: DSNYPickupLocationIntent, in context: Context, completion: @escaping (GarbageCollectionEntry) -> ()) {
         do {
             let data = try getData()
             let entry = GarbageCollectionEntry(date: Date(), garbageCollection: data.first!)
@@ -25,7 +25,7 @@ struct Provider: IntentTimelineProvider {
         }
     }
 
-    func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
+    func getTimeline(for configuration: DSNYPickupLocationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         do {
             let items = try getData()
             let entry = GarbageCollectionEntry(date: Date(), garbageCollection: items.first!)
@@ -99,7 +99,7 @@ struct DSNYPickupWidget: Widget {
     let kind: String = "DSNYPickupWidget"
 
     var body: some WidgetConfiguration {
-        IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
+        IntentConfiguration(kind: kind, intent: DSNYPickupLocationIntent.self, provider: Provider()) { entry in
             DSNYPickupWidgetEntryView(entry: entry)
         }
         .configurationDisplayName("DSNYPickup Widget")
