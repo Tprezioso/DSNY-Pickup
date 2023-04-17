@@ -28,7 +28,8 @@ struct Provider: IntentTimelineProvider {
     func getTimeline(for configuration: DSNYPickupLocationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         do {
             let items = try getData()
-            let entry = GarbageCollectionEntry(date: Date(), garbageCollection: items.first!)
+            let matchingDay = items.first { $0.formattedAddress == configuration.pickupLocation }!
+            let entry = GarbageCollectionEntry(date: Date(), garbageCollection: matchingDay)
             let timeline = Timeline(entries: [entry], policy: .atEnd)
             completion (timeline)
         } catch {
