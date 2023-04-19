@@ -64,14 +64,14 @@ struct DSNYPickupWidgetEntryView : View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 40, height: 40)
-                    .foregroundColor(!(entry.garbageCollection.regularCollectionSchedule?.isEmpty ?? true) && entry.garbageCollection.savedDate?.dayNumberOfWeek() == entry.date.dayNumberOfWeek() ? .green : .secondary)
+                    .foregroundColor(checkIfGarbageIsTakenOutToday(organizeCollection(from: entry.garbageCollection.regularCollectionSchedule ?? "")) ? .green : .secondary)
                 
                 Spacer()
                 Image(systemName: "sofa")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 40, height: 40)
-                    .foregroundColor(!(entry.garbageCollection.bulkPickupCollectionSchedule?.isEmpty ?? true) && entry.garbageCollection.savedDate?.dayNumberOfWeek() == entry.date.dayNumberOfWeek() ? .green : .secondary)
+                    .foregroundColor(checkIfGarbageIsTakenOutToday(organizeCollection(from: entry.garbageCollection.bulkPickupCollectionSchedule ?? "")) ? .green : .secondary)
                 Spacer()
             }
             Spacer()
@@ -81,18 +81,30 @@ struct DSNYPickupWidgetEntryView : View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 40, height: 40)
-                    .foregroundColor(!(entry.garbageCollection.recyclingCollectionSchedule?.isEmpty ?? true) && entry.garbageCollection.savedDate?.dayNumberOfWeek() == entry.date.dayNumberOfWeek() ? .cyan : .secondary)
+                    .foregroundColor(checkIfGarbageIsTakenOutToday(organizeCollection(from: entry.garbageCollection.recyclingCollectionSchedule ?? "")) ? .cyan : .secondary)
                 Spacer()
                 Image(systemName: "leaf.circle")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 40, height: 40)
-                    .foregroundColor(!(entry.garbageCollection.organicsCollectionSchedule?.isEmpty ?? true) && entry.garbageCollection.savedDate?.dayNumberOfWeek() == entry.date.dayNumberOfWeek() ? .orange : .secondary)
+                    .foregroundColor(checkIfGarbageIsTakenOutToday(organizeCollection(from: entry.garbageCollection.organicsCollectionSchedule ?? "")) ? .orange : .secondary)
                 Spacer()
             }
             
             Spacer()
         }
+    }
+    
+    func checkIfGarbageIsTakenOutToday(_ days:[String]) -> Bool {
+        let collectionDays = EnumDays.dayToNumber(days.removeDuplicates()).map { $0?.number ?? 0}
+        if (collectionDays.first { $0 == entry.date.dayNumberOfWeek() ?? 0 } != nil) {
+            return true
+        }
+        return false
+    }
+    
+    func organizeCollection(from schedule: String) -> [String] {
+        return schedule.components(separatedBy: ",")
     }
 }
 

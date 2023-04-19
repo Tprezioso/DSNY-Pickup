@@ -29,12 +29,13 @@ extension IntentHandler: DSNYPickupLocationIntentHandling {
     
     func providePickupLocationOptionsCollection(for intent: DSNYPickupLocationIntent) async throws -> INObjectCollection<NSString> {
         // Get list of repos
-        guard let collectionData = try? getData() else {
+        do {
+           let collectionData = try getData()
+            let collectionLocations = collectionData.compactMap { $0.formattedAddress }
+            return INObjectCollection(items: collectionLocations as [NSString])
+        } catch {
             return INObjectCollection(items: ["test"] as [NSString])
         }
-        
-        let collectionLocations = collectionData.compactMap { $0.formattedAddress }
-        return INObjectCollection(items: collectionLocations as [NSString])
     }
     
     func defaultRepo(for intent: DSNYPickupLocationIntent) -> String? { "1234 Main st, Flushing, NY 12345 USA" }

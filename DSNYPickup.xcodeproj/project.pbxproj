@@ -13,6 +13,9 @@
 		553C92AE29EC39EE003072FD /* DSNYPickupWidgetIntents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 555AE9D029D3B41700A66411 /* DSNYPickupWidgetIntents.intentdefinition */; };
 		553C92B029EC3B64003072FD /* GarbageCollection.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 55576EB0298605E20089861A /* GarbageCollection.xcdatamodeld */; };
 		553C92B129EC3B71003072FD /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55576EB32986EBF10089861A /* DataManager.swift */; };
+		553C92B229EE0237003072FD /* Array+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555AE9BE29D2796200A66411 /* Array+Ext.swift */; };
+		553C92B429EE06D1003072FD /* EnumDays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C92B329EE0692003072FD /* EnumDays.swift */; };
+		553C92B529EE06F2003072FD /* EnumDays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C92B329EE0692003072FD /* EnumDays.swift */; };
 		5545A31529A04CF400352A57 /* FavoritesNotificationSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5545A31429A04CF400352A57 /* FavoritesNotificationSheetView.swift */; };
 		55576E9C29821F8F0089861A /* ItemToDispose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55576E9B29821F8F0089861A /* ItemToDispose.swift */; };
 		55576E9E298221940089861A /* DisposeOfItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55576E9D298221940089861A /* DisposeOfItemView.swift */; };
@@ -109,6 +112,7 @@
 		553C92A329EC39A7003072FD /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
 		553C92A529EC39A7003072FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		553C92AC29EC39AB003072FD /* DSNYPickupIntents.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DSNYPickupIntents.entitlements; sourceTree = "<group>"; };
+		553C92B329EE0692003072FD /* EnumDays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumDays.swift; sourceTree = "<group>"; };
 		5545A31429A04CF400352A57 /* FavoritesNotificationSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesNotificationSheetView.swift; sourceTree = "<group>"; };
 		55576E9B29821F8F0089861A /* ItemToDispose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemToDispose.swift; sourceTree = "<group>"; };
 		55576E9D298221940089861A /* DisposeOfItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisposeOfItemView.swift; sourceTree = "<group>"; };
@@ -299,6 +303,7 @@
 				555AE9DF29D3D77900A66411 /* DSNYPickup.entitlements */,
 				5590824225A3CB7900F2CF62 /* DSNYPickupApp.swift */,
 				55F6792B2973A193003331C5 /* Screens */,
+				553C92B329EE0692003072FD /* EnumDays.swift */,
 				55F679282973A15C003331C5 /* Views */,
 				55F9C42C2974B80D0038A427 /* Alert */,
 				55F6792A2973A17D003331C5 /* Manager */,
@@ -541,6 +546,8 @@
 				555AE9E529D51A1700A66411 /* Garbage.swift in Sources */,
 				555AE9DE29D3B47600A66411 /* DataManager.swift in Sources */,
 				555AE9CD29D3B41700A66411 /* DSNYPickupWidgetBundle.swift in Sources */,
+				553C92B229EE0237003072FD /* Array+Ext.swift in Sources */,
+				553C92B529EE06F2003072FD /* EnumDays.swift in Sources */,
 				555AE9CF29D3B41700A66411 /* DSNYPickupWidget.swift in Sources */,
 				555AE9E329D3DB7700A66411 /* GarbageCollection.xcdatamodeld in Sources */,
 				556BDAF729DF9D0A000D9056 /* MockData.swift in Sources */,
@@ -555,6 +562,7 @@
 				55576F00298DBF430089861A /* LottieView.swift in Sources */,
 				55576EB62986ECA70089861A /* FavoritesView.swift in Sources */,
 				5545A31529A04CF400352A57 /* FavoritesNotificationSheetView.swift in Sources */,
+				553C92B429EE06D1003072FD /* EnumDays.swift in Sources */,
 				55F6791629722F94003331C5 /* Garbage.swift in Sources */,
 				55F67918297327CB003331C5 /* CalendarHeaderView.swift in Sources */,
 				555AE9BF29D2796200A66411 /* Array+Ext.swift in Sources */,
