@@ -51,6 +51,31 @@ struct GarbageCollectionEntry: TimelineEntry {
 }
 
 struct DSNYPickupWidgetEntryView : View {
+    @Environment(\.widgetFamily) var family
+    var entry: GarbageCollectionEntry
+    
+    var body: some View {
+        switch family {
+        case .systemSmall:
+            SmallWidgetView(entry: entry)
+        case .systemMedium:
+            EmptyView()
+        case .systemLarge:
+            EmptyView()
+        case .accessoryInline:
+            EmptyView()
+        case .accessoryRectangular:
+            EmptyView()
+        case .accessoryCircular:
+            EmptyView()
+        default:
+            EmptyView()
+        }
+    }
+}
+
+struct SmallWidgetView: View {
+    @Environment(\.widgetFamily) var family
     var entry: GarbageCollectionEntry
     
     var body: some View {
@@ -90,7 +115,6 @@ struct DSNYPickupWidgetEntryView : View {
                     .foregroundColor(checkIfGarbageIsTakenOutToday(organizeCollection(from: entry.garbageCollection.organicsCollectionSchedule ?? "")) ? .orange : .secondary)
                 Spacer()
             }
-            
             Spacer()
         }
     }
@@ -117,6 +141,7 @@ struct DSNYPickupWidget: Widget {
         }
         .configurationDisplayName("DSNYPickup Widget")
         .description("Know when NYC garbage is picked up")
+        .supportedFamilies([.systemSmall, .systemMedium, .systemLarge, .accessoryInline, .accessoryRectangular, .accessoryCircular])
     }
 }
 
