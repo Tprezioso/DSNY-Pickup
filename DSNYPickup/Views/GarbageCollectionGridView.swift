@@ -11,20 +11,22 @@ import OrderedCollections
 struct GarbageCollectionGridView: View {
     var garbageData: Garbage?
     var garbageCollection: GarbageCollection?
+    var isWidget: Bool
     @State var garbages: Garbage?
     @State var garbage: OrderedDictionary = WeekDay.week
     @State var largeItems: OrderedDictionary = WeekDay.week
     @State var recycling: OrderedDictionary = WeekDay.week
     @State var composting: OrderedDictionary = WeekDay.week
     
-    init(garbageData: Garbage? = nil, garbageCollection: GarbageCollection? = nil) {
+    init(garbageData: Garbage? = nil, garbageCollection: GarbageCollection? = nil, isWidget: Bool = false) {
         self.garbageData = garbageData
         self.garbageCollection = garbageCollection
+        self.isWidget = isWidget
     }
     
     var body: some View {
         Grid {
-            GridRow { CalendarHeaderView() }
+            GridRow { CalendarHeaderView(isWidget: isWidget) }
             
             // Garbage
             GridRow {
@@ -34,21 +36,22 @@ struct GarbageCollectionGridView: View {
                             Image(systemName: "trash")
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 30, height: 30)
-                            
-                            Text("Garbage")
-                                .font(.caption)
-                                .scaledToFit()
+                                .frame(width: isWidget ? 15 : 30 , height: isWidget ? 15 : 30)
+                            if !isWidget {
+                                Text("Garbage")
+                                    .font(.caption)
+                                    .scaledToFit()
                                 .minimumScaleFactor(0.4)
-                        }.foregroundColor(.green)
-                            .padding(4)
-                            .overlay {
-                                RoundedRectangle(cornerRadius: 10.0)
-                                    .stroke(.green)
                             }
+                        }.foregroundColor(.green)
+//                            .padding(4)
+//                            .overlay {
+//                                RoundedRectangle(cornerRadius: 10.0)
+//                                    .stroke(.green)
+//                            }
                     } else {
                         Text("")
-                            .frame(width: 40, height: 60)
+                            .frame(width: isWidget ? 15 : 40, height: isWidget ? 15 : 60)
                     }
                 }
             }
@@ -61,23 +64,24 @@ struct GarbageCollectionGridView: View {
                             Image(systemName: "sofa")
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 40, height: 40)
-                            
-                            Text("Large Items")
-                                .font(.caption2)
-                                .scaledToFit()
-                                .minimumScaleFactor(0.6)
-                        }.foregroundColor(.green)
-                            .padding(4)
-                            .overlay {
-                                RoundedRectangle(cornerRadius: 10.0)
-                                    .stroke(.green)
+                                .frame(width: isWidget ? 15 : 40 , height: isWidget ? 15 : 40)
+                            if !isWidget {
+                                Text("Large Items")
+                                    .font(.caption2)
+                                    .scaledToFit()
+                                    .minimumScaleFactor(0.6)
                             }
+                        }.foregroundColor(.green)
+//                            .padding(4)
+//                            .overlay {
+//                                RoundedRectangle(cornerRadius: 10.0)
+//                                    .stroke(.green)
+//                            }
                         
                         
                     } else {
                         Text("")
-                            .frame(width: 40, height: 60)
+                            .frame(width: isWidget ? 15 : 40, height: isWidget ? 15 : 60)
                     }
                 }
             }
@@ -91,22 +95,23 @@ struct GarbageCollectionGridView: View {
                             Image(systemName: "arrow.3.trianglepath")
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 30, height: 30)
-                            
-                            Text("Recycling")
-                                .font(.caption)
-                                .scaledToFit()
+                                .frame(width: isWidget ? 15 : 30 , height: isWidget ? 15 : 30)
+                            if !isWidget {
+                                Text("Recycling")
+                                    .font(.caption)
+                                    .scaledToFit()
                                 .minimumScaleFactor(0.4)
-                        }.foregroundColor(.cyan)
-                            .padding(4)
-                            .overlay {
-                                RoundedRectangle(cornerRadius: 10.0)
-                                    .stroke(.cyan)
                             }
+                        }.foregroundColor(.cyan)
+//                            .padding(4)
+//                            .overlay {
+//                                RoundedRectangle(cornerRadius: 10.0)
+//                                    .stroke(.cyan)
+//                            }
                         
                     } else {
                         Text("")
-                            .frame(width: 40, height: 60)
+                            .frame(width: isWidget ? 15 : 40, height: isWidget ? 15 : 60)
                     }
                 }
             }
@@ -120,27 +125,28 @@ struct GarbageCollectionGridView: View {
                             Image(systemName: "leaf.circle")
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 30, height: 30)
-                            
-                            Text("Compost")
-                                .font(.caption)
-                                .scaledToFit()
-                                .minimumScaleFactor(0.4)
+                                .frame(width: isWidget ? 20 : 30, height: isWidget ? 20 : 30)
+                            if !isWidget {
+                                Text("Compost")
+                                    .font(.caption)
+                                    .scaledToFit()
+                                    .minimumScaleFactor(0.4)
+                            }
                         }
                         .foregroundColor(.orange)
-                        .padding(4)
-                        .overlay {
-                            RoundedRectangle(cornerRadius: 10.0)
-                                .stroke(.orange)
-                        }
+//                        .padding(4)
+//                        .overlay {
+//                            RoundedRectangle(cornerRadius: 10.0)
+//                                .stroke(.orange)
+//                        }
                     } else {
                         Text("")
-                            .frame(width: 40, height: 60)
+                            .frame(width: isWidget ? 20 : 40, height: isWidget ? 20 : 60)
                     }
                 }
             }
             Divider()            
-        }.padding(.all, 10)
+        }.padding(10)
             .onAppear {
                 sortData()
             }

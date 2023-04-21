@@ -59,7 +59,7 @@ struct DSNYPickupWidgetEntryView : View {
         case .systemSmall:
             SmallWidgetView(entry: entry)
         case .systemMedium:
-            EmptyView()
+            GarbageCollectionGridView(garbageCollection: entry.garbageCollection, isWidget: true)
         case .systemLarge:
             EmptyView()
         case .accessoryInline:
@@ -75,7 +75,6 @@ struct DSNYPickupWidgetEntryView : View {
 }
 
 struct SmallWidgetView: View {
-    @Environment(\.widgetFamily) var family
     var entry: GarbageCollectionEntry
     
     var body: some View {
@@ -150,7 +149,7 @@ struct DSNYPickupWidget_Previews: PreviewProvider {
         let context = DataManager.shared.container.viewContext
 
         DSNYPickupWidgetEntryView(entry: GarbageCollectionEntry(date: Date(), garbageCollection:  GarbageCollection(context: context)))
-            .previewContext(WidgetPreviewContext(family: .systemSmall))
+            .previewContext(WidgetPreviewContext(family: .systemMedium))
     }
 }
 

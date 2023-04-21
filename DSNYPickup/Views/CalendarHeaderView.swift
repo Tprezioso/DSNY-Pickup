@@ -10,15 +10,15 @@ import SwiftUI
 struct CalendarHeaderView: View {
     // Monday through Saturday week
     let daysOfWeek = ["M", "T", "W", "T", "F", "S"]
-    var font: Font = .body
+    var isWidget = false
 
     var body: some View {
             ForEach(daysOfWeek, id: \.self) { dayOfWeek in
                 Text(dayOfWeek)
-                    .font(font)
+                    .font(isWidget ? .caption : .body)
                     .fontWeight(.black)
                     .foregroundColor(.orange)
-                    .frame(maxWidth: .infinity)
+//                    .frame(maxWidth: .infinity)
             
         }
     }
