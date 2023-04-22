@@ -18,7 +18,7 @@ struct CalendarHeaderView: View {
                     .font(isWidget ? .caption : .body)
                     .fontWeight(.black)
                     .foregroundColor(.orange)
-//                    .frame(maxWidth: .infinity)
+                    .frame(maxWidth: .infinity)
             
         }
     }
