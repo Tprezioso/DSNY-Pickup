@@ -140,7 +140,7 @@ struct DSNYPickupWidget: Widget {
         }
         .configurationDisplayName("DSNYPickup Widget")
         .description("Know when NYC garbage is picked up")
-        .supportedFamilies([.systemSmall, .systemMedium, .systemLarge, .accessoryInline, .accessoryRectangular, .accessoryCircular])
+        .supportedFamilies([.systemSmall, .systemMedium, .accessoryInline, .accessoryRectangular, .accessoryCircular])
     }
 }
 
