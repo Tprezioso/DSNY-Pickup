@@ -18,6 +18,8 @@
 		553C92B529EE06F2003072FD /* EnumDays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C92B329EE0692003072FD /* EnumDays.swift */; };
 		553C92B629F218F2003072FD /* GarbageCollectionGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F6792629738A68003331C5 /* GarbageCollectionGridView.swift */; };
 		553C92B729F2194E003072FD /* CalendarHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F67917297327CB003331C5 /* CalendarHeaderView.swift */; };
+		553C92B929F74805003072FD /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C92B829F74805003072FD /* Date+Ext.swift */; };
+		553C92BA29F74805003072FD /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C92B829F74805003072FD /* Date+Ext.swift */; };
 		5545A31529A04CF400352A57 /* FavoritesNotificationSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5545A31429A04CF400352A57 /* FavoritesNotificationSheetView.swift */; };
 		55576E9C29821F8F0089861A /* ItemToDispose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55576E9B29821F8F0089861A /* ItemToDispose.swift */; };
 		55576E9E298221940089861A /* DisposeOfItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55576E9D298221940089861A /* DisposeOfItemView.swift */; };
@@ -115,6 +117,7 @@
 		553C92A529EC39A7003072FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		553C92AC29EC39AB003072FD /* DSNYPickupIntents.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DSNYPickupIntents.entitlements; sourceTree = "<group>"; };
 		553C92B329EE0692003072FD /* EnumDays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumDays.swift; sourceTree = "<group>"; };
+		553C92B829F74805003072FD /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 		5545A31429A04CF400352A57 /* FavoritesNotificationSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesNotificationSheetView.swift; sourceTree = "<group>"; };
 		55576E9B29821F8F0089861A /* ItemToDispose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemToDispose.swift; sourceTree = "<group>"; };
 		55576E9D298221940089861A /* DisposeOfItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisposeOfItemView.swift; sourceTree = "<group>"; };
@@ -251,6 +254,7 @@
 				55576EF2298B5D6A0089861A /* Navigation+Ext.swift */,
 				555AE9BE29D2796200A66411 /* Array+Ext.swift */,
 				55576EF4298B5DAD0089861A /* View+Ext.swift */,
+				553C92B829F74805003072FD /* Date+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -551,6 +555,7 @@
 				555AE9CD29D3B41700A66411 /* DSNYPickupWidgetBundle.swift in Sources */,
 				553C92B229EE0237003072FD /* Array+Ext.swift in Sources */,
 				553C92B529EE06F2003072FD /* EnumDays.swift in Sources */,
+				553C92BA29F74805003072FD /* Date+Ext.swift in Sources */,
 				553C92B729F2194E003072FD /* CalendarHeaderView.swift in Sources */,
 				555AE9CF29D3B41700A66411 /* DSNYPickupWidget.swift in Sources */,
 				555AE9E329D3DB7700A66411 /* GarbageCollection.xcdatamodeld in Sources */,
@@ -582,6 +587,7 @@
 				55576EF9298C96A90089861A /* NotificationManager.swift in Sources */,
 				55576EFB298CAB780089861A /* FavoritesDetailView.swift in Sources */,
 				55B2513D2969B7D40045364E /* NetworkManager.swift in Sources */,
+				553C92B929F74805003072FD /* Date+Ext.swift in Sources */,
 				55576EB42986EBF10089861A /* DataManager.swift in Sources */,
 				55576E9E298221940089861A /* DisposeOfItemView.swift in Sources */,
 				55F679232973600D003331C5 /* GarbageCollectionStateModel.swift in Sources */,
