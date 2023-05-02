@@ -60,13 +60,7 @@ struct DSNYPickupWidgetEntryView : View {
             SmallWidgetView(entry: entry)
         case .systemMedium:
             GarbageCollectionGridView(garbageCollection: entry.garbageCollection, isWidget: true)
-        case .systemLarge:
-            EmptyView()
-        case .accessoryInline:
-            EmptyView()
-        case .accessoryRectangular:
-            EmptyView()
-        case .accessoryCircular:
+        case .systemLarge, .accessoryInline, .accessoryRectangular, .accessoryCircular:
             EmptyView()
         default:
             EmptyView()
