@@ -23,9 +23,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>This app would like to use your current location for better search results and auto completion</string>
+	<string>This app would like to use your current location for better search results and better auto completion when searching</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>This app would like to use your current location for better search results and auto completion</string>
+	<string>This app would like to use your current location for better search results and better auto completion when searching</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
