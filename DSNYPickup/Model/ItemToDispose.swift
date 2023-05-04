@@ -28,13 +28,13 @@ struct ItemToDispose: Identifiable {
         self.url = url
     }
     
-//    enum CodingKeys: String, CodingKey {
-//        case header, excerpt, content, name
-//        case postType = "post_type"
-//        case linkedPage = "linked_page"
-//        case otherSearchWords = "other_search_words"
-//        case keyWords = "key_words"
-//    }
+    enum CodingKeys: String, CodingKey {
+        case header, excerpt, content, name
+        case postType = "post_type"
+        case linkedPage = "linked_page"
+        case otherSearchWords = "other_search_words"
+        case keyWords = "key_words"
+    }
 }
 
 enum LinkedPageUnion: Codable {
