@@ -3,5 +3,5 @@ An Unofficial app for tracking services from the DSNY. Be able to search service
 
 ## Contact
 If you have any issues or questions about the app please reach out on:\
-Twitter: twitter.com/tommyprezioso \
+Twitter: https://www.twitter.com/tommyprezioso \
 Email: tommyprezioso@gmail.com 
