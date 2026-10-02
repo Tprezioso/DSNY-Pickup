@@ -29,14 +29,24 @@ struct PickupEntry: TimelineEntry {
     let date: Date
     /// `nil` when the user hasn't saved an address yet.
     let address: AddressSnapshot?
+    /// A Pro widget placed without Pro.
+    var isLocked = false
 
     var next: UpcomingPickup? { address?.next(from: date) }
+
+    /// Where a tap goes: the paywall when locked, otherwise the address.
+    var url: URL? {
+        isLocked ? DeepLink.pro.url : address.map { DeepLink.address($0.id).url }
+    }
 
     static let placeholder = PickupEntry(date: .now, address: .sample)
     static let empty = PickupEntry(date: .now, address: nil)
 }
 
 struct PickupProvider: AppIntentTimelineProvider {
+    /// Pro-only widgets show a lock instead of content until Pro is unlocked.
+    var requiresPro = false
+
     func placeholder(in context: Context) -> PickupEntry {
         .placeholder
     }
@@ -44,14 +54,17 @@ struct PickupProvider: AppIntentTimelineProvider {
     func snapshot(for configuration: SelectAddressIntent, in context: Context) async -> PickupEntry {
         let address = AddressSnapshot.find(configuration.address?.id)
         // Show sample data in the widget gallery before anything is saved.
-        if address == nil && context.isPreview { return .placeholder }
-        return PickupEntry(date: .now, address: address)
+        if context.isPreview && (address == nil || isLocked) { return .placeholder }
+        return PickupEntry(date: .now, address: address, isLocked: isLocked)
     }
+
+    private var isLocked: Bool { requiresPro && !ProStatus.isPro }
 
     func timeline(for configuration: SelectAddressIntent, in context: Context) async -> Timeline<PickupEntry> {
         let address = AddressSnapshot.find(configuration.address?.id)
         let dates = PickupTimeline.dates(from: .now)
-        return Timeline(entries: dates.map { PickupEntry(date: $0, address: address) }, policy: PickupTimeline.policy(for: dates))
+        let isLocked = isLocked
+        return Timeline(entries: dates.map { PickupEntry(date: $0, address: address, isLocked: isLocked) }, policy: PickupTimeline.policy(for: dates))
     }
 }
 
@@ -60,6 +73,7 @@ struct PickupProvider: AppIntentTimelineProvider {
 struct AddressesEntry: TimelineEntry {
     let date: Date
     let addresses: [AddressSnapshot]
+    var isLocked = false
 
     static let placeholder = AddressesEntry(date: .now, addresses: [
         .sample,
@@ -85,12 +99,17 @@ struct AddressesProvider: TimelineProvider {
 
     func getSnapshot(in context: Context, completion: @escaping (AddressesEntry) -> Void) {
         let addresses = AddressSnapshot.all()
-        completion(addresses.isEmpty && context.isPreview ? .placeholder : AddressesEntry(date: .now, addresses: addresses))
+        if context.isPreview && (addresses.isEmpty || !ProStatus.isPro) {
+            completion(.placeholder)
+        } else {
+            completion(AddressesEntry(date: .now, addresses: addresses, isLocked: !ProStatus.isPro))
+        }
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<AddressesEntry>) -> Void) {
         let addresses = AddressSnapshot.all()
         let dates = PickupTimeline.dates(from: .now)
-        completion(Timeline(entries: dates.map { AddressesEntry(date: $0, addresses: addresses) }, policy: PickupTimeline.policy(for: dates)))
+        let isLocked = !ProStatus.isPro
+        completion(Timeline(entries: dates.map { AddressesEntry(date: $0, addresses: addresses, isLocked: isLocked) }, policy: PickupTimeline.policy(for: dates)))
     }
 }

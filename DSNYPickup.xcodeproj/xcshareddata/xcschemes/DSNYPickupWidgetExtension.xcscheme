@@ -63,7 +63,6 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "555AE9C429D3B41700A66411"
             BuildableName = "DSNYPickupWidgetExtension.appex"
-            BlueprintName = "DSNYPickupWidgetExtension"
             ReferencedContainer = "container:DSNYPickup.xcodeproj">
          </BuildableReference>
       </RemoteRunnable>

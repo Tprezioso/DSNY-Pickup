@@ -4,18 +4,18 @@ import SwiftUI
 import WidgetKit
 
 /// A Control Center / Lock Screen / Action button control showing the next pickup.
-/// Tapping it opens the app on that address.
+/// Tapping it opens the app on that address (or the paywall, without Pro).
 struct NextPickupControl: ControlWidget {
     static let kind = "com.Swifttom.DSNYPickup.NextPickupControl"
 
     var body: some ControlWidgetConfiguration {
         AppIntentControlConfiguration(kind: Self.kind, provider: Provider()) { value in
-            ControlWidgetButton(action: OpenAddressIntent(target: value.entity)) {
+            ControlWidgetButton(action: ControlTapIntent(addressID: value.addressID, showsPaywall: value.isLocked)) {
                 Label {
-                    Text(value.title)
-                    Text(value.subtitle)
+                    Text(value.isLocked ? String(localized: "Next Pickup") : value.title)
+                    Text(value.isLocked ? String(localized: "Unlock with Pro") : value.subtitle)
                 } icon: {
-                    Image(systemName: value.systemImage)
+                    Image(systemName: value.isLocked ? "lock.fill" : value.systemImage)
                 }
             }
         }
@@ -26,14 +26,15 @@ struct NextPickupControl: ControlWidget {
 
 extension NextPickupControl {
     struct Value {
-        let entity: AddressEntity
+        let addressID: UUID?
         let title: String
         let subtitle: String
         let systemImage: String
+        var isLocked = false
 
         init(_ address: AddressSnapshot, now: Date = .now) {
             let next = address.next(from: now)
-            entity = address.entity(now: now)
+            addressID = address.id
             title = next?.headline(now: now) ?? String(localized: "No pickups")
             subtitle = next?.streamList ?? address.name
             systemImage = next?.streams.first?.systemImage ?? "calendar"
@@ -43,7 +44,7 @@ extension NextPickupControl {
         static let noAddress = Value(placeholder: String(localized: "Add an address"))
 
         private init(placeholder: String) {
-            entity = AddressSnapshot.sample.entity()
+            addressID = nil
             title = String(localized: "DSNY Pickup")
             subtitle = placeholder
             systemImage = "house.badge.plus"
@@ -56,7 +57,9 @@ extension NextPickupControl {
         }
 
         func currentValue(configuration: SelectAddressControlIntent) async throws -> Value {
-            AddressSnapshot.find(configuration.address?.id).map { Value($0) } ?? .noAddress
+            var value = AddressSnapshot.find(configuration.address?.id).map { Value($0) } ?? .noAddress
+            value.isLocked = !ProStatus.isPro
+            return value
         }
     }
 }

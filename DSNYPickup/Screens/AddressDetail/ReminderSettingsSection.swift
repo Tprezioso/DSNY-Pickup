@@ -6,13 +6,22 @@ import UIKit
 struct ReminderSettingsSection: View {
     @Bindable var address: SavedAddress
     @Environment(AddressStore.self) private var store
+    @Environment(PurchaseManager.self) private var purchases
+    @Environment(AppNavigator.self) private var navigator
     @Environment(\.openURL) private var openURL
 
     var body: some View {
         Section {
             Toggle("Pickup Reminders", systemImage: "bell.badge", isOn: $address.remindersEnabled)
 
-            if address.remindersEnabled {
+            if address.remindersEnabled && !purchases.isPro {
+                // Free reminders use the saved settings (7 PM the night before, every collection by default).
+                Button {
+                    navigator.showsPaywall = true
+                } label: {
+                    Label("Customize Time & Collections", systemImage: "sparkles")
+                }
+            } else if address.remindersEnabled {
                 Picker("Remind Me", selection: timing) {
                     ForEach(ReminderTiming.allCases) { timing in
                         Text(timing.title).tag(timing)

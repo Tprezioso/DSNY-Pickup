@@ -1,9 +1,19 @@
+import DSNYKit
+import StoreKit
 import SwiftUI
 
 struct MoreView: View {
+    @Environment(PurchaseManager.self) private var purchases
+    @Environment(AppNavigator.self) private var navigator
+    @Environment(AddressStore.self) private var store
+    @AppStorage(AddressStore.serviceAlertsKey, store: SharedModelContainer.defaults) private var serviceAlertsEnabled = true
+
     var body: some View {
         NavigationStack {
             List {
+                proSection
+                alertsSection
+
                 Section {
                     NavigationLink {
                         CollectionRulesView()
@@ -33,6 +43,17 @@ struct MoreView: View {
                 }
 
                 Section {
+                    ForEach(ProStatus.ProductID.tips, id: \.self) { id in
+                        ProductView(id: id)
+                            .productViewStyle(.compact)
+                    }
+                } header: {
+                    Text("Tip Jar")
+                } footer: {
+                    Text("Tips don't unlock anything. They help keep DSNY Pickup independent and up to date. Thank you!")
+                }
+
+                Section {
                     LabeledContent("Version", value: Bundle.main.versionString)
                     if let email = Links.email {
                         Link(destination: email) {
@@ -48,6 +69,58 @@ struct MoreView: View {
             .navigationTitle("More")
         }
     }
+
+    private var proSection: some View {
+        Section {
+            Button {
+                navigator.showsPaywall = true
+            } label: {
+                LabeledContent {
+                    Text(purchases.isPro ? "Unlocked" : "Upgrade")
+                } label: {
+                    Label("DSNY Pickup Pro", systemImage: "sparkles")
+                }
+            }
+            Button("Restore Purchases", systemImage: "arrow.clockwise") {
+                Task { await purchases.restore() }
+            }
+            #if DEBUG
+            Picker("Debug: Pro", systemImage: "ladybug", selection: debugOverride) {
+                Text("Real").tag(Bool?.none)
+                Text("On").tag(Bool?.some(true))
+                Text("Off").tag(Bool?.some(false))
+            }
+            #endif
+        }
+    }
+
+    private var alertsSection: some View {
+        Section {
+            Toggle("Service Change Alerts", systemImage: "exclamationmark.triangle", isOn: alertsBinding)
+        } footer: {
+            Text("A heads-up two days before holidays that affect your pickups, plus alerts for snow delays and suspensions. iOS decides when the app can check, so short-notice changes may arrive a few hours late.")
+        }
+    }
+
+    /// Without Pro the toggle reads off and opens the paywall.
+    private var alertsBinding: Binding<Bool> {
+        Binding {
+            purchases.isPro && serviceAlertsEnabled
+        } set: { isOn in
+            guard purchases.isPro else {
+                navigator.showsPaywall = true
+                return
+            }
+            serviceAlertsEnabled = isOn
+            Task { await store.syncReminders() }
+        }
+    }
+
+    #if DEBUG
+    private var debugOverride: Binding<Bool?> {
+        Binding { purchases.debugOverride } set: { purchases.debugOverride = $0 }
+    }
+    #endif
 }
 
 private enum Links {
@@ -91,4 +164,7 @@ private extension Bundle {
 
 #Preview {
     MoreView()
+        .environment(AddressStore.preview)
+        .environment(PurchaseManager())
+        .environment(AppNavigator(store: AddressStore.preview))
 }

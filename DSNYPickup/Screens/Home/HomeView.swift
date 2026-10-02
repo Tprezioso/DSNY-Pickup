@@ -5,6 +5,7 @@ import SwiftUI
 struct HomeView: View {
     @Environment(AddressStore.self) private var store
     @Environment(AppNavigator.self) private var navigator
+    @Environment(PurchaseManager.self) private var purchases
     @Query(sort: [SortDescriptor(\SavedAddress.sortOrder), SortDescriptor(\SavedAddress.createdAt)])
     private var addresses: [SavedAddress]
 
@@ -24,7 +25,12 @@ struct HomeView: View {
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     Button("Add Address", systemImage: "plus") {
-                        isAddingAddress = true
+                        // The first address is free; more need Pro.
+                        if addresses.isEmpty || purchases.isPro {
+                            isAddingAddress = true
+                        } else {
+                            navigator.showsPaywall = true
+                        }
                     }
                 }
                 if addresses.count > 1 {
@@ -73,7 +79,7 @@ struct HomeView: View {
             if let primary = addresses.first {
                 Section {
                     NavigationLink(value: primary) {
-                        NextPickupCard(name: primary.displayName, schedule: primary.schedule)
+                        NextPickupCard(name: primary.displayName, schedule: primary.schedule, service: store.serviceCalendar)
                     }
                 } footer: {
                     StreamLegend()
@@ -101,10 +107,12 @@ struct HomeView: View {
 }
 
 private struct AddressRow: View {
+    @Environment(AddressStore.self) private var store
     let address: SavedAddress
 
     var body: some View {
-        let next = PickupCalendar.next(address.schedule)
+        let next = PickupCalendar.next(address.schedule, service: store.serviceCalendar)
+        let change = PickupCalendar.nextChange(address.schedule, service: store.serviceCalendar)
         VStack(alignment: .leading, spacing: 4) {
             HStack {
                 Text(address.displayName)
@@ -120,6 +128,10 @@ private struct AddressRow: View {
                 Text(address.shortAddress)
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
+            }
+            if let notice = change?.notice {
+                ServiceNoticeLabel(text: notice.headline)
+                    .font(.caption.weight(.semibold))
             }
             if let next {
                 HStack(spacing: 6) {
@@ -139,5 +151,6 @@ private struct AddressRow: View {
     HomeView()
         .environment(AddressStore.preview)
         .environment(AppNavigator(store: AddressStore.preview))
+        .environment(PurchaseManager())
         .modelContainer(AddressStore.preview.context.container)
 }

@@ -27,3 +27,11 @@ public extension DropOffSite {
         longitude: -73.99232
     )
 }
+
+public extension ServiceCalendar {
+    /// A calendar with a holiday `days` from today, for previews.
+    static func sampleHoliday(inDays days: Int, status: String = "SUSPENDED", name: String? = "Thanksgiving Day") -> ServiceCalendar {
+        let date = Calendar.current.date(byAdding: .day, value: days, to: .now) ?? .now
+        return ServiceCalendar(days: [ServiceDay(dayID: dayID(for: date, calendar: .current), statusValue: status, exceptionName: name)])
+    }
+}

@@ -73,6 +73,25 @@ struct DayHeadline: View {
     }
 }
 
+/// "Thu: No Collection" in orange, for holidays and delays.
+struct WidgetNoticeText: View {
+    let pickup: UpcomingPickup
+    let notice: ServiceNotice
+    let now: Date
+
+    var body: some View {
+        Label {
+            Text("\(Weekday(date: pickup.date).shortName): \(notice.headline)")
+        } icon: {
+            Image(systemName: "exclamationmark.triangle.fill")
+        }
+        .font(.caption.weight(.semibold))
+        .foregroundStyle(.orange)
+        .lineLimit(2)
+        .widgetAccentable()
+    }
+}
+
 /// Shown until the user saves an address in the app.
 struct AddAddressPrompt: View {
     var body: some View {
@@ -85,6 +104,34 @@ struct AddAddressPrompt: View {
                 .font(.footnote.weight(.medium))
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+    }
+}
+
+/// Shown in a Pro widget until Pro is unlocked. Pair with `PickupEntry.url`, which opens the paywall.
+struct ProLockedView: View {
+    @Environment(\.widgetFamily) private var family
+    let title: LocalizedStringResource
+
+    var body: some View {
+        switch family {
+        case .accessoryCircular:
+            Image(systemName: "lock.fill")
+                .font(.title3)
+                .widgetAccentable()
+        default:
+            VStack(spacing: 8) {
+                Image(systemName: "lock.fill")
+                    .font(.title2)
+                    .foregroundStyle(.tint)
+                Text(title)
+                    .font(.headline)
+                Text("Unlock with DSNY Pickup Pro")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+            .multilineTextAlignment(.center)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        }
     }
 }
 

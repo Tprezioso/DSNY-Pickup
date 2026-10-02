@@ -1,0 +1,43 @@
+{
+  "days": [
+    {
+      "today_id": "20261124",
+      "items": [
+        { "details": "Alternate side parking and meters are in effect.", "status": "IN EFFECT", "type": "Alternate Side Parking" },
+        { "details": "Trash and recycling collections are on schedule. Compost collection is on schedule.", "status": "ON SCHEDULE", "type": "Collections" },
+        { "details": "Public schools are open.", "status": "OPEN", "type": "Schools" }
+      ]
+    },
+    {
+      "today_id": "20261125",
+      "items": [
+        { "details": "Compost collection is suspended. Trash and recycling collections are on schedule.", "status": "COMPOST SUSPENDED", "type": "Collections" }
+      ]
+    },
+    {
+      "today_id": "20261126",
+      "items": [
+        { "details": "Trash, recycling, and compost collections are suspended for Thanksgiving.", "exceptionName": "Thanksgiving Day 2026", "status": "SUSPENDED", "type": "Collections" },
+        { "details": "Public schools are closed.", "exceptionName": "Thanksgiving Day", "status": "CLOSED", "type": "Schools" }
+      ]
+    },
+    {
+      "today_id": "20261127",
+      "items": [
+        { "details": "Collections may be delayed due to weather.", "status": "DELAYED", "type": "Collections" }
+      ]
+    },
+    {
+      "today_id": "20261128",
+      "items": [
+        { "details": "A brand new status.", "status": "SOMETHING NEW", "type": "Collections" }
+      ]
+    },
+    {
+      "today_id": "20261129",
+      "items": [
+        { "details": "Not in effect on Sundays.", "status": "NOT IN EFFECT", "type": "Collections" }
+      ]
+    }
+  ]
+}

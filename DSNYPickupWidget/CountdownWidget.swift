@@ -7,10 +7,10 @@ struct CountdownWidget: Widget {
     let kind = "DSNYPickupCountdownWidget"
 
     var body: some WidgetConfiguration {
-        AppIntentConfiguration(kind: kind, intent: SelectAddressIntent.self, provider: PickupProvider()) { entry in
+        AppIntentConfiguration(kind: kind, intent: SelectAddressIntent.self, provider: PickupProvider(requiresPro: true)) { entry in
             CountdownView(entry: entry)
                 .containerBackground(for: .widget) { AccessoryWidgetBackground() }
-                .widgetURL(entry.address.map { DeepLink.address($0.id).url })
+                .widgetURL(entry.url)
         }
         .configurationDisplayName("Pickup Countdown")
         .description("Know at a glance whether bins go out tonight.")
@@ -22,7 +22,9 @@ struct CountdownView: View {
     let entry: PickupEntry
 
     var body: some View {
-        if let next = entry.next {
+        if entry.isLocked {
+            ProLockedView(title: "Pickup Countdown")
+        } else if let next = entry.next {
             let countdown = PickupCalendar.countdown(to: next, from: entry.date)
             Gauge(value: countdown.progress) {
                 Image(systemName: next.streams.first?.systemImage ?? "trash")

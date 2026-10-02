@@ -1,44 +1,83 @@
 import Foundation
 
-/// A day with one or more collections.
+/// A scheduled collection day. On a holiday or other service change some (or all) streams may be cancelled.
 public struct UpcomingPickup: Sendable, Equatable, Identifiable {
     /// Start of the collection day.
     public let date: Date
+    /// Streams actually collected that day.
     public let streams: [CollectionStream]
+    /// Normally scheduled streams that won't be collected because of `notice`.
+    public let cancelled: [CollectionStream]
+    /// The service change affecting this day, if any.
+    public let notice: ServiceNotice?
 
     public var id: Date { date }
 
-    public init(date: Date, streams: [CollectionStream]) {
+    public init(date: Date, streams: [CollectionStream], cancelled: [CollectionStream] = [], notice: ServiceNotice? = nil) {
         self.date = date
         self.streams = streams
+        self.cancelled = cancelled
+        self.notice = notice
     }
 
     /// "Trash and Recycling".
     public var streamList: String {
         streams.map { String(localized: $0.title) }.formatted(.list(type: .and))
     }
+
+    /// Nothing scheduled that day will be collected.
+    public var isFullyCancelled: Bool { streams.isEmpty && !cancelled.isEmpty }
 }
 
 /// Date math shared by the app, widget and reminders so they always agree.
 public enum PickupCalendar {
-    /// Collection days in the next `days` days, starting with today.
-    public static func upcoming(
+    /// Scheduled collection days in the next `days` days, starting with today, with `service` changes applied.
+    /// Fully cancelled days are included (with empty `streams`) so callers can mention them.
+    public static func scheduledDays(
         _ schedule: CollectionSchedule,
         from now: Date = .now,
         days: Int = 7,
+        service: ServiceCalendar = .empty,
         calendar: Calendar = .current
     ) -> [UpcomingPickup] {
         let start = calendar.startOfDay(for: now)
         return (0..<days).compactMap { offset in
             guard let date = calendar.date(byAdding: .day, value: offset, to: start) else { return nil }
-            let streams = schedule.streams(on: Weekday(date: date, calendar: calendar))
-            return streams.isEmpty ? nil : UpcomingPickup(date: date, streams: streams)
+            let scheduled = schedule.streams(on: Weekday(date: date, calendar: calendar))
+            guard !scheduled.isEmpty else { return nil }
+            guard let notice = service.notice(for: date, calendar: calendar) else {
+                return UpcomingPickup(date: date, streams: scheduled)
+            }
+            let off = notice.status.cancelledStreams
+            return UpcomingPickup(
+                date: date,
+                streams: scheduled.filter { !off.contains($0) },
+                cancelled: scheduled.filter(off.contains),
+                notice: notice
+            )
         }
     }
 
+    /// Days with at least one collection in the next `days` days, starting with today.
+    public static func upcoming(
+        _ schedule: CollectionSchedule,
+        from now: Date = .now,
+        days: Int = 7,
+        service: ServiceCalendar = .empty,
+        calendar: Calendar = .current
+    ) -> [UpcomingPickup] {
+        scheduledDays(schedule, from: now, days: days, service: service, calendar: calendar).filter { !$0.streams.isEmpty }
+    }
+
     /// The next collection day, including today.
-    public static func next(_ schedule: CollectionSchedule, from now: Date = .now, calendar: Calendar = .current) -> UpcomingPickup? {
-        upcoming(schedule, from: now, calendar: calendar).first
+    public static func next(_ schedule: CollectionSchedule, from now: Date = .now, service: ServiceCalendar = .empty, calendar: Calendar = .current) -> UpcomingPickup? {
+        // Look a little past a week so a holiday doesn't leave "no pickups".
+        upcoming(schedule, from: now, days: 8, service: service, calendar: calendar).first
+    }
+
+    /// The first scheduled day in the next week that has a service change, for banners.
+    public static func nextChange(_ schedule: CollectionSchedule, from now: Date = .now, service: ServiceCalendar = .empty, calendar: Calendar = .current) -> UpcomingPickup? {
+        scheduledDays(schedule, from: now, service: service, calendar: calendar).first { $0.notice != nil }
     }
 
     /// The next day each stream is collected.
@@ -46,9 +85,10 @@ public enum PickupCalendar {
         for stream: CollectionStream,
         in schedule: CollectionSchedule,
         from now: Date = .now,
+        service: ServiceCalendar = .empty,
         calendar: Calendar = .current
     ) -> Date? {
-        upcoming(schedule, from: now, calendar: calendar).first { $0.streams.contains(stream) }?.date
+        upcoming(schedule, from: now, days: 14, service: service, calendar: calendar).first { $0.streams.contains(stream) }?.date
     }
 
     /// "Today", "Tomorrow", or the weekday name for dates later this week.
@@ -81,10 +121,10 @@ public enum PickupCalendar {
     }
 
     /// What's collected tomorrow, i.e. what goes out tonight.
-    public static func tonight(_ schedule: CollectionSchedule, from now: Date = .now, calendar: Calendar = .current) -> UpcomingPickup? {
+    /// Includes a fully cancelled day so callers can say "keep your bins in".
+    public static func tonight(_ schedule: CollectionSchedule, from now: Date = .now, service: ServiceCalendar = .empty, calendar: Calendar = .current) -> UpcomingPickup? {
         guard let tomorrow = calendar.date(byAdding: .day, value: 1, to: calendar.startOfDay(for: now)) else { return nil }
-        let streams = schedule.streams(on: Weekday(date: tomorrow, calendar: calendar))
-        return streams.isEmpty ? nil : UpcomingPickup(date: tomorrow, streams: streams)
+        return scheduledDays(schedule, from: tomorrow, days: 1, service: service, calendar: calendar).first
     }
 
     /// How soon `pickup` is, for countdown displays.

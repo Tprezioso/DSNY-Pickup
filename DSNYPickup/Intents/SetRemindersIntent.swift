@@ -32,6 +32,9 @@ struct SetRemindersIntent: AppIntent {
 
     @MainActor
     func perform() async throws -> some IntentResult & ProvidesDialog {
+        guard ProStatus.isPro else {
+            return .result(dialog: "Changing reminders with Siri is part of DSNY Pickup Pro. You can still turn them on in the app.")
+        }
         let addresses = store.allAddresses()
         guard let saved = addresses.first(where: { $0.id == address?.id }) ?? addresses.first else {
             return .result(dialog: "You haven't saved an address yet. Open DSNY Pickup and add one first.")

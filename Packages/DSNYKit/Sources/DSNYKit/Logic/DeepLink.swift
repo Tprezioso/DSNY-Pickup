@@ -4,6 +4,8 @@ import Foundation
 public enum DeepLink: Equatable, Sendable {
     case address(UUID)
     case home
+    /// The Pro paywall, used by locked widgets.
+    case pro
 
     public static let scheme = "dsnypickup"
 
@@ -11,6 +13,7 @@ public enum DeepLink: Equatable, Sendable {
         switch self {
         case .address(let id): URL(string: "\(Self.scheme)://address/\(id.uuidString)")!
         case .home: URL(string: "\(Self.scheme)://home")!
+        case .pro: URL(string: "\(Self.scheme)://pro")!
         }
     }
 
@@ -22,6 +25,8 @@ public enum DeepLink: Equatable, Sendable {
             self = .address(id)
         case "home":
             self = .home
+        case "pro":
+            self = .pro
         default:
             return nil
         }

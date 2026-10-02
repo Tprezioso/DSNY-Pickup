@@ -9,28 +9,42 @@ public struct AddressSnapshot: Sendable, Identifiable, Equatable {
     public let shortAddress: String
     public let schedule: CollectionSchedule
     public let remindersEnabled: Bool
+    /// Holidays and delays to apply, from the app group cache.
+    public let service: ServiceCalendar
 
-    public init(id: UUID, name: String, shortAddress: String, schedule: CollectionSchedule, remindersEnabled: Bool = false) {
+    public init(id: UUID, name: String, shortAddress: String, schedule: CollectionSchedule, remindersEnabled: Bool = false, service: ServiceCalendar = .empty) {
         self.id = id
         self.name = name
         self.shortAddress = shortAddress
         self.schedule = schedule
         self.remindersEnabled = remindersEnabled
+        self.service = service
     }
 
-    public init(_ address: SavedAddress) {
+    public init(_ address: SavedAddress, service: ServiceCalendar = .empty) {
         self.init(
             id: address.id,
             name: address.displayName,
             shortAddress: address.shortAddress,
             schedule: address.schedule,
-            remindersEnabled: address.remindersEnabled
+            remindersEnabled: address.remindersEnabled,
+            service: service
         )
     }
 
-    /// The next collection day, including today.
+    /// The next collection day, including today, with holidays applied.
     public func next(from now: Date = .now) -> UpcomingPickup? {
-        PickupCalendar.next(schedule, from: now)
+        PickupCalendar.next(schedule, from: now, service: service)
+    }
+
+    /// Collection days in the next week, with holidays applied.
+    public func upcoming(from now: Date = .now) -> [UpcomingPickup] {
+        PickupCalendar.upcoming(schedule, from: now, service: service)
+    }
+
+    /// The first service change in the next week, for banners.
+    public func nextChange(from now: Date = .now) -> UpcomingPickup? {
+        PickupCalendar.nextChange(schedule, from: now, service: service)
     }
 
     /// Sample data for previews and the widget gallery.
@@ -52,7 +66,8 @@ public extension AddressSnapshot {
     static func all() -> [AddressSnapshot] {
         let context = ModelContext(container)
         let descriptor = FetchDescriptor<SavedAddress>(sortBy: [SortDescriptor(\.sortOrder), SortDescriptor(\.createdAt)])
-        return ((try? context.fetch(descriptor)) ?? []).map(AddressSnapshot.init)
+        let service = ServiceCalendarService.cached()
+        return ((try? context.fetch(descriptor)) ?? []).map { AddressSnapshot($0, service: service) }
     }
 
     /// The address with `id`, or the primary (first) address when `id` is unset or was deleted.

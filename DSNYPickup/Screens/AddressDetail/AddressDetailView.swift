@@ -29,7 +29,7 @@ struct AddressDetailView: View {
 
             Section("Collection Days") {
                 ForEach(CollectionStream.allCases) { stream in
-                    StreamScheduleRow(stream: stream, schedule: address.schedule)
+                    StreamScheduleRow(stream: stream, schedule: address.schedule, service: store.serviceCalendar)
                 }
             }
 
@@ -138,4 +138,6 @@ struct AddressDetailView: View {
         AddressDetailView(address: AddressStore.preview.allAddresses()[0])
     }
     .environment(AddressStore.preview)
+    .environment(AppNavigator(store: AddressStore.preview))
+    .environment(PurchaseManager())
 }

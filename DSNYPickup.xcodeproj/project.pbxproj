@@ -7,16 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0D9149A0B0653BBB86D4AE1E /* SetRemindersIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4D7E75D8586F7926CFB9DD1 /* SetRemindersIntent.swift */; };
-		361D8313BF516213CB908515 /* DSNYPickupShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EDD6A61279160E79740DA2 /* DSNYPickupShortcuts.swift */; };
-		14B0D9F3285ECCBE62DCEA25 /* AppNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D209E21CE3B51E7D4EA1B8F /* AppNavigator.swift */; };
 		068BDD85DAB4D6367E0B0F83 /* NextPickupControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017314017309B65595CF3358 /* NextPickupControl.swift */; };
-		E2E48865591BEDFC1DA25E61 /* CountdownWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C22B55D2AEE9D601912AF0 /* CountdownWidget.swift */; };
-		35D42E2A8C988D9CACA66D92 /* AllAddressesWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FD25090D6FCF44C12F89B4 /* AllAddressesWidget.swift */; };
-		600BB469313555684D7D947C /* WeekWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA92C27163F3D21DD391450 /* WeekWidget.swift */; };
-		EDEA3D6793BEC71A5BFEDE31 /* WidgetComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118895795D30568F4C51929B /* WidgetComponents.swift */; };
+		0D9149A0B0653BBB86D4AE1E /* SetRemindersIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4D7E75D8586F7926CFB9DD1 /* SetRemindersIntent.swift */; };
+		14B0D9F3285ECCBE62DCEA25 /* AppNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D209E21CE3B51E7D4EA1B8F /* AppNavigator.swift */; };
 		21BAE7D20815C587772D040B /* PickupProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D588DE3322037637BCB3AA /* PickupProvider.swift */; };
-		5B7BCAA1A342FCF0E90A9A51 /* DSNYPickupWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 555AE9C529D3B41700A66411 /* DSNYPickupWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		2BE9C185DC299CBDE4A0DA8C /* PurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67948E3D0A70AFD089E4325B /* PurchaseManager.swift */; };
+		313278594DC3F873094AC777 /* ProPaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9181AA6CBBB28DB4DC206F /* ProPaywallView.swift */; };
+		35D42E2A8C988D9CACA66D92 /* AllAddressesWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FD25090D6FCF44C12F89B4 /* AllAddressesWidget.swift */; };
+		361D8313BF516213CB908515 /* DSNYPickupShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EDD6A61279160E79740DA2 /* DSNYPickupShortcuts.swift */; };
 		55576EB2298605E20089861A /* GarbageCollection.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 55576EB0298605E20089861A /* GarbageCollection.xcdatamodeld */; };
 		555AE9C829D3B41700A66411 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 555AE9C729D3B41700A66411 /* WidgetKit.framework */; };
 		555AE9CA29D3B41700A66411 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 555AE9C929D3B41700A66411 /* SwiftUI.framework */; };
@@ -48,6 +46,10 @@
 		55F463E5306DFDC400D30A25 /* DropOffsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F463E4306DFDC400D30A25 /* DropOffsView.swift */; };
 		55F463E8306DFE2400D30A25 /* MoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F463E7306DFE2400D30A25 /* MoreView.swift */; };
 		55F463EA306DFE2C00D30A25 /* CollectionRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F463E9306DFE2C00D30A25 /* CollectionRulesView.swift */; };
+		5B7BCAA1A342FCF0E90A9A51 /* DSNYPickupWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 555AE9C529D3B41700A66411 /* DSNYPickupWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		600BB469313555684D7D947C /* WeekWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA92C27163F3D21DD391450 /* WeekWidget.swift */; };
+		E2E48865591BEDFC1DA25E61 /* CountdownWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C22B55D2AEE9D601912AF0 /* CountdownWidget.swift */; };
+		EDEA3D6793BEC71A5BFEDE31 /* WidgetComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118895795D30568F4C51929B /* WidgetComponents.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,15 +77,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		B4D7E75D8586F7926CFB9DD1 /* SetRemindersIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetRemindersIntent.swift; sourceTree = "<group>"; };
-		27EDD6A61279160E79740DA2 /* DSNYPickupShortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSNYPickupShortcuts.swift; sourceTree = "<group>"; };
-		6D209E21CE3B51E7D4EA1B8F /* AppNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavigator.swift; sourceTree = "<group>"; };
+		3908F4DDDEB02CAD6E11FFC3 /* Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Shared.xcconfig; sourceTree = "<group>"; };
 		017314017309B65595CF3358 /* NextPickupControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextPickupControl.swift; sourceTree = "<group>"; };
-		A0C22B55D2AEE9D601912AF0 /* CountdownWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownWidget.swift; sourceTree = "<group>"; };
-		84FD25090D6FCF44C12F89B4 /* AllAddressesWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllAddressesWidget.swift; sourceTree = "<group>"; };
-		8AA92C27163F3D21DD391450 /* WeekWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekWidget.swift; sourceTree = "<group>"; };
 		118895795D30568F4C51929B /* WidgetComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetComponents.swift; sourceTree = "<group>"; };
-		A3D588DE3322037637BCB3AA /* PickupProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupProvider.swift; sourceTree = "<group>"; };
+		27EDD6A61279160E79740DA2 /* DSNYPickupShortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSNYPickupShortcuts.swift; sourceTree = "<group>"; };
 		553C92A029EC39A7003072FD /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
 		55576EB1298605E20089861A /* Garbage.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Garbage.xcdatamodel; sourceTree = "<group>"; };
 		555AE9C529D3B41700A66411 /* DSNYPickupWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = DSNYPickupWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -120,6 +117,15 @@
 		55F463E4306DFDC400D30A25 /* DropOffsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropOffsView.swift; sourceTree = "<group>"; };
 		55F463E7306DFE2400D30A25 /* MoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreView.swift; sourceTree = "<group>"; };
 		55F463E9306DFE2C00D30A25 /* CollectionRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionRulesView.swift; sourceTree = "<group>"; };
+		67948E3D0A70AFD089E4325B /* PurchaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseManager.swift; sourceTree = "<group>"; };
+		6D209E21CE3B51E7D4EA1B8F /* AppNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavigator.swift; sourceTree = "<group>"; };
+		7A9181AA6CBBB28DB4DC206F /* ProPaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProPaywallView.swift; sourceTree = "<group>"; };
+		84FD25090D6FCF44C12F89B4 /* AllAddressesWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllAddressesWidget.swift; sourceTree = "<group>"; };
+		8AA92C27163F3D21DD391450 /* WeekWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekWidget.swift; sourceTree = "<group>"; };
+		A0C22B55D2AEE9D601912AF0 /* CountdownWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownWidget.swift; sourceTree = "<group>"; };
+		A3D588DE3322037637BCB3AA /* PickupProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupProvider.swift; sourceTree = "<group>"; };
+		B4D7E75D8586F7926CFB9DD1 /* SetRemindersIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetRemindersIntent.swift; sourceTree = "<group>"; };
+		ECEE05D45207F12FF70B5483 /* Products.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Products.storekit; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,13 +150,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		DB9FE3CB50973D51D6EE81B2 /* Intents */ = {
+		1E1A1A81FE2CD26829D26EBE /* Config */ = {
 			isa = PBXGroup;
 			children = (
-				B4D7E75D8586F7926CFB9DD1 /* SetRemindersIntent.swift */,
-				27EDD6A61279160E79740DA2 /* DSNYPickupShortcuts.swift */,
+				3908F4DDDEB02CAD6E11FFC3 /* Shared.xcconfig */,
 			);
-			path = Intents;
+			path = Config;
+			sourceTree = "<group>";
+		};
+		0243BD477299C8EDD231E79B /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				ECEE05D45207F12FF70B5483 /* Products.storekit */,
+				7A9181AA6CBBB28DB4DC206F /* ProPaywallView.swift */,
+				67948E3D0A70AFD089E4325B /* PurchaseManager.swift */,
+			);
+			path = Store;
 			sourceTree = "<group>";
 		};
 		555AE9C629D3B41700A66411 /* Frameworks */ = {
@@ -184,6 +199,7 @@
 			isa = PBXGroup;
 			children = (
 				55B96B3C2A0A6DA2008D715E /* README.md */,
+				1E1A1A81FE2CD26829D26EBE /* Config */,
 				555AE9E429D5165400A66411 /* DSNYPickupWidgetExtension.entitlements */,
 				5590824125A3CB7900F2CF62 /* DSNYPickup */,
 				555AE9CB29D3B41700A66411 /* DSNYPickupWidget */,
@@ -204,6 +220,7 @@
 		5590824125A3CB7900F2CF62 /* DSNYPickup */ = {
 			isa = PBXGroup;
 			children = (
+				0243BD477299C8EDD231E79B /* Store */,
 				555AE9DF29D3D77900A66411 /* DSNYPickup.entitlements */,
 				5590824225A3CB7900F2CF62 /* DSNYPickupApp.swift */,
 				55576EB0298605E20089861A /* GarbageCollection.xcdatamodeld */,
@@ -321,6 +338,15 @@
 				55F463E9306DFE2C00D30A25 /* CollectionRulesView.swift */,
 			);
 			path = More;
+			sourceTree = "<group>";
+		};
+		DB9FE3CB50973D51D6EE81B2 /* Intents */ = {
+			isa = PBXGroup;
+			children = (
+				B4D7E75D8586F7926CFB9DD1 /* SetRemindersIntent.swift */,
+				27EDD6A61279160E79740DA2 /* DSNYPickupShortcuts.swift */,
+			);
+			path = Intents;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -449,6 +475,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				313278594DC3F873094AC777 /* ProPaywallView.swift in Sources */,
+				2BE9C185DC299CBDE4A0DA8C /* PurchaseManager.swift in Sources */,
 				0D9149A0B0653BBB86D4AE1E /* SetRemindersIntent.swift in Sources */,
 				361D8313BF516213CB908515 /* DSNYPickupShortcuts.swift in Sources */,
 				14B0D9F3285ECCBE62DCEA25 /* AppNavigator.swift in Sources */,
@@ -665,6 +693,7 @@
 		};
 		5590824F25A3CB7A00F2CF62 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3908F4DDDEB02CAD6E11FFC3 /* Shared.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -690,6 +719,7 @@
 		};
 		5590825025A3CB7A00F2CF62 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3908F4DDDEB02CAD6E11FFC3 /* Shared.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

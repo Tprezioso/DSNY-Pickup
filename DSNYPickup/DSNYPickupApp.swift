@@ -6,7 +6,9 @@
 //
 
 import AppIntents
+import BackgroundTasks
 import DSNYKit
+import StoreKit
 import SwiftData
 import SwiftUI
 
@@ -15,6 +17,10 @@ struct DSNYPickupApp: App {
     private let container: ModelContainer
     @State private var store: AddressStore
     @State private var navigator: AppNavigator
+    @State private var purchases = PurchaseManager()
+    @Environment(\.scenePhase) private var scenePhase
+
+    static let refreshTaskID = "com.Swifttom.DSNYPickup.refresh"
 
     init() {
         let container = SharedModelContainer.make()
@@ -31,18 +37,54 @@ struct DSNYPickupApp: App {
             RootView()
                 .environment(store)
                 .environment(navigator)
+                .environment(purchases)
+                .onInAppPurchaseCompletion { _, result in
+                    if case .success(.success(let verification)) = result {
+                        await purchases.handle(verification)
+                    }
+                }
+                .onChange(of: purchases.isPro) {
+                    // Turning Pro on or off adds or removes service alerts.
+                    Task { await store.syncReminders() }
+                }
                 .onOpenURL { url in
                     if let link = DeepLink(url: url) { navigator.open(link) }
                 }
                 .onAppIntentExecution(OpenAddressIntent.self) { intent in
                     navigator.openAddress(id: intent.target.id)
                 }
+                .onAppIntentExecution(ControlTapIntent.self) { intent in
+                    if intent.showsPaywall {
+                        navigator.showsPaywall = true
+                    } else if let id = intent.addressID.flatMap(UUID.init(uuidString:)) {
+                        navigator.openAddress(id: id)
+                    }
+                }
                 .task {
+                    await purchases.refresh()
                     // One-time import of favorites saved by the Core Data version of the app.
                     await LegacyCoreDataImporter.importIfNeeded(into: store)
+                    await store.refreshServiceCalendar()
+                    // Reminders are dated over a rolling window, so top them up on every launch.
+                    await store.syncReminders()
                     await store.indexForSpotlight()
                 }
         }
         .modelContainer(container)
+        .onChange(of: scenePhase) { _, phase in
+            if phase == .background { Self.scheduleRefresh() }
+        }
+        .backgroundTask(.appRefresh(Self.refreshTaskID)) { @MainActor in
+            Self.scheduleRefresh()
+            await store.performBackgroundRefresh()
+        }
+    }
+
+    /// Asks iOS to wake the app in a few hours to check for holidays and snow delays.
+    /// iOS decides the actual time based on how the app is used.
+    static func scheduleRefresh() {
+        let request = BGAppRefreshTaskRequest(identifier: refreshTaskID)
+        request.earliestBeginDate = .now.addingTimeInterval(3 * 60 * 60)
+        try? BGTaskScheduler.shared.submit(request)
     }
 }

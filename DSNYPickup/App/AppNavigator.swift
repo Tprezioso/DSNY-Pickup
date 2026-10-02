@@ -8,6 +8,7 @@ import SwiftData
 final class AppNavigator {
     var selectedTab: RootView.Section = .home
     var homePath: [SavedAddress] = []
+    var showsPaywall = false
 
     private let store: AddressStore
 
@@ -22,6 +23,8 @@ final class AppNavigator {
             homePath = []
         case .address(let id):
             openAddress(id: id)
+        case .pro:
+            showsPaywall = true
         }
     }
 

@@ -7,12 +7,12 @@ struct WeekWidget: Widget {
     let kind = "DSNYPickupWeekWidget"
 
     var body: some WidgetConfiguration {
-        AppIntentConfiguration(kind: kind, intent: SelectAddressIntent.self, provider: PickupProvider()) { entry in
+        AppIntentConfiguration(kind: kind, intent: SelectAddressIntent.self, provider: PickupProvider(requiresPro: true)) { entry in
             WeekView(entry: entry)
                 .containerBackground(for: .widget) {
                     PickupBackground(stream: entry.next?.streams.first)
                 }
-                .widgetURL(entry.address.map { DeepLink.address($0.id).url })
+                .widgetURL(entry.url)
         }
         .configurationDisplayName("Week at a Glance")
         .description("Every collection for the next seven days.")
@@ -24,7 +24,9 @@ struct WeekView: View {
     let entry: PickupEntry
 
     var body: some View {
-        if let address = entry.address {
+        if entry.isLocked {
+            ProLockedView(title: "Week at a Glance")
+        } else if let address = entry.address {
             content(address)
         } else {
             AddAddressPrompt()
@@ -49,13 +51,19 @@ struct WeekView: View {
 
             // Rows share whatever height is left so seven days always fit without clipping.
             VStack(spacing: 2) {
+                let scheduled = PickupCalendar.scheduledDays(address.schedule, from: entry.date, service: address.service)
                 ForEach(days, id: \.self) { date in
-                    DayRow(date: date, streams: address.schedule.streams(on: Weekday(date: date)), isToday: date == days.first)
+                    let pickup = scheduled.first { Calendar.current.isDate($0.date, inSameDayAs: date) }
+                    DayRow(date: date, pickup: pickup, isToday: date == days.first)
                         .frame(maxHeight: .infinity)
                 }
             }
 
-            if let next = entry.next {
+            if let change = address.nextChange(from: entry.date), let notice = change.notice {
+                WidgetNoticeText(pickup: change, notice: notice, now: entry.date)
+                    .font(.caption2.weight(.semibold))
+                    .lineLimit(1)
+            } else if let next = entry.next {
                 Label(shortHint(for: next), systemImage: "clock")
                     .font(.caption2)
                     .foregroundStyle(.secondary)
@@ -81,8 +89,11 @@ struct WeekView: View {
 private struct DayRow: View {
     @Environment(\.widgetRenderingMode) private var renderingMode
     let date: Date
-    let streams: [CollectionStream]
+    let pickup: UpcomingPickup?
     let isToday: Bool
+
+    private var streams: [CollectionStream] { pickup?.streams ?? [] }
+    private var cancelled: [CollectionStream] { pickup?.cancelled ?? [] }
 
     var body: some View {
         HStack(spacing: 10) {
@@ -95,23 +106,29 @@ private struct DayRow: View {
             }
             .frame(width: 64, alignment: .leading)
 
-            if streams.isEmpty {
+            if streams.isEmpty && cancelled.isEmpty {
                 Text("No collection")
                     .font(.caption)
                     .foregroundStyle(.tertiary)
             } else if renderingMode == .fullColor {
-                // Full chips when they fit, otherwise just the icons.
+                // Full chips when they fit, otherwise just the icons. Cancelled streams are struck through.
                 ViewThatFits(in: .horizontal) {
-                    HStack(spacing: 4) { ForEach(streams) { CompactChip(stream: $0) } }
-                    HStack(spacing: 4) { ForEach(streams) { CompactChip(stream: $0, showsTitle: false) } }
+                    chips(showsTitles: true)
+                    chips(showsTitles: false)
                 }
             } else {
-                Text(streams.map { String(localized: $0.title) }.formatted(.list(type: .and)))
+                Text(streams.isEmpty ? String(localized: "Cancelled") : streams.map { String(localized: $0.title) }.formatted(.list(type: .and)))
                     .font(.caption.weight(.medium))
                     .lineLimit(1)
                     .widgetAccentable()
             }
             Spacer(minLength: 0)
+            if pickup?.notice != nil {
+                Image(systemName: "exclamationmark.triangle.fill")
+                    .font(.caption)
+                    .foregroundStyle(.orange)
+                    .widgetAccentable()
+            }
         }
         .padding(.horizontal, 8)
         .frame(maxHeight: .infinity)
@@ -124,22 +141,33 @@ private struct DayRow: View {
     }
 }
 
+extension DayRow {
+    private func chips(showsTitles: Bool) -> some View {
+        HStack(spacing: 4) {
+            ForEach(streams) { CompactChip(stream: $0, showsTitle: showsTitles) }
+            ForEach(cancelled) { CompactChip(stream: $0, showsTitle: showsTitles, isCancelled: true) }
+        }
+    }
+}
+
 /// A smaller `StreamChip` that fits four to a row in a large widget.
 private struct CompactChip: View {
     let stream: CollectionStream
     var showsTitle = true
+    var isCancelled = false
 
     var body: some View {
         HStack(spacing: 3) {
             Image(systemName: stream.systemImage)
-            if showsTitle { Text(stream.title) }
+            if showsTitle { Text(stream.title).strikethrough(isCancelled) }
         }
         .font(.caption2.weight(.semibold))
         .lineLimit(1)
-        .foregroundStyle(stream.color)
+        .foregroundStyle(isCancelled ? Color.secondary : stream.color)
         .padding(.horizontal, 7)
         .padding(.vertical, 3)
-        .background(stream.color.opacity(0.15), in: .capsule)
+        .background((isCancelled ? Color.secondary : stream.color).opacity(0.15), in: .capsule)
+        .opacity(isCancelled ? 0.7 : 1)
     }
 }
 
@@ -147,5 +175,6 @@ private struct CompactChip: View {
     WeekWidget()
 } timeline: {
     PickupEntry.placeholder
+    PickupEntry(date: .now, address: AddressSnapshot(id: UUID(), name: "Home", shortAddress: "125 Worth St", schedule: .sample, service: .sampleHoliday(inDays: 2)))
     PickupEntry.empty
 }

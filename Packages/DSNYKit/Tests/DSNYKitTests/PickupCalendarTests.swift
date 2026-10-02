@@ -81,8 +81,16 @@ struct PickupCalendarTests {
         let id = UUID()
         #expect(DeepLink(url: DeepLink.address(id).url) == .address(id))
         #expect(DeepLink(url: DeepLink.home.url) == .home)
+        #expect(DeepLink(url: DeepLink.pro.url) == .pro)
         #expect(DeepLink(url: try #require(URL(string: "dsnypickup://address/not-a-uuid"))) == nil)
         #expect(DeepLink(url: try #require(URL(string: "https://nyc.gov/address/\(id)"))) == nil)
+    }
+
+    @Test("Installs up to build 5 keep Pro features; sandbox versions don't", arguments: [
+        ("1", true), ("5", true), (" 5 ", true), ("6", false), ("12", false), ("1.0", false), ("", false)
+    ])
+    func grandfathering(build: String, expected: Bool) {
+        #expect(ProStatus.isGrandfathered(originalBuild: build) == expected)
     }
 
     @Test("Weekday wrap-around")

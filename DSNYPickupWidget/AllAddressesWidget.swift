@@ -10,7 +10,7 @@ struct AllAddressesWidget: Widget {
         StaticConfiguration(kind: kind, provider: AddressesProvider()) { entry in
             AllAddressesView(entry: entry)
                 .containerBackground(Color(.systemBackground), for: .widget)
-                .widgetURL(DeepLink.home.url)
+                .widgetURL(entry.isLocked ? DeepLink.pro.url : DeepLink.home.url)
         }
         .configurationDisplayName("All Addresses")
         .description("The next pickup at each of your saved addresses.")
@@ -23,7 +23,9 @@ struct AllAddressesView: View {
     let entry: AddressesEntry
 
     var body: some View {
-        if entry.addresses.isEmpty {
+        if entry.isLocked {
+            ProLockedView(title: "All Addresses")
+        } else if entry.addresses.isEmpty {
             AddAddressPrompt()
         } else {
             VStack(alignment: .leading, spacing: 0) {
@@ -68,10 +70,16 @@ private struct AddressRow: View {
                 Text(address.name)
                     .font(.subheadline.weight(.semibold))
                     .lineLimit(1)
-                Text(next?.streamList ?? String(localized: "No pickups this week"))
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-                    .lineLimit(1)
+                if let change = address.nextChange(from: now), let notice = change.notice {
+                    WidgetNoticeText(pickup: change, notice: notice, now: now)
+                        .font(.caption)
+                        .lineLimit(1)
+                } else {
+                    Text(next?.streamList ?? String(localized: "No pickups this week"))
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .lineLimit(1)
+                }
             }
             Spacer(minLength: 4)
             if let next {

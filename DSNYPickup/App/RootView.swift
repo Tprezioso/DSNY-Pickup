@@ -25,6 +25,9 @@ struct RootView: View {
             }
         }
         .tabBarMinimizeBehavior(.onScrollDown)
+        .sheet(isPresented: $navigator.showsPaywall) {
+            ProPaywallView()
+        }
         .onAppear { navigator.selectedTab = savedSelection }
         .onChange(of: navigator.selectedTab) { savedSelection = $1 }
     }
@@ -55,5 +58,6 @@ extension RootView.Section: RawRepresentable {
     RootView()
         .environment(AddressStore.preview)
         .environment(AppNavigator(store: AddressStore.preview))
+        .environment(PurchaseManager())
         .modelContainer(AddressStore.preview.context.container)
 }

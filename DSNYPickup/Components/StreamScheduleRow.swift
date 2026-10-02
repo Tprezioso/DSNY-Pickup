@@ -5,6 +5,8 @@ import SwiftUI
 struct StreamScheduleRow: View {
     let stream: CollectionStream
     let schedule: CollectionSchedule
+    /// Holidays to skip when showing the next collection.
+    var service: ServiceCalendar = .empty
 
     var body: some View {
         let days = schedule.days(for: stream)
@@ -26,8 +28,9 @@ struct StreamScheduleRow: View {
                 .foregroundStyle(.secondary)
             }
             Spacer()
-            if let next = PickupCalendar.nextDate(for: stream, in: schedule) {
-                Text(PickupCalendar.relativeDayName(for: next))
+            if let next = PickupCalendar.nextDate(for: stream, in: schedule, service: service) {
+                // A holiday can push the next collection past this week, where a bare weekday name is ambiguous.
+                Text(PickupCalendar.daysUntil(next) > 6 ? next.formatted(.dateTime.weekday(.abbreviated).month(.abbreviated).day()) : PickupCalendar.relativeDayName(for: next))
                     .font(.subheadline.weight(.medium))
                     .foregroundStyle(stream.color)
             }

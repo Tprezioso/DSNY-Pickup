@@ -6,14 +6,16 @@ public struct PickupSnippetView: View {
     let headline: String
     let streams: [CollectionStream]
     let hint: String?
+    let notice: String?
     let schedule: CollectionSchedule
     let today: Weekday
 
-    public init(addressName: String, headline: String, streams: [CollectionStream], hint: String?, schedule: CollectionSchedule, now: Date = .now) {
+    public init(addressName: String, headline: String, streams: [CollectionStream], hint: String?, notice: String? = nil, schedule: CollectionSchedule, now: Date = .now) {
         self.addressName = addressName
         self.headline = headline
         self.streams = streams
         self.hint = hint
+        self.notice = notice
         self.schedule = schedule
         self.today = Weekday(date: now)
     }
@@ -34,6 +36,10 @@ public struct PickupSnippetView: View {
                 }
             }
 
+            if let notice {
+                ServiceNoticeLabel(text: notice)
+            }
+
             if !streams.isEmpty {
                 HStack(spacing: 6) {
                     ForEach(streams) { StreamChip($0) }
@@ -49,6 +55,21 @@ public struct PickupSnippetView: View {
             WeekStripView(schedule: schedule, today: today, compact: true)
         }
         .padding()
+    }
+}
+
+/// An orange callout for holidays and delays, shared by the app, widgets and Siri.
+public struct ServiceNoticeLabel: View {
+    let text: String
+
+    public init(text: String) {
+        self.text = text
+    }
+
+    public var body: some View {
+        Label(text, systemImage: "exclamationmark.triangle.fill")
+            .font(.subheadline.weight(.semibold))
+            .foregroundStyle(.orange)
     }
 }
 

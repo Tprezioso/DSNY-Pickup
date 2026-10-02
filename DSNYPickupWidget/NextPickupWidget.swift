@@ -19,7 +19,7 @@ struct NextPickupWidget: Widget {
                 .containerBackground(for: .widget) {
                     PickupBackground(stream: entry.next?.streams.first)
                 }
-                .widgetURL(entry.address.map { DeepLink.address($0.id).url })
+                .widgetURL(entry.url)
         }
         .configurationDisplayName("Next Pickup")
         .description("See what's collected next at your address and when to set it out.")
@@ -74,9 +74,15 @@ struct NextPickupView: View {
                 Text("No pickups this week")
                     .font(.headline)
             }
-            Text(address.name)
-                .font(.caption2)
-                .foregroundStyle(.secondary)
+            if let notice = address.nextChange(from: entry.date)?.notice {
+                Label(notice.headline, systemImage: "exclamationmark.triangle")
+                    .font(.caption2)
+                    .lineLimit(1)
+            } else {
+                Text(address.name)
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+            }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
@@ -91,10 +97,15 @@ struct NextPickupView: View {
                 StreamIconStack(streams: next.streams, size: 30)
                     .padding(.bottom, 2)
                 DayHeadline(text: next.headline(now: entry.date))
-                Text(footer(for: next))
-                    .font(.caption.weight(.medium))
-                    .foregroundStyle(.secondary)
-                    .lineLimit(2)
+                if let change = address.nextChange(from: entry.date), let notice = change.notice {
+                    // A holiday or delay matters more than the usual set-out hint.
+                    WidgetNoticeText(pickup: change, notice: notice, now: entry.date)
+                } else {
+                    Text(footer(for: next))
+                        .font(.caption.weight(.medium))
+                        .foregroundStyle(.secondary)
+                        .lineLimit(2)
+                }
             } else {
                 DayHeadline(text: String(localized: "No pickups"), font: .title3.bold())
                 Text("this week")
@@ -114,7 +125,7 @@ struct NextPickupView: View {
                     .font(.caption2.weight(.semibold))
                     .foregroundStyle(.secondary)
                     .textCase(.uppercase)
-                let later = PickupCalendar.upcoming(address.schedule, from: entry.date).dropFirst().prefix(3)
+                let later = address.upcoming(from: entry.date).dropFirst().prefix(3)
                 if later.isEmpty {
                     Text("Nothing else this week")
                         .font(.caption)

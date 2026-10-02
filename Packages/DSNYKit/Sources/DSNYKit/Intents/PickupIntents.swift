@@ -59,24 +59,34 @@ public struct NextPickupIntent: AppIntent {
         let snapshot = try AddressSnapshot.resolve(address)
         let now = Date.now
         let next = snapshot.next(from: now)
+        // A cancelled day before the next pickup is worth mentioning ("No collection Thursday for Thanksgiving").
+        let skipped = snapshot.nextChange(from: now).flatMap { change in
+            change.isFullyCancelled && (next.map { change.date < $0.date } ?? true) ? change : nil
+        }
 
-        let dialog: IntentDialog
+        var sentences: [String] = []
+        if let skipped, let notice = skipped.notice {
+            let day = PickupCalendar.spokenDay(for: skipped.date, now: now)
+            sentences.append(String(localized: "There's no collection \(day) (\(notice.name ?? notice.headline))."))
+        }
         if let next {
             let day = PickupCalendar.spokenDay(for: next.date, now: now)
-            let hint = PickupCalendar.setOutHint(for: next, now: now)
-            dialog = "\(next.streamList) \(day) at \(snapshot.name). \(hint)"
+            sentences.append(String(localized: "\(next.streamList) \(day) at \(snapshot.name)."))
+            if let notice = next.notice { sentences.append("\(notice.headline).") }
+            sentences.append(PickupCalendar.setOutHint(for: next, now: now))
         } else {
-            dialog = "There are no pickups scheduled at \(snapshot.name) this week."
+            sentences.append(String(localized: "There are no pickups scheduled at \(snapshot.name) this week."))
         }
 
         return .result(
             value: snapshot.entity(now: now),
-            dialog: dialog,
+            dialog: IntentDialog(stringLiteral: sentences.joined(separator: " ")),
             view: PickupSnippetView(
                 addressName: snapshot.name,
                 headline: next.map { PickupCalendar.relativeDayName(for: $0.date, now: now) } ?? String(localized: "No pickups this week"),
                 streams: next?.streams ?? [],
                 hint: next.map { PickupCalendar.setOutHint(for: $0, now: now) },
+                notice: (skipped ?? next)?.notice?.headline,
                 schedule: snapshot.schedule,
                 now: now
             )
@@ -117,7 +127,7 @@ public struct StreamPickupIntent: AppIntent {
         let now = Date.now
         let title = String(localized: stream.title)
         let days = snapshot.schedule.days(for: stream)
-        let nextDate = PickupCalendar.nextDate(for: stream, in: snapshot.schedule, from: now)
+        let nextDate = PickupCalendar.nextDate(for: stream, in: snapshot.schedule, from: now, service: snapshot.service)
 
         let dialog: IntentDialog
         let headline: String
@@ -170,26 +180,36 @@ public struct TonightIntent: AppIntent {
     public func perform() async throws -> some IntentResult & ProvidesDialog & ShowsSnippetView {
         let snapshot = try AddressSnapshot.resolve(address)
         let now = Date.now
-        let tonight = PickupCalendar.tonight(snapshot.schedule, from: now)
+        let tonight = PickupCalendar.tonight(snapshot.schedule, from: now, service: snapshot.service)
         let next = snapshot.next(from: now)
 
         let dialog: IntentDialog
-        if let tonight {
-            dialog = "Put out \(tonight.streamList) at \(snapshot.name) tonight after 6 PM."
+        let headline: String
+        if let tonight, tonight.isFullyCancelled {
+            let reason = tonight.notice?.name ?? tonight.notice?.headline ?? ""
+            dialog = "Keep your bins in tonight at \(snapshot.name). There's no collection tomorrow (\(reason))."
+            headline = String(localized: "Nothing tonight")
+        } else if let tonight {
+            let change = tonight.notice.map { " \($0.headline)." } ?? ""
+            dialog = "Put out \(tonight.streamList) at \(snapshot.name) tonight after 6 PM.\(change)"
+            headline = String(localized: "Tonight")
         } else if let next {
             let day = PickupCalendar.spokenDay(for: next.date, now: now)
             dialog = "Nothing goes out tonight at \(snapshot.name). Next up is \(next.streamList) \(day)."
+            headline = String(localized: "Nothing tonight")
         } else {
             dialog = "Nothing goes out tonight at \(snapshot.name)."
+            headline = String(localized: "Nothing tonight")
         }
 
         return .result(
             dialog: dialog,
             view: PickupSnippetView(
                 addressName: snapshot.name,
-                headline: tonight == nil ? String(localized: "Nothing tonight") : String(localized: "Tonight"),
+                headline: headline,
                 streams: tonight?.streams ?? [],
-                hint: tonight.map { PickupCalendar.setOutHint(for: $0, now: now) },
+                hint: tonight.flatMap { $0.streams.isEmpty ? nil : PickupCalendar.setOutHint(for: $0, now: now) },
+                notice: tonight?.notice?.headline,
                 schedule: snapshot.schedule,
                 now: now
             )
