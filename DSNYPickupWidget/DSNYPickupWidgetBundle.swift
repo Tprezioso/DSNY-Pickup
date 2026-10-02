@@ -11,6 +11,10 @@ import SwiftUI
 @main
 struct DSNYPickupWidgetBundle: WidgetBundle {
     var body: some Widget {
-        DSNYPickupWidget()
+        NextPickupWidget()
+        WeekWidget()
+        AllAddressesWidget()
+        CountdownWidget()
+        NextPickupControl()
     }
 }
