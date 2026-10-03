@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		22FD8CB09F5988316252875E /* ScreenshotMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18ECB32EE5B43DB501FC7C2C /* ScreenshotMode.swift */; };
+		C7AA75354B05F0FF43E8CDD4 /* DetailRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C1495BA3030E0B221E8425 /* DetailRow.swift */; };
 		068BDD85DAB4D6367E0B0F83 /* NextPickupControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017314017309B65595CF3358 /* NextPickupControl.swift */; };
 		0D9149A0B0653BBB86D4AE1E /* SetRemindersIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4D7E75D8586F7926CFB9DD1 /* SetRemindersIntent.swift */; };
 		14B0D9F3285ECCBE62DCEA25 /* AppNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D209E21CE3B51E7D4EA1B8F /* AppNavigator.swift */; };
@@ -77,6 +79,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		18ECB32EE5B43DB501FC7C2C /* ScreenshotMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotMode.swift; sourceTree = "<group>"; };
+		28C1495BA3030E0B221E8425 /* DetailRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRow.swift; sourceTree = "<group>"; };
 		3908F4DDDEB02CAD6E11FFC3 /* Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Shared.xcconfig; sourceTree = "<group>"; };
 		017314017309B65595CF3358 /* NextPickupControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextPickupControl.swift; sourceTree = "<group>"; };
 		118895795D30568F4C51929B /* WidgetComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetComponents.swift; sourceTree = "<group>"; };
@@ -247,6 +251,7 @@
 		55F463BB306DFCE700D30A25 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				18ECB32EE5B43DB501FC7C2C /* ScreenshotMode.swift */,
 				6D209E21CE3B51E7D4EA1B8F /* AppNavigator.swift */,
 				55F463BC306DFCE700D30A25 /* AppServices.swift */,
 				55F463BE306DFCF500D30A25 /* AddressStore.swift */,
@@ -269,6 +274,7 @@
 		55F463CB306DFD2800D30A25 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				28C1495BA3030E0B221E8425 /* DetailRow.swift */,
 				55F463CC306DFD2800D30A25 /* ErrorStateView.swift */,
 				55F463CE306DFD3000D30A25 /* NextPickupCard.swift */,
 				55F463D7306DFD7700D30A25 /* StreamScheduleRow.swift */,
@@ -475,6 +481,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22FD8CB09F5988316252875E /* ScreenshotMode.swift in Sources */,
+				C7AA75354B05F0FF43E8CDD4 /* DetailRow.swift in Sources */,
 				313278594DC3F873094AC777 /* ProPaywallView.swift in Sources */,
 				2BE9C185DC299CBDE4A0DA8C /* PurchaseManager.swift in Sources */,
 				0D9149A0B0653BBB86D4AE1E /* SetRemindersIntent.swift in Sources */,
@@ -516,65 +524,65 @@
 
 /* Begin XCBuildConfiguration section */
 		555AE9DA29D3B41900A66411 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_ENTITLEMENTS = DSNYPickupWidgetExtension.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
-				DEVELOPMENT_TEAM = 6JBM5ZNF6C;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = DSNYPickupWidget/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "DSNY Pickup";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Swifttom.DSNYPickup.DSNYPickupWidget;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 6.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
+	buildSettings = {
+		"ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME" = AccentColor;
+		"ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME" = WidgetBackground;
+		"CLANG_CXX_LANGUAGE_STANDARD" = "gnu++20";
+		"CODE_SIGN_ENTITLEMENTS" = "DSNYPickupWidgetExtension.entitlements";
+		"CODE_SIGN_STYLE" = Automatic;
+		"CURRENT_PROJECT_VERSION" = 6;
+		"DEVELOPMENT_TEAM" = 6JBM5ZNF6C;
+		"GENERATE_INFOPLIST_FILE" = YES;
+		"INFOPLIST_FILE" = "DSNYPickupWidget/Info.plist";
+		"INFOPLIST_KEY_CFBundleDisplayName" = "DSNY Pickup";
+		"INFOPLIST_KEY_NSHumanReadableCopyright" = "";
+		"IPHONEOS_DEPLOYMENT_TARGET" = "26.0";
+		"LD_RUNPATH_SEARCH_PATHS" = (
+			"$(inherited)",
+			"@executable_path/Frameworks",
+			"@executable_path/../../Frameworks",
+		);
+		"MARKETING_VERSION" = "2.0";
+		"PRODUCT_BUNDLE_IDENTIFIER" = "com.Swifttom.DSNYPickup.DSNYPickupWidget";
+		"PRODUCT_NAME" = "$(TARGET_NAME)";
+		"SKIP_INSTALL" = YES;
+		"SWIFT_EMIT_LOC_STRINGS" = YES;
+		"SWIFT_VERSION" = "6.0";
+		"TARGETED_DEVICE_FAMILY" = "1,2";
+	};
+	isa = XCBuildConfiguration;
+	name = Debug;
+};
 		555AE9DB29D3B41900A66411 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_ENTITLEMENTS = DSNYPickupWidgetExtension.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
-				DEVELOPMENT_TEAM = 6JBM5ZNF6C;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = DSNYPickupWidget/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "DSNY Pickup";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Swifttom.DSNYPickup.DSNYPickupWidget;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 6.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
+	buildSettings = {
+		"ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME" = AccentColor;
+		"ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME" = WidgetBackground;
+		"CLANG_CXX_LANGUAGE_STANDARD" = "gnu++20";
+		"CODE_SIGN_ENTITLEMENTS" = "DSNYPickupWidgetExtension.entitlements";
+		"CODE_SIGN_STYLE" = Automatic;
+		"CURRENT_PROJECT_VERSION" = 6;
+		"DEVELOPMENT_TEAM" = 6JBM5ZNF6C;
+		"GENERATE_INFOPLIST_FILE" = YES;
+		"INFOPLIST_FILE" = "DSNYPickupWidget/Info.plist";
+		"INFOPLIST_KEY_CFBundleDisplayName" = "DSNY Pickup";
+		"INFOPLIST_KEY_NSHumanReadableCopyright" = "";
+		"IPHONEOS_DEPLOYMENT_TARGET" = "26.0";
+		"LD_RUNPATH_SEARCH_PATHS" = (
+			"$(inherited)",
+			"@executable_path/Frameworks",
+			"@executable_path/../../Frameworks",
+		);
+		"MARKETING_VERSION" = "2.0";
+		"PRODUCT_BUNDLE_IDENTIFIER" = "com.Swifttom.DSNYPickup.DSNYPickupWidget";
+		"PRODUCT_NAME" = "$(TARGET_NAME)";
+		"SKIP_INSTALL" = YES;
+		"SWIFT_EMIT_LOC_STRINGS" = YES;
+		"SWIFT_VERSION" = "6.0";
+		"TARGETED_DEVICE_FAMILY" = "1,2";
+	};
+	isa = XCBuildConfiguration;
+	name = Release;
+};
 		5590824C25A3CB7A00F2CF62 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -692,57 +700,57 @@
 			name = Release;
 		};
 		5590824F25A3CB7A00F2CF62 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3908F4DDDEB02CAD6E11FFC3 /* Shared.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = DSNYPickup/DSNYPickup.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
-				DEVELOPMENT_ASSET_PATHS = "\"DSNYPickup/Preview Content\"";
-				DEVELOPMENT_TEAM = 6JBM5ZNF6C;
-				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = DSNYPickup/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Swifttom.DSNYPickup;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 6.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
+	baseConfigurationReference = 3908F4DDDEB02CAD6E11FFC3;
+	buildSettings = {
+		"ASSETCATALOG_COMPILER_APPICON_NAME" = AppIcon;
+		"ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME" = AccentColor;
+		"CODE_SIGN_ENTITLEMENTS" = "DSNYPickup/DSNYPickup.entitlements";
+		"CODE_SIGN_STYLE" = Automatic;
+		"CURRENT_PROJECT_VERSION" = 6;
+		"DEVELOPMENT_ASSET_PATHS" = "\"DSNYPickup/Preview Content\"";
+		"DEVELOPMENT_TEAM" = 6JBM5ZNF6C;
+		"ENABLE_PREVIEWS" = YES;
+		"INFOPLIST_FILE" = "DSNYPickup/Info.plist";
+		"IPHONEOS_DEPLOYMENT_TARGET" = "26.0";
+		"LD_RUNPATH_SEARCH_PATHS" = (
+			"$(inherited)",
+			"@executable_path/Frameworks",
+		);
+		"MARKETING_VERSION" = "2.0";
+		"PRODUCT_BUNDLE_IDENTIFIER" = "com.Swifttom.DSNYPickup";
+		"PRODUCT_NAME" = "$(TARGET_NAME)";
+		"SWIFT_VERSION" = "6.0";
+		"TARGETED_DEVICE_FAMILY" = "1,2";
+	};
+	isa = XCBuildConfiguration;
+	name = Debug;
+};
 		5590825025A3CB7A00F2CF62 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3908F4DDDEB02CAD6E11FFC3 /* Shared.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = DSNYPickup/DSNYPickup.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
-				DEVELOPMENT_ASSET_PATHS = "\"DSNYPickup/Preview Content\"";
-				DEVELOPMENT_TEAM = 6JBM5ZNF6C;
-				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = DSNYPickup/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Swifttom.DSNYPickup;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 6.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
+	baseConfigurationReference = 3908F4DDDEB02CAD6E11FFC3;
+	buildSettings = {
+		"ASSETCATALOG_COMPILER_APPICON_NAME" = AppIcon;
+		"ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME" = AccentColor;
+		"CODE_SIGN_ENTITLEMENTS" = "DSNYPickup/DSNYPickup.entitlements";
+		"CODE_SIGN_STYLE" = Automatic;
+		"CURRENT_PROJECT_VERSION" = 6;
+		"DEVELOPMENT_ASSET_PATHS" = "\"DSNYPickup/Preview Content\"";
+		"DEVELOPMENT_TEAM" = 6JBM5ZNF6C;
+		"ENABLE_PREVIEWS" = YES;
+		"INFOPLIST_FILE" = "DSNYPickup/Info.plist";
+		"IPHONEOS_DEPLOYMENT_TARGET" = "26.0";
+		"LD_RUNPATH_SEARCH_PATHS" = (
+			"$(inherited)",
+			"@executable_path/Frameworks",
+		);
+		"MARKETING_VERSION" = "2.0";
+		"PRODUCT_BUNDLE_IDENTIFIER" = "com.Swifttom.DSNYPickup";
+		"PRODUCT_NAME" = "$(TARGET_NAME)";
+		"SWIFT_VERSION" = "6.0";
+		"TARGETED_DEVICE_FAMILY" = "1,2";
+	};
+	isa = XCBuildConfiguration;
+	name = Release;
+};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */

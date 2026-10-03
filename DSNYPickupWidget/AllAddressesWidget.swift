@@ -9,6 +9,8 @@ struct AllAddressesWidget: Widget {
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: AddressesProvider()) { entry in
             AllAddressesView(entry: entry)
+                // Widgets have a fixed size; past this, text would be clipped rather than readable.
+                .dynamicTypeSize(...DynamicTypeSize.xxLarge)
                 .containerBackground(Color(.systemBackground), for: .widget)
                 .widgetURL(entry.isLocked ? DeepLink.pro.url : DeepLink.home.url)
         }

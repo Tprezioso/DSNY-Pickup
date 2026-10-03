@@ -121,3 +121,7 @@ iOSInjectionProject/
 # End of https://www.toptal.com/developers/gitignore/api/macos,swift
 # Local secrets
 Config/Secrets.xcconfig
+
+# asc CLI local reports and build artifacts
+.asc/reports/
+.asc/artifacts/

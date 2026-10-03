@@ -73,7 +73,7 @@ struct DayHeadline: View {
     }
 }
 
-/// "Thu: No Collection" in orange, for holidays and delays.
+/// "Thu: No Collection" with an orange warning icon, for holidays and delays.
 struct WidgetNoticeText: View {
     let pickup: UpcomingPickup
     let notice: ServiceNotice
@@ -84,9 +84,9 @@ struct WidgetNoticeText: View {
             Text("\(Weekday(date: pickup.date).shortName): \(notice.headline)")
         } icon: {
             Image(systemName: "exclamationmark.triangle.fill")
+                .foregroundStyle(.orange)
         }
         .font(.caption.weight(.semibold))
-        .foregroundStyle(.orange)
         .lineLimit(2)
         .widgetAccentable()
     }

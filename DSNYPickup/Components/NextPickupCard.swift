@@ -94,12 +94,19 @@ private struct ServiceChangeBanner: View {
 
 /// Stream chips that wrap onto a second line when needed.
 private struct FlowChips: View {
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     let streams: [CollectionStream]
 
     var body: some View {
-        ViewThatFits(in: .horizontal) {
-            HStack { chips }
+        if dynamicTypeSize.isAccessibilitySize {
+            // Chips can wrap at these sizes, which makes ViewThatFits's side-by-side trial layout
+            // report a huge height; stacking directly keeps the card's height honest.
             VStack(alignment: .leading) { chips }
+        } else {
+            ViewThatFits(in: .horizontal) {
+                HStack { chips }
+                VStack(alignment: .leading) { chips }
+            }
         }
     }
 

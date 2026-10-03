@@ -9,6 +9,8 @@ struct WeekWidget: Widget {
     var body: some WidgetConfiguration {
         AppIntentConfiguration(kind: kind, intent: SelectAddressIntent.self, provider: PickupProvider(requiresPro: true)) { entry in
             WeekView(entry: entry)
+                // Widgets have a fixed size; past this, text would be clipped rather than readable.
+                .dynamicTypeSize(...DynamicTypeSize.xxLarge)
                 .containerBackground(for: .widget) {
                     PickupBackground(stream: entry.next?.streams.first)
                 }

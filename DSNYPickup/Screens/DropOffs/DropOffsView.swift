@@ -14,6 +14,8 @@ struct DropOffsView: View {
     @State private var position: MapCameraPosition = .region(AddressCompleter.nycRegion)
     @State private var location = LocationProvider()
     @Namespace private var glassNamespace
+    /// Height reserved above the map's controls for the filter chips, which grow with Dynamic Type.
+    @ScaledMetric(relativeTo: .subheadline) private var chipBarHeight: CGFloat = 52
 
     private var sites: [DropOffSite] {
         let sites = sitesByKind[kind] ?? []
@@ -64,7 +66,7 @@ struct DropOffsView: View {
             MapCompass()
         }
         // Keep the map's own controls clear of the filter chips overlaid at the top.
-        .safeAreaPadding(.top, 52)
+        .safeAreaPadding(.top, chipBarHeight)
     }
 
     private var kindPicker: some View {
@@ -150,11 +152,16 @@ struct DropOffsView: View {
 }
 
 private struct SiteRow: View {
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     let site: DropOffSite
     let distance: Measurement<UnitLength>?
 
     var body: some View {
-        HStack {
+        // The distance moves under the address at accessibility sizes instead of squeezing it.
+        let layout = dynamicTypeSize.isAccessibilitySize
+            ? AnyLayout(VStackLayout(alignment: .leading, spacing: 4))
+            : AnyLayout(HStackLayout())
+        layout {
             VStack(alignment: .leading, spacing: 2) {
                 Text(site.name)
                     .font(.headline)
@@ -165,10 +172,12 @@ private struct SiteRow: View {
                     Text(hours)
                         .font(.caption)
                         .foregroundStyle(.secondary)
-                        .lineLimit(2)
+                        .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 2)
                 }
             }
-            Spacer()
+            if !dynamicTypeSize.isAccessibilitySize {
+                Spacer()
+            }
             if let distance {
                 Text(distance, format: .measurement(width: .abbreviated, usage: .road))
                     .font(.subheadline)
@@ -188,14 +197,14 @@ private struct DropOffSiteSheet: View {
         NavigationStack {
             List {
                 Section {
-                    LabeledContent("Address", value: site.address)
+                    DetailRow("Address", value: site.address)
                     if let borough = site.borough {
-                        LabeledContent("Borough", value: borough)
+                        DetailRow("Borough", value: borough)
                     }
                     if let hours = site.hours {
-                        LabeledContent("Hours", value: hours)
+                        DetailRow("Hours", value: hours)
                     } else if site.kind == .specialWaste {
-                        LabeledContent("Hours", value: String(localized: "Tue–Sat, 9 AM–3 PM (closed legal holidays)"))
+                        DetailRow("Hours", value: String(localized: "Tue–Sat, 9 AM–3 PM (closed legal holidays)"))
                     }
                     if let notes = site.notes {
                         Text(notes)

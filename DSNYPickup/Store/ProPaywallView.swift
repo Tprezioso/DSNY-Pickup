@@ -82,13 +82,15 @@ struct ProPaywallView: View {
 
 private struct FeatureRow: View {
     let feature: ProFeature
+    /// Keeps the icon column in proportion with the text as it grows.
+    @ScaledMetric(relativeTo: .title3) private var iconWidth: CGFloat = 32
 
     var body: some View {
         HStack(alignment: .top, spacing: 14) {
             Image(systemName: feature.systemImage)
                 .font(.title3)
                 .foregroundStyle(.tint)
-                .frame(width: 32)
+                .frame(width: iconWidth)
             VStack(alignment: .leading, spacing: 2) {
                 Text(feature.title)
                     .font(.headline)

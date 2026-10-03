@@ -6,6 +6,7 @@ struct HomeView: View {
     @Environment(AddressStore.self) private var store
     @Environment(AppNavigator.self) private var navigator
     @Environment(PurchaseManager.self) private var purchases
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Query(sort: [SortDescriptor(\SavedAddress.sortOrder), SortDescriptor(\SavedAddress.createdAt)])
     private var addresses: [SavedAddress]
 
@@ -78,8 +79,17 @@ struct HomeView: View {
 
             if let primary = addresses.first {
                 Section {
-                    NavigationLink(value: primary) {
+                    if dynamicTypeSize.isAccessibilitySize {
+                        // At these sizes a list row with a chevron mis-measures the tall card and pads it
+                        // with empty space; a plain card plus a separate link also makes a smaller tap target.
                         NextPickupCard(name: primary.displayName, schedule: primary.schedule, service: store.serviceCalendar)
+                        NavigationLink(value: primary) {
+                            Label("Schedule & Reminders", systemImage: "calendar")
+                        }
+                    } else {
+                        NavigationLink(value: primary) {
+                            NextPickupCard(name: primary.displayName, schedule: primary.schedule, service: store.serviceCalendar)
+                        }
                     }
                 } footer: {
                     StreamLegend()
@@ -108,6 +118,7 @@ struct HomeView: View {
 
 private struct AddressRow: View {
     @Environment(AddressStore.self) private var store
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     let address: SavedAddress
 
     var body: some View {
@@ -134,12 +145,18 @@ private struct AddressRow: View {
                     .font(.caption.weight(.semibold))
             }
             if let next {
-                HStack(spacing: 6) {
-                    ForEach(next.streams) { StreamIcon($0, size: 20) }
+                // Icons above the text at accessibility sizes, so the full list of collections can wrap.
+                let layout = dynamicTypeSize.isAccessibilitySize
+                    ? AnyLayout(VStackLayout(alignment: .leading, spacing: 4))
+                    : AnyLayout(HStackLayout(spacing: 6))
+                layout {
+                    HStack(spacing: 6) {
+                        ForEach(next.streams) { StreamIcon($0, size: 20) }
+                    }
                     Text("\(PickupCalendar.relativeDayName(for: next.date)): \(next.streamList)")
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
-                        .lineLimit(1)
+                        .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 1)
                 }
             }
         }

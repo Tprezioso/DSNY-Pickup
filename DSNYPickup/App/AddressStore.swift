@@ -125,6 +125,10 @@ final class AddressStore {
 
     /// Asks for notification permission if needed, then reschedules every reminder and heads-up alert.
     func syncReminders() async {
+        #if DEBUG
+        // Screenshot mode uses demo data; never prompt for or schedule notifications.
+        if ScreenshotMode.isActive { return }
+        #endif
         let addresses = allAddresses()
         let alertsActive = serviceAlertsActive && !addresses.isEmpty
         if alertsActive || addresses.contains(where: \.remindersEnabled) {
@@ -160,6 +164,13 @@ final class AddressStore {
     }
 
     // MARK: Service changes
+
+    #if DEBUG
+    /// Lets screenshot mode show a sample service change without downloading.
+    func setServiceCalendarForScreenshots(_ calendar: ServiceCalendar) {
+        serviceCalendar = calendar
+    }
+    #endif
 
     /// Downloads the latest holidays and delays when the cache is older than `maxAge`,
     /// then refreshes widgets. Keeps the cached calendar if the download fails.

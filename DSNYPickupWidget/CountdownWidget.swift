@@ -9,6 +9,8 @@ struct CountdownWidget: Widget {
     var body: some WidgetConfiguration {
         AppIntentConfiguration(kind: kind, intent: SelectAddressIntent.self, provider: PickupProvider(requiresPro: true)) { entry in
             CountdownView(entry: entry)
+                // Widgets have a fixed size; past this, text would be clipped rather than readable.
+                .dynamicTypeSize(...DynamicTypeSize.xxLarge)
                 .containerBackground(for: .widget) { AccessoryWidgetBackground() }
                 .widgetURL(entry.url)
         }

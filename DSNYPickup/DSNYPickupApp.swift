@@ -44,6 +44,10 @@ struct DSNYPickupApp: App {
                     }
                 }
                 .onChange(of: purchases.isPro) {
+                    #if DEBUG
+                    // Screenshot mode unlocks Pro; don't trigger a notification permission prompt.
+                    if ScreenshotMode.isActive { return }
+                    #endif
                     // Turning Pro on or off adds or removes service alerts.
                     Task { await store.syncReminders() }
                 }
@@ -62,6 +66,12 @@ struct DSNYPickupApp: App {
                 }
                 .task {
                     await purchases.refresh()
+                    #if DEBUG
+                    if ScreenshotMode.isActive {
+                        ScreenshotMode.prepare(store: store, navigator: navigator, purchases: purchases)
+                        return
+                    }
+                    #endif
                     // One-time import of favorites saved by the Core Data version of the app.
                     await LegacyCoreDataImporter.importIfNeeded(into: store)
                     await store.refreshServiceCalendar()

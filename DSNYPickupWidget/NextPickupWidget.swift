@@ -16,6 +16,8 @@ struct NextPickupWidget: Widget {
     var body: some WidgetConfiguration {
         AppIntentConfiguration(kind: kind, intent: SelectAddressIntent.self, provider: PickupProvider()) { entry in
             NextPickupView(entry: entry)
+                // Widgets have a fixed size; past this, text would be clipped rather than readable.
+                .dynamicTypeSize(...DynamicTypeSize.xxLarge)
                 .containerBackground(for: .widget) {
                     PickupBackground(stream: entry.next?.streams.first)
                 }

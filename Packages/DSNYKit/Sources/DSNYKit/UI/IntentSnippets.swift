@@ -67,9 +67,14 @@ public struct ServiceNoticeLabel: View {
     }
 
     public var body: some View {
-        Label(text, systemImage: "exclamationmark.triangle.fill")
-            .font(.subheadline.weight(.semibold))
-            .foregroundStyle(.orange)
+        // Orange text on white fails contrast guidelines, so only the icon carries the color.
+        Label {
+            Text(text)
+        } icon: {
+            Image(systemName: "exclamationmark.triangle.fill")
+                .foregroundStyle(.orange)
+        }
+        .font(.subheadline.weight(.semibold))
     }
 }
 

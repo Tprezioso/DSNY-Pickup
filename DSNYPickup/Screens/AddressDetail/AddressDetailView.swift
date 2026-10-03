@@ -97,7 +97,7 @@ struct AddressDetailView: View {
         if !rows.isEmpty {
             Section {
                 ForEach(rows, id: \.1) { label, value in
-                    LabeledContent(label, value: value)
+                    DetailRow(label, value: value)
                 }
             } header: {
                 Text("DSNY Routing Times")

@@ -28,7 +28,12 @@ struct RootView: View {
         .sheet(isPresented: $navigator.showsPaywall) {
             ProPaywallView()
         }
-        .onAppear { navigator.selectedTab = savedSelection }
+        .onAppear {
+            #if DEBUG
+            if ScreenshotMode.isActive { return }
+            #endif
+            navigator.selectedTab = savedSelection
+        }
         .onChange(of: navigator.selectedTab) { savedSelection = $1 }
     }
 }
